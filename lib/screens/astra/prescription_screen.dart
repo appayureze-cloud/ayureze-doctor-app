@@ -9,12 +9,14 @@ import 'dart:async';
 class PrescriptionScreen extends StatefulWidget {
   final String patientId;
   final String patientName;
+  final String? patientPhone; // Added
   final String? doctorId;
 
   const PrescriptionScreen({
     Key? key,
     required this.patientId,
     required this.patientName,
+    this.patientPhone, // Added
     this.doctorId,
   }) : super(key: key);
 
@@ -94,11 +96,13 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
       final payload = {
         "doctor_id": widget.doctorId ?? SharedPreferenceHelper.getString(Preferences.doctorId),
         "patient_id": widget.patientId,
+        "patient_name": widget.patientName, // Mandatory for Shopify
+        "patient_phone": widget.patientPhone, // Mandatory for WhatsApp/Cart
         "diagnosis": _diagnosisController.text,
         "medicines": _medicines,
         "lifestyle_advice": "Rest and hydration", 
         "auto_process": true,
-        "create_shopify_cart": allHaveShopify // Only attempt if possible
+        "create_shopify_cart": allHaveShopify 
       };
 
       final response = await _astraService.submitPrescription(payload);

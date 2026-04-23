@@ -1045,6 +1045,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                                   MaterialPageRoute(builder: (context) => PrescriptionScreen(
                                                     patientId: userId.toString(), 
                                                     patientName: name ?? "Patient",
+                                                    patientPhone: phoneNo,
                                                   ))
                                                 );
                                               },
