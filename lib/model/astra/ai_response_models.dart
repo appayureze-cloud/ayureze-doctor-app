@@ -19,8 +19,13 @@ class AIChatResponse {
   });
 
   factory AIChatResponse.fromJson(Map<String, dynamic> json) {
+    // If backend wrapped it in a "data" object, unwrap it
+    if (json.containsKey('data') && json['data'] is Map) {
+      json = json['data'] as Map<String, dynamic>;
+    }
+    
     return AIChatResponse(
-      response: json['response'],
+      response: json['response'] ?? json['message'] ?? json['answer'] ?? json['text'] ?? json['reply'],
       intent: json['intent'],
       capability: json['capability'],
       confidence: json['confidence']?.toDouble(),
