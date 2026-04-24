@@ -61,8 +61,11 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
       final data = await _astraService.getPatientView(widget.patientId);
       setState(() {
         _patientData = data;
-        if (data['latest_astra_fill'] != null) {
-          _processAstraFillData(data['latest_astra_fill']);
+        var latestFill = data['latest_astra_fill'];
+        if (latestFill != null && latestFill is Map<String, dynamic> && latestFill.isNotEmpty) {
+          _processAstraFillData(latestFill);
+        } else {
+          _patientData!['latest_astra_fill'] = null;
         }
       });
     } catch (e) {

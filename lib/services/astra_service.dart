@@ -105,6 +105,12 @@ class AstraService {
   Future<Map<String, dynamic>> getAstraFillRecords(String patientId) async {
     try {
       final response = await _dio.get('/api/v1/astra-fill/patient/$patientId/records');
+      if (response.data is List) {
+        if ((response.data as List).isNotEmpty) {
+          return response.data[0] as Map<String, dynamic>;
+        }
+        return {};
+      }
       return response.data ?? {};
     } catch (e) {
       return {};
@@ -115,6 +121,12 @@ class AstraService {
   Future<Map<String, dynamic>> getLatestAstraFill(String patientId) async {
     try {
       final response = await _dio.get('/api/v1/astra-fill/patient/$patientId/latest');
+      if (response.data is List) {
+        if ((response.data as List).isNotEmpty) {
+          return response.data[0] as Map<String, dynamic>;
+        }
+        return {};
+      }
       return response.data ?? {};
     } catch (e) {
       return {};
