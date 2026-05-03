@@ -8,6 +8,7 @@ import 'package:doctro/chat/constants/firestore_constants.dart';
 import 'package:doctro/chat/models/message_chat.dart';
 import 'package:doctro/chat/providers/auth_provider.dart';
 import 'package:doctro/chat/providers/chat_provider.dart';
+import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/localization/localization_constant.dart';

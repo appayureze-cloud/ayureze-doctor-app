@@ -196,7 +196,7 @@ class _SignInState extends State<SignIn> {
                             ).toString(),
                             hintText: "example@email.com",
                             prefixIcon: Icon(
-                              Icons.alternate_email_rounded,
+                              AppIcons.email,
                               color: loginButton,
                             ),
                           ),
@@ -229,14 +229,14 @@ class _SignInState extends State<SignIn> {
                             ).toString(),
                             hintText: "........",
                             prefixIcon: Icon(
-                              Icons.lock_outline_rounded,
+                              AppIcons.password,
                               color: loginButton,
                             ),
                             suffixIcon: IconButton(
                               icon: Icon(
                                 _isHidden
-                                    ? Icons.visibility_outlined
-                                    : Icons.visibility_off_outlined,
+                                    ? AppIcons.visibility
+                                    : AppIcons.visibilityOff,
                                 color: hintColor,
                               ),
                               onPressed: () {

@@ -39,7 +39,7 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
         backgroundColor: OslerTheme.canvas,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
+            AppIcons.back,
             color: OslerTheme.forestDeep,
             size: 20,
           ),

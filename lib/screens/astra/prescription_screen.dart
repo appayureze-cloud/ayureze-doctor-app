@@ -298,7 +298,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                             ],
                           ),
                           trailing: IconButton(
-                            icon: Icon(Icons.delete, color: OslerTheme.danger),
+                            icon: Icon(AppIcons.delete, color: OslerTheme.danger),
                             onPressed: () => setState(() => _medicines.removeAt(idx)),
                           ),
                         ),
@@ -313,7 +313,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                       Expanded(
                         child: ElevatedButton.icon(
                           onPressed: _showSearchSheet,
-                          icon: Icon(Icons.add),
+                          icon: Icon(AppIcons.add),
                           label: Text("Add Medicine"),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.blue.shade50,
@@ -497,7 +497,7 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
             controller: _searchController,
             decoration: InputDecoration(
               hintText: "Type medicine name (e.g. Ashwagandha)",
-              prefixIcon: Icon(Icons.search),
+              prefixIcon: Icon(AppIcons.search),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             ),
             onChanged: _onSearchChanged,

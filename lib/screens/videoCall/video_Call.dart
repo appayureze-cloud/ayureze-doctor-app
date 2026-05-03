@@ -92,7 +92,7 @@ class _VideoCallState extends State<VideoCall> {
                 // Mute Audio
                 _buildControlButton(
                   onPressed: _onToggleMute,
-                  icon: muted ? Icons.mic_off : Icons.mic,
+                  icon: muted ? AppIcons.micOff : AppIcons.mic,
                   color: muted ? Colors.red : Colors.white,
                   bgColor: muted ? Colors.white : Colors.white.withOpacity(0.2),
                 ),
@@ -101,7 +101,7 @@ class _VideoCallState extends State<VideoCall> {
                 // Mute Video
                 _buildControlButton(
                   onPressed: _onToggleVideo,
-                  icon: mutedVideo ? Icons.videocam_off : Icons.videocam,
+                  icon: mutedVideo ? AppIcons.videoCallOff : AppIcons.videoCall,
                   color: mutedVideo ? Colors.red : Colors.white,
                   bgColor: mutedVideo ? Colors.white : Colors.white.withOpacity(0.2),
                 ),
@@ -129,7 +129,7 @@ class _VideoCallState extends State<VideoCall> {
                         BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))
                       ],
                     ),
-                    child: const Icon(Icons.call_end, color: Colors.white, size: 28),
+                    child: const Icon(AppIcons.callEnd, color: Colors.white, size: 28),
                   ),
                 ),
               ],

@@ -38,7 +38,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         backgroundColor: OslerTheme.canvas,
         leading: IconButton(
           icon: const Icon(
-            Icons.arrow_back_ios_new_rounded,
+            AppIcons.back,
             color: OslerTheme.forestDeep,
             size: 20,
           ),
@@ -157,7 +157,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
           ).toString(),
           hintStyle: const TextStyle(color: OslerTheme.textSecondary),
           suffixIcon: const Icon(
-            Icons.search_rounded,
+            AppIcons.search,
             color: OslerTheme.forestDeep,
           ),
         ),

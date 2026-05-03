@@ -186,7 +186,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                     children: [
                       GestureDetector(
                         child: const Icon(
-                          Icons.arrow_back_ios_new_rounded,
+                          AppIcons.back,
                           size: 20,
                           color: Colors.white,
                         ),
@@ -1026,7 +1026,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             45)),
-                                                child: Icon(Icons.add,
+                                                child: Icon(AppIcons.add,
                                                     size: width! * 0.06,
                                                     color: loginButton),
                                               ),
@@ -1291,7 +1291,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             45)),
-                                                child: Icon(Icons.add,
+                                                child: Icon(AppIcons.add,
                                                     size: width! * 0.06,
                                                     color: loginButton),
                                               ),

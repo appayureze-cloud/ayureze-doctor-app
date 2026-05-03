@@ -194,7 +194,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                                 padding: const EdgeInsets.only(
                                                     left: 25.0),
                                                 child: IconButton(
-                                                  icon: Icon(Icons.edit),
+                                                  icon: Icon(AppIcons.edit),
                                                   onPressed: () async {
                                                     passIndex = index;
                                                     id = workingReq[index].id;

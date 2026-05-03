@@ -45,7 +45,7 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(
-            Icons.arrow_back_ios,
+            AppIcons.back,
             size: 20,
             color: hintColor,
           ),
