@@ -20,7 +20,14 @@ class OslerTheme {
     vertical: 16,
   );
 
-  static ThemeData theme() {
+  static ThemeData theme({bool isDarkMode = false}) {
+    if (isDarkMode) {
+      return darkTheme();
+    }
+    return lightTheme();
+  }
+
+  static ThemeData lightTheme() {
     final colorScheme = ColorScheme.fromSeed(
       seedColor: forest,
       brightness: Brightness.light,
@@ -223,4 +230,164 @@ class OslerTheme {
       border: Border.all(color: border),
     );
   }
+
+  static ThemeData darkTheme() {
+    const Color darkCanvas = Color(0xFF1A1A1A);
+    const Color darkSurface = Color(0xFF2D2D2D);
+    const Color darkSurfaceMuted = Color(0xFF3D3D3D);
+    const Color darkBorder = Color(0xFF4D4D4D);
+    const Color darkTextPrimary = Color(0xFFE0E0E0);
+    const Color darkTextSecondary = Color(0xFFA0A0A0);
+
+    final colorScheme = ColorScheme.fromSeed(
+      seedColor: forest,
+      brightness: Brightness.dark,
+      primary: lime,
+      secondary: moss,
+      surface: darkSurface,
+    ).copyWith(
+      onPrimary: Colors.white,
+      onSecondary: Colors.white,
+      onSurface: darkTextPrimary,
+      error: danger,
+      onError: Colors.white,
+    );
+
+    return ThemeData(
+      useMaterial3: true,
+      colorScheme: colorScheme,
+      scaffoldBackgroundColor: darkCanvas,
+      cardColor: darkSurface,
+      dividerColor: darkBorder,
+      shadowColor: const Color(0x40000000),
+      textTheme: const TextTheme(
+        headlineLarge: TextStyle(
+          fontSize: 32,
+          height: 1.05,
+          fontWeight: FontWeight.w800,
+          color: darkTextPrimary,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: 24,
+          height: 1.15,
+          fontWeight: FontWeight.w800,
+          color: darkTextPrimary,
+        ),
+        titleLarge: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+          color: darkTextPrimary,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+          color: darkTextPrimary,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 15,
+          height: 1.4,
+          color: darkTextPrimary,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14,
+          height: 1.35,
+          color: darkTextSecondary,
+        ),
+        labelLarge: TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w700,
+          color: darkTextPrimary,
+        ),
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: darkSurface,
+        foregroundColor: darkTextPrimary,
+        elevation: 0,
+        centerTitle: true,
+        titleTextStyle: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.w700,
+          color: darkTextPrimary,
+        ),
+      ),
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: lime,
+          foregroundColor: Colors.white,
+          elevation: 0,
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+          textStyle: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700),
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          foregroundColor: lime,
+          side: const BorderSide(color: lime, width: 1.5),
+          padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        ),
+      ),
+      inputDecorationTheme: InputDecorationTheme(
+        filled: true,
+        fillColor: darkSurfaceMuted,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide.none,
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: darkBorder),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: lime, width: 2),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(color: danger),
+        ),
+        hintStyle: const TextStyle(color: darkTextSecondary),
+      ),
+      cardTheme: CardTheme(
+        color: darkSurface,
+        elevation: 0,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20), side: const BorderSide(color: darkBorder)),
+      ),
+      iconTheme: const IconThemeData(color: darkTextPrimary),
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+        backgroundColor: darkSurface,
+        selectedItemColor: lime,
+        unselectedItemColor: darkTextSecondary,
+      ),
+      drawerTheme: const DrawerThemeData(backgroundColor: darkSurface),
+      dialogTheme: DialogTheme(backgroundColor: darkSurface, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: lime, foregroundColor: Colors.white),
+      chipTheme: ChipThemeData(backgroundColor: darkSurfaceMuted, labelStyle: const TextStyle(color: darkTextPrimary)),
+      tabBarTheme: const TabBarTheme(labelColor: lime, unselectedLabelColor: darkTextSecondary),
+    );
+  }
+
+  static BoxDecoration darkPanelDecoration() {
+    return BoxDecoration(
+      color: const Color(0xFF2D2D2D),
+      borderRadius: BorderRadius.circular(28),
+      border: Border.all(color: const Color(0xFF4D4D4D)),
+      boxShadow: const [
+        BoxShadow(
+          color: Color(0x30000000),
+          blurRadius: 18,
+          offset: Offset(0, 10),
+        ),
+      ],
+    );
+  }
+
+  static const Color darkCanvas = Color(0xFF1A1A1A);
+  static const Color darkSurface = Color(0xFF2D2D2D);
+  static const Color darkSurfaceMuted = Color(0xFF3D3D3D);
+  static const Color darkBorder = Color(0xFF4D4D4D);
+  static const Color darkTextPrimary = Color(0xFFE0E0E0);
+  static const Color darkTextSecondary = Color(0xFFA0A0A0);
 }

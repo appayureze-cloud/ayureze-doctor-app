@@ -635,7 +635,7 @@ class _MyAppState extends State<MyApp> {
                 }
                 return supportedLocales.first;
               },
-              theme: OslerTheme.theme(),
+              theme: OslerTheme.theme(isDarkMode: SharedPreferenceHelper.getBoolean(Preferences.is_dark_mode) ?? false),
               routes: {
                 // '/': (context) => SignIn(),
                 'SignIn': (context) => SignIn(),
