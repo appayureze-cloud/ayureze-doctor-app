@@ -427,17 +427,28 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
     setState(() => _isLoading = true);
     try {
       final results = await _astraApiService.getAvailableMedicines();
+      debugPrint("📦 Products received: ${results.length}");
+      if (results.isNotEmpty) {
+        debugPrint("First product: ${results.first}");
+      }
       if (mounted) {
         setState(() => _results = results);
         if (results.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("No medicines found. Tap 'Sync Shopify' to load products."),
+            content: Text("⚠️ 0 products loaded. Tap 'Sync' to sync from Shopify."),
             backgroundColor: OslerTheme.warning,
             duration: Duration(seconds: 4),
+          ));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("✅ ${results.length} products loaded!"),
+            backgroundColor: Colors.green,
+            duration: Duration(seconds: 2),
           ));
         }
       }
     } catch (e) {
+      debugPrint("❌ Load medicines error: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Failed to load medicines: $e"),
@@ -523,17 +534,25 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
     setState(() => _isLoading = true);
     try {
       final results = await _astraApiService.searchMedicineProducts(query);
+      debugPrint("🔍 Search for '$query': ${results.length} results");
       if (mounted) {
         setState(() => _results = results);
         if (results.isEmpty) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("No medicines found for '$query'. Try different keywords."),
+            content: Text("No medicines found for '$query'"),
             backgroundColor: OslerTheme.warning,
+            duration: Duration(seconds: 2),
+          ));
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            content: Text("Found ${results.length} products"),
+            backgroundColor: Colors.green,
             duration: Duration(seconds: 2),
           ));
         }
       }
     } catch (e) {
+      debugPrint("❌ Search error: $e");
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text("Search failed: $e"),
