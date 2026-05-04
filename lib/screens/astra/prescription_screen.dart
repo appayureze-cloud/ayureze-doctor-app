@@ -452,25 +452,13 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
   Future<void> _syncShopify() async {
     setState(() => _isSyncing = true);
     try {
-      // Show diagnostics
-      debugPrint("=== SHOPIFY SYNC DEBUG ===");
-      debugPrint("Shop URL: ayureze-healthcare.myshopify.com");
-      debugPrint("Testing connection to: https://astra.ayureze.in");
-      
-      // First check the connection
+      // First check the connection status
       final status = await _astraApiService.getShopifyStatus();
-      debugPrint("Shopify Status Response: $status");
       
-      if (status['connected'] == true) {
-        debugPrint("✅ Shopify Connected!");
-      } else {
-        debugPrint("❌ Shopify Not Connected: ${status['error']}");
-      }
-      
-      if (status['error'] != null || status['connected'] == false) {
+      if (status['connected'] != true) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("❌ Shopify not connected: ${status['error'] ?? 'Check backend credentials'}"),
+            content: Text("❌ Shopify not connected. Check server credentials."),
             backgroundColor: OslerTheme.danger,
             duration: Duration(seconds: 6),
           ));
@@ -481,12 +469,10 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
       
       // Now try sync
       final response = await _astraApiService.syncShopifyProducts();
-      debugPrint("Shopify Sync Response: $response");
       
       await _loadAvailableMedicines();
       if (mounted) {
         final count = response['count'] ?? response['products_synced'] ?? response['total'] ?? response['synced_count'] ?? 0;
-        final message = response['message'] ?? response['status'] ?? '';
         final error = response['error'] ?? response['errors'];
         
         if (error != null) {
@@ -511,11 +497,8 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
       }
     } catch (e) {
       if (mounted) {
-        String errorMsg = "❌ Sync failed: $e";
-        debugPrint("Shopify Sync Error: $e");
-        
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text(errorMsg),
+          content: Text("❌ Sync failed. Check connection."),
           backgroundColor: OslerTheme.danger,
           duration: Duration(seconds: 6),
         ));
