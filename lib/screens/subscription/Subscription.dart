@@ -46,7 +46,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
       appBar: AppBar(
         backgroundColor: OslerTheme.canvas,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             AppIcons.back,
             color: OslerTheme.forestDeep,
             size: 20,

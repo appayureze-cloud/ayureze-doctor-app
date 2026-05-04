@@ -185,7 +185,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       GestureDetector(
-                        child: const Icon(
+                        child: Icon(
                           AppIcons.back,
                           size: 20,
                           color: Colors.white,
