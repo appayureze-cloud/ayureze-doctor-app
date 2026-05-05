@@ -95,7 +95,32 @@ class _SettingScreenState extends State<SettingScreen> {
                       val,
                     );
                     Fluttertoast.showToast(
-                      msg: "Theme updated (Restart to apply)",
+                      msg: "Dark mode: ${val ? 'ON' : 'OFF'}. Restart app to apply.",
+                      duration: 3,
+                    );
+                    debugPrint("Dark mode toggled: $val");
+                    
+                    // Show restart dialog
+                    showDialog(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: Text("Restart Required"),
+                        content: Text("Restart the app to apply dark mode changes."),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: Text("Later"),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pop(ctx);
+                              // Exit app to restart
+                              SystemNavigator.pop();
+                            },
+                            child: Text("Restart Now"),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
