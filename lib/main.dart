@@ -38,6 +38,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'theme/osler_theme.dart';
+import 'theme/theme_provider.dart';
 import 'VideoCall/overlay_handler.dart';
 import 'chat/pages/home_page.dart';
 import 'chat/providers/auth_provider.dart' as provider;
@@ -607,15 +608,21 @@ class _MyAppState extends State<MyApp> {
                   firebaseStorage: this.firebaseStorage,
                 ),
               ),
+              ChangeNotifierProvider<ThemeProvider>(
+                create: (_) => ThemeProvider(),
+              ),
             ],
-            child: MaterialApp(
-              navigatorKey: navigatorKey,
-              title: "Doctor",
-              debugShowCheckedModeBanner: false,
-              home: SharedPreferenceHelper.getBoolean(Preferences.is_logged_in)
-                  ? LoginHomeScreen(chat: "")
-                  : SignIn(),
-              locale: _locale,
+            child: Consumer<ThemeProvider>(
+                builder: (context, themeProvider, child) {
+                  return MaterialApp(
+                    navigatorKey: navigatorKey,
+                    title: "Doctor",
+                    debugShowCheckedModeBanner: false,
+                    theme: themeProvider.theme,
+                    home: SharedPreferenceHelper.getBoolean(Preferences.is_logged_in)
+                        ? LoginHomeScreen(chat: "")
+                        : SignIn(),
+                    locale: _locale,
               supportedLocales: [
                 Locale(ENGLISH, 'US'),
                 // Locale(ARABIC, 'AE'),

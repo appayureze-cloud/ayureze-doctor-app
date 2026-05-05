@@ -1,6 +1,8 @@
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
+import 'package:doctro/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -88,39 +90,13 @@ class _SettingScreenState extends State<SettingScreen> {
                   ).toString(),
                   value: isDarkMode,
                   color: const Color(0xFF7E8D9B),
-                  onChanged: (val) {
+                  onChanged: (val) async {
                     setState(() => isDarkMode = val);
-                    SharedPreferenceHelper.setBoolean(
-                      Preferences.is_dark_mode,
-                      val,
-                    );
+                    // Use ThemeProvider for instant theme change
+                    await context.read<ThemeProvider>().setDarkMode(val);
                     Fluttertoast.showToast(
-                      msg: "Dark mode: ${val ? 'ON' : 'OFF'}. Restart app to apply.",
-                      duration: 3,
-                    );
-                    debugPrint("Dark mode toggled: $val");
-                    
-                    // Show restart dialog
-                    showDialog(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title: Text("Restart Required"),
-                        content: Text("Restart the app to apply dark mode changes."),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(ctx),
-                            child: Text("Later"),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(ctx);
-                              // Exit app to restart
-                              SystemNavigator.pop();
-                            },
-                            child: Text("Restart Now"),
-                          ),
-                        ],
-                      ),
+                      msg: "Dark mode: ${val ? 'ON' : 'OFF'}",
+                      duration: 2,
                     );
                   },
                 ),
