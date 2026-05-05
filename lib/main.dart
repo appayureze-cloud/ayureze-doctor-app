@@ -671,7 +671,7 @@ class _MyAppState extends State<MyApp> {
                 'ChatHome': (context) => HomePage(),
               },
             ),
-          },
+          ),
         ),
       );
     }
