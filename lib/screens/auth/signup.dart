@@ -85,535 +85,228 @@ class _CreateAccountState extends State<CreateAccount> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size(width, height * 0.08),
-        child: SafeArea(
-          child: Container(
-            margin: EdgeInsets.only(
-                left: width * 0.05, right: width * 0.05, top: height * 0.02),
-            alignment: AlignmentDirectional.topStart,
-            child: InkWell(
-              child: Padding(
-                padding: EdgeInsets.zero,
-                child: Icon(Icons.arrow_back_ios),
-              ),
-              onTap: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
+      backgroundColor: AyurezeTheme.canvas,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: AyurezeTheme.textPrimary, size: 20),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: GestureDetector(
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SingleChildScrollView(
-          child: Center(
-            child: Form(
-              key: _formkey,
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: height * 0.04,
-                        left: width * 0.073,
-                        right: width * 0.073),
-                    child: Column(
-                      children: [
-                        Text(
-                          getTranslated(context, AppString.register_heading)
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: width * 0.08,
-                              fontWeight: FontWeight.bold,
-                              color: loginButton,
-                              letterSpacing: -1),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          "Join the world's most advanced Ayurveda platform",
-                          style: TextStyle(color: grey, fontSize: 13),
-                          textAlign: TextAlign.center,
-                        ),
-                      ],
-                    ),
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 28),
+          child: Form(
+            key: _formkey,
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(22),
+                  decoration: AyurezeTheme.heroDecoration(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        getTranslated(context, AppString.register_heading).toString(),
+                        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -0.5),
+                      ),
+                      const SizedBox(height: 10),
+                      Text(
+                        "Join the world's most advanced Ayurveda platform",
+                        style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.8)),
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: width * 0.020,
-                        right: width * 0.020,
-                        top: height * 0.027),
-                    child: Column(
-                      children: [
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: height * 0.01,
-                              left: width * 0.05,
-                              right: width * 0.05),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: cardColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: TextFormField(
-                            controller: _name,
-                            keyboardType: TextInputType.name,
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp("[a-zA-Z ]")),
-                            ],
-                            textCapitalization: TextCapitalization.words,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: getTranslated(
-                                      context, AppString.register_full_name)
-                                  .toString(),
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.04,
-                                color: hintColor,
-                              ),
-                            ),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return getTranslated(context,
-                                        AppString.please_enter_full_name)
-                                    .toString();
-                              } else if (value.trim().length < 1) {
-                                return getTranslated(context,
-                                        AppString.please_enter_valid_name)
-                                    .toString();
-                              }
-                              return null;
-                            },
-                            onSaved: (String? name) {},
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: height * 0.01,
-                              left: width * 0.05,
-                              right: width * 0.05),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: cardColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: TextFormField(
-                            controller: _email,
-                            keyboardType: TextInputType.text,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: getTranslated(
-                                      context, AppString.register_email_hint)
-                                  .toString(),
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.04,
-                                color: hintColor,
-                              ),
-                            ),
-                            validator: (String? value) {
-                              Pattern pattern =
-                                  r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                              RegExp regex = new RegExp(pattern as String);
-
-                              if (value!.length == 0) {
-                                return getTranslated(
-                                        context, AppString.please_enter_email)
-                                    .toString();
-                              }
-                              if (!regex.hasMatch(value)) {
-                                return getTranslated(context,
-                                        AppString.please_enter_valid_email)
-                                    .toString();
-                              }
-                              return null;
-                            },
-                            onSaved: (String? name) {},
-                          ),
-                        ),
-                        Container(
-                          child: Row(
-                            children: [
-                              Container(
-                                width: width * 0.21,
-                                height: height * 0.06,
-                                margin: EdgeInsets.only(
-                                  top: height * 0.01,
-                                  left: width * 0.05,
-                                  right: width * 0.05,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: cardColor,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                      width: width * 0.20,
-                                      height: height * 0.06,
-                                      decoration: BoxDecoration(
-                                        color: cardColor,
-                                        borderRadius: BorderRadius.circular(10),
-                                      ),
-                                      child: TextFormField(
-                                        keyboardType: TextInputType.phone,
-                                        textAlign: TextAlign.center,
-                                        readOnly: true,
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          color: hintColor,
-                                        ),
-                                        controller: _phoneCode,
-                                        decoration: InputDecoration(
-                                          hintText: '+91',
-                                          border: InputBorder.none,
-                                          hintStyle: TextStyle(
-                                            fontSize: width * 0.04,
-                                            color: hintColor,
-                                          ),
-                                        ),
-                                        onTap: () {
-                                          showCountryPicker(
-                                            context: context,
-                                            exclude: <String>['KN', 'MF'],
-                                            showPhoneCode: true,
-                                            onSelect: (Country country) {
-                                              _phoneCode.text =
-                                                  "+" + country.phoneCode;
-                                            },
-                                            countryListTheme:
-                                                CountryListThemeData(
-                                              borderRadius: BorderRadius.only(
-                                                topLeft: Radius.circular(40.0),
-                                                topRight: Radius.circular(40.0),
-                                              ),
-                                              inputDecoration: InputDecoration(
-                                                labelText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .register_phone_code_search)
-                                                    .toString(),
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .register_typing_search)
-                                                    .toString(),
-                                                prefixIcon:
-                                                    const Icon(Icons.search),
-                                                border: OutlineInputBorder(
-                                                  borderSide: BorderSide(
-                                                    color: hintColor
-                                                        .withOpacity(0.2),
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                width: width * 0.60,
-                                height: height * 0.06,
-                                margin: EdgeInsets.only(
-                                  top: height * 0.01,
-                                ),
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 15, vertical: 1),
-                                decoration: BoxDecoration(
-                                    color: cardColor,
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: TextFormField(
-                                  controller: _phone,
-                                  keyboardType: TextInputType.numberWithOptions(
-                                      decimal: true),
-                                  inputFormatters: [
-                                    new FilteringTextInputFormatter.allow(
-                                        RegExp("[0-9]")),
-                                    LengthLimitingTextInputFormatter(10)
-                                  ],
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: getTranslated(context,
-                                            AppString.register_phone_no)
-                                        .toString(),
-                                    hintStyle: TextStyle(
-                                      fontSize: width * 0.04,
-                                      color: hintColor,
-                                    ),
-                                  ),
-                                  validator: (String? value) {
-                                    // print(' ${value!.length}');
-                                    if (value?.isEmpty ?? false) {
-                                      return getTranslated(context,
-                                              AppString.please_enter_phone_no)
-                                          .toString();
-                                    }
-                                    if (value?.length != 10) {
-                                      return getTranslated(
-                                              context,
-                                              AppString
-                                                  .please_enter_valid_number)
-                                          .toString();
-                                    }
-                                    return null;
-                                  },
-                                  onSaved: (String? name) {},
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: height * 0.01,
-                              left: width * 0.05,
-                              right: width * 0.05),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: cardColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: TextFormField(
-                            textCapitalization: TextCapitalization.words,
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: hintColor,
-                            ),
-                            controller: _dob,
-                            readOnly: true,
-                            decoration: InputDecoration(
-                              hintText: getTranslated(context,
-                                      AppString.register_birth_date_hint)
-                                  .toString(),
-                              border: InputBorder.none,
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.04,
-                                color: hintColor,
-                              ),
-                            ),
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return getTranslated(context,
-                                        AppString.please_select_birth_date)
-                                    .toString();
-                              }
-                              return null;
-                            },
-                            onTap: () {
-                              _selectDate(context);
-                            },
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: height * 0.01,
-                              left: width * 0.05,
-                              right: width * 0.05),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 3),
-                          decoration: BoxDecoration(
-                              color: cardColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: DropdownButtonFormField(
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: getTranslated(context,
-                                      AppString.register_select_gender_hint)
-                                  .toString(),
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.04,
-                                color: hintColor,
-                              ),
-                            ),
-                            value: _genderSelect,
-                            isExpanded: true,
-                            iconSize: 25,
-                            onSaved: (dynamic value) {
-                              setState(
-                                () {
-                                  _genderSelect = value;
-                                },
-                              );
-                            },
-                            onChanged: (dynamic newValue) {
-                              setState(
-                                () {
-                                  _genderSelect = newValue;
-                                },
-                              );
-                            },
-                            validator: (dynamic value) => value == null
-                                ? getTranslated(
-                                        context, AppString.please_select_gender)
-                                    .toString()
-                                : null,
-                            items: gender.map(
-                              (location) {
-                                return DropdownMenuItem<String>(
-                                  child: new Text(
-                                    location,
-                                    style: TextStyle(
-                                      fontSize: width * 0.04,
-                                      color: hintColor,
-                                    ),
-                                  ),
-                                  value: location,
+                ),
+                const SizedBox(height: 20),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: AyurezeTheme.panelDecoration(),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _name,
+                        keyboardType: TextInputType.name,
+                        inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]"))],
+                        textCapitalization: TextCapitalization.words,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.register_full_name).toString(),
+                        ).copyWith(prefixIcon: Icon(Icons.person_outline_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return getTranslated(context, AppString.please_enter_full_name).toString();
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      TextFormField(
+                        controller: _email,
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.register_email_hint).toString(),
+                        ).copyWith(prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return getTranslated(context, AppString.please_enter_email).toString();
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: TextFormField(
+                              controller: _phoneCode,
+                              readOnly: true,
+                              textAlign: TextAlign.center,
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AyurezeTheme.textPrimary),
+                              decoration: AyurezeTheme.textFieldDecoration(labelText: "Code"),
+                              onTap: () {
+                                showCountryPicker(
+                                  context: context,
+                                  showPhoneCode: true,
+                                  onSelect: (Country country) => setState(() => _phoneCode.text = "+${country.phoneCode}"),
                                 );
                               },
-                            ).toList(),
-                          ),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              top: height * 0.01,
-                              left: width * 0.05,
-                              right: width * 0.05),
-                          padding:
-                              EdgeInsets.symmetric(horizontal: 15, vertical: 2),
-                          decoration: BoxDecoration(
-                              color: cardColor,
-                              borderRadius: BorderRadius.circular(10)),
-                          child: TextFormField(
-                            controller: _password,
-                            keyboardType: TextInputType.name,
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                              hintText: getTranslated(
-                                      context, AppString.register_password_hint)
-                                  .toString(),
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.04,
-                                color: hintColor,
-                              ),
-                              suffixIcon: IconButton(
-                                icon: Icon(
-                                  _isHidden
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                  color: passwordVisibility,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    _isHidden = !_isHidden;
-                                  });
-                                },
-                              ),
                             ),
-                            obscureText: _isHidden,
-                            validator: (String? value) {
-                              if (value!.isEmpty) {
-                                return getTranslated(context,
-                                        AppString.please_enter_password)
-                                    .toString();
-                              }
-                              return null;
-                            },
-                            onSaved: (String? name) {},
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            flex: 5,
+                            child: TextFormField(
+                              controller: _phone,
+                              keyboardType: TextInputType.phone,
+                              inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(10)],
+                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                              decoration: AyurezeTheme.textFieldDecoration(
+                                labelText: getTranslated(context, AppString.register_phone_no).toString(),
+                              ).copyWith(prefixIcon: Icon(Icons.phone_iphone_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                              validator: (String? value) {
+                                if (value!.isEmpty) return getTranslated(context, AppString.please_enter_phone_no).toString();
+                                if (value.length != 10) return getTranslated(context, AppString.please_enter_valid_number).toString();
+                                return null;
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 14),
+                      TextFormField(
+                        controller: _dob,
+                        readOnly: true,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.register_birth_date_hint).toString(),
+                        ).copyWith(prefixIcon: Icon(Icons.calendar_month_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        onTap: () => _selectDate(context),
+                        validator: (String? value) {
+                          if (value!.isEmpty) return getTranslated(context, AppString.please_select_birth_date).toString();
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 14),
+                      DropdownButtonFormField<String>(
+                        value: _genderSelect,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.register_select_gender_hint).toString(),
+                        ).copyWith(prefixIcon: Icon(Icons.people_alt_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        items: gender.map((String value) => DropdownMenuItem(value: value, child: Text(value))).toList(),
+                        onChanged: (newValue) => setState(() => _genderSelect = newValue),
+                        validator: (value) => value == null ? getTranslated(context, AppString.please_select_gender).toString() : null,
+                      ),
+                      const SizedBox(height: 14),
+                      TextFormField(
+                        controller: _password,
+                        obscureText: _isHidden,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.register_password_hint).toString(),
+                        ).copyWith(
+                          prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.forestDeep),
+                          suffixIcon: IconButton(
+                            icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.forestDeep),
+                            onPressed: () => setState(() => _isHidden = !_isHidden),
                           ),
                         ),
-                      ],
-                    ),
-                  ),
-
-
-                  // Final Registration Button
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: height * 0.02,
-                        left: width * 0.05,
-                        right: width * 0.05,
-                        bottom: width * 0.1),
-                    child: SizedBox(
-                      width: width * 1.0,
-                      height: 56,
-                      child: ElevatedButton(
+                        validator: (String? value) {
+                          if (value!.isEmpty) return getTranslated(context, AppString.please_enter_password).toString();
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: loginButton,
-                          elevation: 4,
-                          shadowColor: loginButton.withOpacity(0.3),
-                        ),
-                        child: Text(
-                          getTranslated(context, AppString.register_button)
-                              .toString(),
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          backgroundColor: AyurezeTheme.forestDeep,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 56),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          elevation: 0,
                         ),
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                             Map<String, dynamic> personalData = {
-                                "name": _name.text,
-                                "email": _email.text,
-                                "dob": _dob.text,
-                                "gender": _genderSelect,
-                                "phone": _phone.text,
-                                "password": _password.text,
-                                "phone_code": _phoneCode.text,
-                             };
-                             Navigator.push(
-                               context,
-                               MaterialPageRoute(
-                                 builder: (context) => ProfessionalRegistrationScreen(personalData: personalData),
-                               ),
-                             );
+                            Map<String, dynamic> personalData = {
+                              "name": _name.text,
+                              "email": _email.text,
+                              "dob": _dob.text,
+                              "gender": _genderSelect,
+                              "phone": _phone.text,
+                              "password": _password.text,
+                              "phone_code": _phoneCode.text,
+                            };
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProfessionalRegistrationScreen(personalData: personalData),
+                              ),
+                            );
                           }
                         },
+                        child: Text(
+                          getTranslated(context, AppString.register_button).toString(),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                  Container(
-                    child: Text(
-                      getTranslated(context, AppString.register_description)
-                          .toString(),
-                      style:
-                          TextStyle(fontSize: width * 0.03, color: hintColor),
-                      textAlign: TextAlign.center,
-                    ),
+                ),
+                const SizedBox(height: 24),
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                  decoration: AyurezeTheme.mutedPanelDecoration(),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        getTranslated(context, AppString.register_all_ready_account).toString(),
+                        style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AyurezeTheme.textSecondary),
+                      ),
+                      TextButton(
+                        onPressed: () => Navigator.pushNamed(context, 'SignIn'),
+                        child: Text(
+                          getTranslated(context, AppString.register_sign_in).toString(),
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AyurezeTheme.forestDeep),
+                        ),
+                      ),
+                    ],
                   ),
-                  Container(
-                    margin: EdgeInsets.only(top: 10, bottom: 20),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: [
-                            Text(
-                              getTranslated(context,
-                                      AppString.register_all_ready_account)
-                                  .toString(),
-                              style: TextStyle(
-                                  fontSize: width * 0.035, color: hintColor),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(left: width * 0.009),
-                          child: Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.pushNamed(context, 'SignIn');
-                                },
-                                child: Text(
-                                    getTranslated(
-                                            context, AppString.register_sign_in)
-                                        .toString(),
-                                    style: TextStyle(
-                                        color: loginButton,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: width * 0.035)),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  getTranslated(context, AppString.register_description).toString(),
+                  style: TextStyle(fontSize: 11, color: AyurezeTheme.textSecondary),
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
           ),
         ),

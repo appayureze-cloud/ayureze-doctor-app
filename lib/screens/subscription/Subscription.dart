@@ -12,7 +12,7 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/paymentScreen/PaymentGateway.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 
 class SubSubscription extends StatefulWidget {
@@ -42,13 +42,13 @@ class _SubSubscriptionState extends State<SubSubscription> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () {
@@ -57,10 +57,10 @@ class _SubSubscriptionState extends State<SubSubscription> {
         ),
         title: Text(
           getTranslated(context, AppString.choose_your_best_plan).toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
       ),
@@ -68,13 +68,13 @@ class _SubSubscriptionState extends State<SubSubscription> {
         future: subscriptions,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(color: OslerTheme.forestDeep),
+            return Center(
+              child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
             );
           }
 
           return SingleChildScrollView(
-            padding: OslerTheme.screenPadding,
+            padding: AyurezeTheme.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -98,7 +98,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -129,7 +129,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
           ),
           const SizedBox(height: 8),
           Text(
-            "Compare bookings, monthly options, and billing details in a calmer Osler-style layout.",
+            "Compare bookings, monthly options, and billing details in a calmer Ayureze-style layout.",
             style: TextStyle(
               color: Colors.white.withOpacity(0.78),
               fontSize: 14,
@@ -150,7 +150,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
         : 0;
 
     return Container(
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       padding: const EdgeInsets.all(18),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -161,7 +161,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
-                  color: OslerTheme.forestDeep,
+                  color: AyurezeTheme.forestDeep,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
@@ -179,18 +179,18 @@ class _SubSubscriptionState extends State<SubSubscription> {
                 children: [
                   Text(
                     "${data.totalAppointment}${getTranslated(context, AppString.total_booking).toString()}",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w700,
-                      color: OslerTheme.textPrimary,
+                      color: AyurezeTheme.textPrimary,
                     ),
                   ),
                   const SizedBox(height: 4),
                   Text(
                     hasMultipleOptions ? "Flexible billing options" : "Single plan option",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 12,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   ),
                 ],
@@ -226,7 +226,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    data.name == 'free' ? OslerTheme.moss : OslerTheme.forestDeep,
+                    data.name == 'free' ? AyurezeTheme.moss : AyurezeTheme.forestDeep,
               ),
               child: Text(
                 getTranslated(context, AppString.subscription_buy).toString(),
@@ -242,24 +242,24 @@ class _SubSubscriptionState extends State<SubSubscription> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(16),
-      decoration: OslerTheme.mutedPanelDecoration(),
+      decoration: AyurezeTheme.mutedPanelDecoration(),
       child: option['month'] != null
           ? Row(
               children: [
                 Text(
                   "${_currencyPrefix()}${option['price']} / ",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 18,
-                    color: OslerTheme.textPrimary,
+                    color: AyurezeTheme.textPrimary,
                   ),
                 ),
                 Text(
                   "${option['month']} MONTH",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 13,
-                    color: OslerTheme.textSecondary,
+                    color: AyurezeTheme.textSecondary,
                   ),
                 ),
               ],
@@ -269,18 +269,18 @@ class _SubSubscriptionState extends State<SubSubscription> {
               children: [
                 Text(
                   getTranslated(context, AppString.free_validity).toString(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontWeight: FontWeight.w800,
                     fontSize: 16,
-                    color: OslerTheme.textPrimary,
+                    color: AyurezeTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   getTranslated(context, AppString.edit_or_delete).toString(),
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: OslerTheme.textSecondary,
+                    color: AyurezeTheme.textSecondary,
                   ),
                 ),
               ],
@@ -300,10 +300,10 @@ class _SubSubscriptionState extends State<SubSubscription> {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: selected ? OslerTheme.limeSoft : OslerTheme.surfaceMuted,
+          color: selected ? AyurezeTheme.limeSoft : AyurezeTheme.surfaceMuted,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
-            color: selected ? OslerTheme.lime : OslerTheme.border,
+            color: selected ? AyurezeTheme.lime : AyurezeTheme.border,
           ),
         ),
         child: Row(
@@ -312,7 +312,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               selected
                   ? Icons.radio_button_checked_rounded
                   : Icons.radio_button_off_rounded,
-              color: selected ? OslerTheme.forestDeep : OslerTheme.textSecondary,
+              color: selected ? AyurezeTheme.forestDeep : AyurezeTheme.textSecondary,
             ),
             const SizedBox(width: 12),
             Expanded(
@@ -320,18 +320,18 @@ class _SubSubscriptionState extends State<SubSubscription> {
                 children: [
                   Text(
                     "${_currencyPrefix()}${option['price']} / ",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w800,
                       fontSize: 16,
-                      color: OslerTheme.textPrimary,
+                      color: AyurezeTheme.textPrimary,
                     ),
                   ),
                   Text(
                     "${option['month']} MONTH",
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 13,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   ),
                 ],
@@ -388,3 +388,4 @@ class PaymentData {
     return data;
   }
 }
+

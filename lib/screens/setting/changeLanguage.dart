@@ -13,7 +13,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:image_picker/image_picker.dart';
@@ -91,21 +91,21 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () => Navigator.of(context).pop(),
         ),
         title: Text(
           getTranslated(context, AppString.chang_language).toString(),
-          style: const TextStyle(
-            color: OslerTheme.textPrimary,
+          style: TextStyle(
+            color: AyurezeTheme.textPrimary,
             fontSize: 20,
             fontWeight: FontWeight.w800,
           ),
@@ -115,8 +115,8 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
         future: languageLoader,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(color: OslerTheme.forestDeep),
+            return Center(
+              child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
             );
           }
 
@@ -125,7 +125,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
               FocusScope.of(context).requestFocus(FocusNode());
             },
             child: SingleChildScrollView(
-              padding: OslerTheme.screenPadding,
+              padding: AyurezeTheme.screenPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -146,12 +146,12 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                     return Padding(
                       padding: const EdgeInsets.only(bottom: 12),
                       child: Container(
-                        decoration: OslerTheme.panelDecoration(),
+                        decoration: AyurezeTheme.panelDecoration(),
                         child: RadioListTile(
                           value: index,
                           controlAffinity: ListTileControlAffinity.trailing,
                           groupValue: value,
-                          activeColor: OslerTheme.forestDeep,
+                          activeColor: AyurezeTheme.forestDeep,
                           onChanged: (dynamic selected) async {
                             Future.delayed(const Duration(seconds: 1), () async {
                               value = selected;
@@ -174,10 +174,10 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                           },
                           title: Text(
                             Language.languageList()[index].name,
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w700,
-                              color: OslerTheme.textPrimary,
+                              color: AyurezeTheme.textPrimary,
                             ),
                           ),
                         ),
@@ -197,7 +197,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -218,7 +218,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
           ),
           const SizedBox(height: 14),
           const Text(
-            "Choose how your Osler workspace speaks to you.",
+            "Choose how your Ayureze workspace speaks to you.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -338,3 +338,4 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
     return BaseModel()..data = response;
   }
 }
+

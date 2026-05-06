@@ -5,7 +5,7 @@ import 'package:record/record.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:doctro/services/astra_api_service.dart';
 import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/model/astra/ai_response_models.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
@@ -214,31 +214,31 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         elevation: 0,
         title: Row(
           children: [
             Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                 color: OslerTheme.forestDeep.withOpacity(0.1),
+                 color: AyurezeTheme.forestDeep.withOpacity(0.1),
                 shape: BoxShape.circle,
               ),
-              child: Icon(Icons.psychology, color: OslerTheme.forestDeep, size: 20),
+              child: Icon(Icons.psychology, color: AyurezeTheme.forestDeep, size: 20),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text("Astra AI Assistant", 
-                  style: TextStyle(color: OslerTheme.textPrimary, fontSize: 16, fontWeight: FontWeight.bold)),
+                Text("Astra AI Assistant", 
+                  style: TextStyle(color: AyurezeTheme.textPrimary, fontSize: 16, fontWeight: FontWeight.bold)),
                 Row(
                   children: [
                     Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle)),
                     const SizedBox(width: 4),
-                    const Text("Always Active", style: TextStyle(color: OslerTheme.textSecondary, fontSize: 10)),
+                    Text("Always Active", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 10)),
                   ],
                 ),
               ],
@@ -246,12 +246,12 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
           ],
         ),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios, color: OslerTheme.forestDeep, size: 20),
+          icon: Icon(Icons.arrow_back_ios, color: AyurezeTheme.forestDeep, size: 20),
           onPressed: () => Navigator.pop(context),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.more_vert, color: OslerTheme.textSecondary),
+            icon: Icon(Icons.more_vert, color: AyurezeTheme.textSecondary),
             onPressed: () {},
           ),
         ],
@@ -273,7 +273,7 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: Row(
                 children: [
-                   SizedBox(height: 15, width: 15, child: CircularProgressIndicator(strokeWidth: 2, color: OslerTheme.forestDeep)),
+                   SizedBox(height: 15, width: 15, child: CircularProgressIndicator(strokeWidth: 2, color: AyurezeTheme.forestDeep)),
                    const SizedBox(width: 10),
                    const Text("Astra is thinking...", style: TextStyle(color: Colors.grey, fontSize: 12)),
                 ],
@@ -294,8 +294,8 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
           color: message.isError 
-              ? OslerTheme.danger.withOpacity(0.1)
-              : (message.isSystem ? OslerTheme.limeSoft : (message.isMe ? OslerTheme.forestDeep : OslerTheme.surface)),
+              ? AyurezeTheme.danger.withOpacity(0.1)
+              : (message.isSystem ? AyurezeTheme.limeSoft : (message.isMe ? AyurezeTheme.forestDeep : AyurezeTheme.surface)),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(20),
             topRight: const Radius.circular(20),
@@ -414,3 +414,4 @@ class ChatMessage {
     this.isSystem = false,
   });
 }
+

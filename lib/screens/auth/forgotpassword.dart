@@ -6,7 +6,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -32,131 +32,86 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
-      appBar: PreferredSize(
-        preferredSize: Size(width * 0.05, height * 0.05),
-        child: SafeArea(
-          child: Container(
-              alignment: AlignmentDirectional.topStart,
-              margin: EdgeInsets.only(
-                  top: height * 0.025, left: width * 0.05, right: width * 0.05),
-              child: GestureDetector(
-                child: const Icon(Icons.arrow_back_ios, color: OslerTheme.forestDeep),
-                onTap: () {
-                  Navigator.pop(context);
-                },
-              )),
+      backgroundColor: AyurezeTheme.canvas,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back_ios_new_rounded, color: AyurezeTheme.textPrimary, size: 20),
+          onPressed: () => Navigator.pop(context),
         ),
       ),
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () {
-          FocusScope.of(context).requestFocus(new FocusNode());
-        },
+        onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
         child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
           child: Form(
             key: _formKey,
-            child: Center(
-              child: Column(
-                children: [
-                  Container(
-                    margin: EdgeInsets.only(
-                        top: height * 0.1,
-                        left: width * 0.073,
-                        right: width * 0.073),
-                    child: Text(
-                      getTranslated(context, AppString.forgot_password_title)
-                          .toString(),
-                      style: TextStyle(
-                          fontSize: width * 0.09,
-                          fontWeight: FontWeight.bold,
-                          color: OslerTheme.textPrimary),
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(top: height * 0.040),
-                    child: Text(
-                      getTranslated(
-                              context, AppString.forgot_password_description)
-                          .toString(),
-                      style:
-                          TextStyle(fontSize: width * 0.040, color: OslerTheme.textSecondary),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(
-                        left: width * 0.020,
-                        right: width * 0.020,
-                        top: height * 0.052),
-                    child: Card(
-                      color: OslerTheme.surface,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
+            child: Column(
+              children: [
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(22),
+                  decoration: AyurezeTheme.heroDecoration(),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        getTranslated(context, AppString.forgot_password_title).toString(),
+                        style: const TextStyle(fontSize: 32, fontWeight: FontWeight.w800, color: Colors.white, letterSpacing: -0.5),
                       ),
-                      child: Container(
-                        // height: height * 0.07,
-                        width: width * 0.85,
-                        child: TextFormField(
-                          controller: _email,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              alignLabelWithHint: true,
-                              contentPadding: EdgeInsets.only(
-                                left: 10,
-                                right: 10,
-                              ),
-                              hintText: getTranslated(
-                                      context, AppString.forgot_email_hint)
-                                  .toString(),
-                              hintStyle: TextStyle(
-                                fontSize: width * 0.034,
-                                color: OslerTheme.textSecondary,
-                              )),
-                          validator: (String? value) {
-                            Pattern pattern =
-                                r'^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$';
-                            RegExp regex = new RegExp(pattern as String);
-
-                            if (value!.length == 0) {
-                              return getTranslated(
-                                      context, AppString.please_enter_email)
-                                  .toString();
-                            }
-                            if (!regex.hasMatch(value)) {
-                              return getTranslated(context,
-                                      AppString.please_enter_valid_email)
-                                  .toString();
-                            }
-                            return null;
-                          },
-                        ),
+                      const SizedBox(height: 10),
+                      Text(
+                        getTranslated(context, AppString.forgot_password_description).toString(),
+                        style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.8), height: 1.4),
                       ),
-                    ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Container(
-                      // height: height * 0.06,
-                      width: width * 0.83,
-                      margin: EdgeInsets.only(
-                          left: width * 0.018, right: width * 0.018),
-                      child: ElevatedButton(
-                        child: Text(
-                          getTranslated(context, AppString.forgot_reset_button)
-                              .toString(),
-                          style: TextStyle(fontSize: width * 0.04),
+                ),
+                const SizedBox(height: 30),
+                Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: AyurezeTheme.panelDecoration(),
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        controller: _email,
+                        keyboardType: TextInputType.emailAddress,
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                        decoration: AyurezeTheme.textFieldDecoration(
+                          labelText: getTranslated(context, AppString.forgot_email_hint).toString(),
+                        ).copyWith(prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        validator: (String? value) {
+                          if (value!.isEmpty) {
+                            return getTranslated(context, AppString.please_enter_email).toString();
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 24),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AyurezeTheme.forestDeep,
+                          foregroundColor: Colors.white,
+                          minimumSize: const Size(double.infinity, 56),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                          elevation: 0,
                         ),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             forgotPasswordScreenRequest();
                           }
                         },
+                        child: Text(
+                          getTranslated(context, AppString.forgot_reset_button).toString(),
+                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                        ),
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
         ),

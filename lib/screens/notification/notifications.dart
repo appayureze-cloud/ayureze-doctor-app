@@ -9,7 +9,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -46,25 +46,25 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawer: const ModernDrawer(),
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
           },
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
         ),
         title: Text(
           getTranslated(context, AppString.notification_heading).toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
         actions: [
@@ -75,7 +75,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
             icon: SvgPicture.asset(
               "assets/icons/dMenuBar.svg",
               height: 16,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
           ),
         ],
@@ -91,19 +91,19 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         },
         child: RefreshIndicator(
           onRefresh: bookNotifications,
-          color: OslerTheme.forestDeep,
+          color: AyurezeTheme.forestDeep,
           child: FutureBuilder(
             future: loadData,
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return const Center(
-                  child: CircularProgressIndicator(color: OslerTheme.forestDeep),
+                return Center(
+                  child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
                 );
               }
 
               return SingleChildScrollView(
                 physics: const AlwaysScrollableScrollPhysics(),
-                padding: OslerTheme.screenPadding,
+                padding: AyurezeTheme.screenPadding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -131,7 +131,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -162,7 +162,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           ),
           const SizedBox(height: 8),
           Text(
-            "Recent appointment and patient notifications stay grouped here in the same Osler desk language.",
+            "Recent appointment and patient notifications stay grouped here in the same Ayureze desk language.",
             style: TextStyle(
               color: Colors.white.withOpacity(0.78),
               fontSize: 14,
@@ -202,7 +202,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
-        decoration: OslerTheme.panelDecoration(),
+        decoration: AyurezeTheme.panelDecoration(),
         child: Row(
           children: [
             ClipRRect(
@@ -216,10 +216,10 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   return Container(
                     width: 58,
                     height: 58,
-                    color: OslerTheme.surfaceMuted,
+                    color: AyurezeTheme.surfaceMuted,
                     child: Icon(
                       AppIcons.profile,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   );
                 },
@@ -235,18 +235,18 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                       Expanded(
                         child: Text(
                           item.user?.name ?? "",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: OslerTheme.textPrimary,
+                            color: AyurezeTheme.textPrimary,
                           ),
                         ),
                       ),
                       Text(
                         date,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: OslerTheme.textSecondary,
+                          color: AyurezeTheme.textSecondary,
                         ),
                       ),
                     ],
@@ -256,9 +256,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     item.message ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   ),
                 ],
@@ -275,32 +275,32 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       onTap: () => Navigator.pushNamed(context, "ViewAllNotification"),
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: OslerTheme.mutedPanelDecoration(),
+        decoration: AyurezeTheme.mutedPanelDecoration(),
         child: Row(
           children: [
             Expanded(
               child: Text(
                 getTranslated(context, AppString.notification_view_all)
                     .toString(),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: OslerTheme.textPrimary,
+                  color: AyurezeTheme.textPrimary,
                 ),
               ),
             ),
             SvgPicture.asset(
               'assets/icons/longArrow.svg',
               height: 12,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
             const SizedBox(width: 10),
             Text(
               "${patientNotification.length}",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w800,
-                color: OslerTheme.forestDeep,
+                color: AyurezeTheme.forestDeep,
               ),
             ),
           ],
@@ -313,14 +313,14 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 36),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         children: [
           Image.asset("assets/images/no-data.png", height: 88),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             "No notifications yet.",
-            style: TextStyle(color: OslerTheme.textSecondary),
+            style: TextStyle(color: AyurezeTheme.textSecondary),
           ),
         ],
       ),
@@ -342,3 +342,4 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     return BaseModel()..data = response;
   }
 }
+

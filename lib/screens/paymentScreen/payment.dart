@@ -13,7 +13,7 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/auth/SignIn.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -74,19 +74,19 @@ class _PaymentScreen extends State<PaymentScreen> {
       },
       child: RefreshIndicator(
         onRefresh: paymentsFunction,
-        color: OslerTheme.forestDeep,
+        color: AyurezeTheme.forestDeep,
         child: Scaffold(
           key: _scaffoldKey,
-          backgroundColor: OslerTheme.canvas,
+          backgroundColor: AyurezeTheme.canvas,
           drawer: const ModernDrawer(),
           appBar: AppBar(
-            backgroundColor: OslerTheme.canvas,
+            backgroundColor: AyurezeTheme.canvas,
             title: Text(
               getTranslated(context, AppString.payment_title).toString(),
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w800,
-                color: OslerTheme.textPrimary,
+                color: AyurezeTheme.textPrimary,
               ),
             ),
             actions: [
@@ -97,7 +97,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                 icon: SvgPicture.asset(
                   "assets/icons/dMenuBar.svg",
                   height: 16,
-                  color: OslerTheme.forestDeep,
+                  color: AyurezeTheme.forestDeep,
                 ),
               ),
             ],
@@ -106,9 +106,9 @@ class _PaymentScreen extends State<PaymentScreen> {
             future: payments,
             builder: (context, snapshot) {
               if (snapshot.connectionState != ConnectionState.done) {
-                return const Center(
+                return Center(
                   child: CircularProgressIndicator(
-                    color: OslerTheme.forestDeep,
+                    color: AyurezeTheme.forestDeep,
                   ),
                 );
               }
@@ -120,7 +120,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                 },
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  padding: OslerTheme.screenPadding,
+                  padding: AyurezeTheme.screenPadding,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -158,7 +158,7 @@ class _PaymentScreen extends State<PaymentScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -203,7 +203,7 @@ class _PaymentScreen extends State<PaymentScreen> {
 
   Widget _buildSearchCard() {
     return Container(
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       child: Row(
         children: [
@@ -215,7 +215,7 @@ class _PaymentScreen extends State<PaymentScreen> {
                 filled: false,
                 hintText:
                     getTranslated(context, AppString.payment_search).toString(),
-                hintStyle: const TextStyle(color: OslerTheme.textSecondary),
+                hintStyle: TextStyle(color: AyurezeTheme.textSecondary),
               ),
               onChanged: onSearchTextChanged,
             ),
@@ -223,7 +223,7 @@ class _PaymentScreen extends State<PaymentScreen> {
           SvgPicture.asset(
             'assets/icons/dSearch.svg',
             height: 20,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
           ),
         ],
       ),
@@ -236,24 +236,24 @@ class _PaymentScreen extends State<PaymentScreen> {
       children: [
         Text(
           getTranslated(context, AppString.payment_patient_list).toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: OslerTheme.limeSoft,
+            color: AyurezeTheme.limeSoft,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
             "${getTranslated(context, AppString.payment_total).toString()} ${paymentsRequest.length}",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
           ),
         ),
@@ -286,19 +286,19 @@ class _PaymentScreen extends State<PaymentScreen> {
     return Container(
       margin: const EdgeInsets.only(bottom: 10),
       padding: const EdgeInsets.all(16),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Row(
         children: [
           Container(
             width: 44,
             height: 44,
             decoration: BoxDecoration(
-              color: OslerTheme.surfaceMuted,
+              color: AyurezeTheme.surfaceMuted,
               borderRadius: BorderRadius.circular(14),
             ),
-            child: const Icon(
+            child: Icon(
               Icons.payments_outlined,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
           ),
           const SizedBox(width: 14),
@@ -308,18 +308,18 @@ class _PaymentScreen extends State<PaymentScreen> {
               children: [
                 Text(
                   payment.user?.name ?? "",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 15,
                     fontWeight: FontWeight.w700,
-                    color: OslerTheme.textPrimary,
+                    color: AyurezeTheme.textPrimary,
                   ),
                 ),
                 const SizedBox(height: 4),
                 Text(
                   "Completed payment",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
-                    color: OslerTheme.textSecondary,
+                    color: AyurezeTheme.textSecondary,
                   ),
                 ),
               ],
@@ -327,10 +327,10 @@ class _PaymentScreen extends State<PaymentScreen> {
           ),
           Text(
             "${SharedPreferenceHelper.getString(Preferences.currency_symbol)}${payment.amount}",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 15,
               fontWeight: FontWeight.w800,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
           ),
         ],
@@ -347,31 +347,31 @@ class _PaymentScreen extends State<PaymentScreen> {
       },
       child: Container(
         padding: const EdgeInsets.all(16),
-        decoration: OslerTheme.mutedPanelDecoration(),
+        decoration: AyurezeTheme.mutedPanelDecoration(),
         child: Row(
           children: [
             Expanded(
               child: Text(
                 getTranslated(context, AppString.view_all_payment).toString(),
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 15,
                   fontWeight: FontWeight.w700,
-                  color: OslerTheme.textPrimary,
+                  color: AyurezeTheme.textPrimary,
                 ),
               ),
             ),
             SvgPicture.asset(
               'assets/icons/longArrow.svg',
               height: 12,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
             const SizedBox(width: 10),
             Text(
               "${paymentsRequest.length}",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 15,
                 fontWeight: FontWeight.w800,
-                color: OslerTheme.forestDeep,
+                color: AyurezeTheme.forestDeep,
               ),
             ),
           ],
@@ -385,7 +385,7 @@ class _PaymentScreen extends State<PaymentScreen> {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 18),
       decoration: BoxDecoration(
-        color: OslerTheme.forestDeep,
+        color: AyurezeTheme.forestDeep,
         borderRadius: BorderRadius.circular(22),
       ),
       child: Row(
@@ -416,14 +416,14 @@ class _PaymentScreen extends State<PaymentScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 36),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         children: [
           Image.asset("assets/images/no-data.png", height: 88),
           const SizedBox(height: 10),
           Text(
             getTranslated(context, AppString.no_user).toString(),
-            style: const TextStyle(color: OslerTheme.textSecondary),
+            style: TextStyle(color: AyurezeTheme.textSecondary),
           ),
         ],
       ),
@@ -538,3 +538,4 @@ class _PaymentScreen extends State<PaymentScreen> {
     setState(() {});
   }
 }
+

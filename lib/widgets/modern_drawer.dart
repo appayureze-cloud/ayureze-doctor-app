@@ -6,7 +6,7 @@ import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 
 class ModernDrawer extends StatelessWidget {
   const ModernDrawer({Key? key}) : super(key: key);
@@ -19,14 +19,14 @@ class ModernDrawer extends StatelessWidget {
 
     return Drawer(
       child: Container(
-        color: OslerTheme.canvas,
+        color: AyurezeTheme.canvas,
         child: Column(
           children: [
             Container(
               height: 260,
               width: double.infinity,
               padding: const EdgeInsets.only(top: 54, left: 22, right: 22, bottom: 22),
-              decoration: OslerTheme.heroDecoration(),
+              decoration: AyurezeTheme.heroDecoration(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -38,7 +38,7 @@ class ModernDrawer extends StatelessWidget {
                       border: Border.all(color: Colors.white.withOpacity(0.16)),
                     ),
                     child: const Text(
-                      "Osler Doctor Desk",
+                      "Ayureze Doctor Desk",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 11,
@@ -53,7 +53,7 @@ class ModernDrawer extends StatelessWidget {
                     height: 76,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: OslerTheme.lime, width: 2),
+                      border: Border.all(color: AyurezeTheme.lime, width: 2),
                       image: DecorationImage(
                         image: NetworkImage(dFullImage ?? "https://via.placeholder.com/150"),
                         fit: BoxFit.cover,
@@ -74,13 +74,13 @@ class ModernDrawer extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: OslerTheme.lime,
+                      color: AyurezeTheme.lime,
                       borderRadius: BorderRadius.circular(999),
                     ),
-                    child: const Text(
+                    child: Text(
                       "Verified Professional",
                       style: TextStyle(
-                        color: OslerTheme.forestDeep,
+                        color: AyurezeTheme.forestDeep,
                         fontSize: 11,
                         fontWeight: FontWeight.w800,
                       ),
@@ -108,7 +108,7 @@ class ModernDrawer extends StatelessWidget {
                   _drawerItem(context, AppIcons.settings, getTranslated(context, AppString.drawer_setting).toString(), () => Navigator.popAndPushNamed(context, 'Settings')),
                   const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-                    child: Divider(color: OslerTheme.border),
+                    child: Divider(color: AyurezeTheme.border),
                   ),
                   _drawerItem(context, Icons.logout, getTranslated(context, AppString.drawer_logout).toString(), () => _showLogoutDialog(context), isDestructive: true),
                 ],
@@ -123,13 +123,13 @@ class ModernDrawer extends StatelessWidget {
   Widget _drawerItem(BuildContext context, IconData icon, String label, VoidCallback onTap, {bool isDestructive = false}) {
     return Container(
       margin: const EdgeInsets.only(bottom: 8),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: ListTile(
         leading: Container(
           width: 38,
           height: 38,
           decoration: BoxDecoration(
-            color: isDestructive ? Colors.red.withOpacity(0.1) : OslerTheme.surfaceMuted,
+            color: isDestructive ? Colors.red.withOpacity(0.1) : AyurezeTheme.surfaceMuted,
             borderRadius: BorderRadius.circular(14),
           ),
           child: Icon(icon, color: isDestructive ? Colors.red : hintColor, size: 20),
@@ -145,7 +145,7 @@ class ModernDrawer extends StatelessWidget {
         trailing: Icon(
           Icons.arrow_forward_ios,
           size: 14,
-          color: isDestructive ? Colors.red.withOpacity(0.7) : OslerTheme.textSecondary,
+          color: isDestructive ? Colors.red.withOpacity(0.7) : AyurezeTheme.textSecondary,
         ),
         onTap: onTap,
         dense: true,
@@ -173,3 +173,4 @@ class ModernDrawer extends StatelessWidget {
     );
   }
 }
+

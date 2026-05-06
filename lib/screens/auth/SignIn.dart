@@ -19,7 +19,7 @@ import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/auth/phoneverification.dart';
 import 'package:doctro/screens/auth/signup.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -84,7 +84,7 @@ class _SignInState extends State<SignIn> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       body: GestureDetector(
         behavior: HitTestBehavior.opaque,
         onTap: () {
@@ -101,26 +101,19 @@ class _SignInState extends State<SignIn> {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.all(22),
-                    decoration: OslerTheme.heroDecoration(),
+                    decoration: AyurezeTheme.heroDecoration(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 10,
-                            vertical: 6,
-                          ),
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
                           decoration: BoxDecoration(
                             color: Colors.white.withOpacity(0.14),
                             borderRadius: BorderRadius.circular(999),
                           ),
                           child: const Text(
                             "Doctor workspace",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                            ),
+                            style: TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.w700),
                           ),
                         ),
                         const SizedBox(height: 18),
@@ -131,23 +124,13 @@ class _SignInState extends State<SignIn> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    getTranslated(context, AppString.login_heading)
-                                        .toString(),
-                                    style: const TextStyle(
-                                      fontSize: 30,
-                                      height: 1.05,
-                                      fontWeight: FontWeight.w800,
-                                      color: Colors.white,
-                                    ),
+                                    getTranslated(context, AppString.login_heading).toString(),
+                                    style: const TextStyle(fontSize: 30, height: 1.05, fontWeight: FontWeight.w800, color: Colors.white),
                                   ),
                                   const SizedBox(height: 10),
                                   Text(
-                                    "Run your practice with a calmer Osler-style workflow for visits, patients, and follow-up.",
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      height: 1.4,
-                                      color: Colors.white.withOpacity(0.78),
-                                    ),
+                                    "Run your practice with a calmer Ayureze-style workflow for visits, patients, and follow-up.",
+                                    style: TextStyle(fontSize: 14, height: 1.4, color: Colors.white.withOpacity(0.78)),
                                   ),
                                 ],
                               ),
@@ -171,49 +154,31 @@ class _SignInState extends State<SignIn> {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.fromLTRB(20, 22, 20, 20),
-                    decoration: OslerTheme.panelDecoration(),
+                    decoration: AyurezeTheme.panelDecoration(),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          getTranslated(context, AppString.login_to_your_account)
-                              .toString(),
-                          style: const TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: OslerTheme.textSecondary,
-                          ),
+                          getTranslated(context, AppString.login_to_your_account).toString(),
+                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textSecondary),
                         ),
                         const SizedBox(height: 18),
                         TextFormField(
                           controller: email,
                           keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(fontSize: 16, color: cardText),
-                          decoration: InputDecoration(
-                            labelText: getTranslated(
-                              context,
-                              AppString.login_email_hint,
-                            ).toString(),
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                          decoration: AyurezeTheme.textFieldDecoration(
+                            labelText: getTranslated(context, AppString.login_email_hint).toString(),
                             hintText: "example@email.com",
-                            prefixIcon: Icon(
-                              AppIcons.email,
-                              color: loginButton,
-                            ),
+                          ).copyWith(
+                            prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.forestDeep),
                           ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return getTranslated(
-                                context,
-                                AppString.please_enter_email,
-                              ).toString();
+                              return getTranslated(context, AppString.login_email_validator).toString();
                             }
-                            if (!RegExp(
-                              r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
-                            ).hasMatch(value)) {
-                              return getTranslated(
-                                context,
-                                AppString.please_enter_valid_email,
-                              ).toString();
+                            if (!RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+").hasMatch(value)) {
+                              return getTranslated(context, AppString.login_email_validator2).toString();
                             }
                             return null;
                           },
@@ -221,134 +186,90 @@ class _SignInState extends State<SignIn> {
                         const SizedBox(height: 14),
                         TextFormField(
                           controller: password,
-                          style: TextStyle(fontSize: 16, color: cardText),
-                          decoration: InputDecoration(
-                            labelText: getTranslated(
-                              context,
-                              AppString.login_password_hint,
-                            ).toString(),
-                            hintText: "........",
-                            prefixIcon: Icon(
-                              AppIcons.password,
-                              color: loginButton,
-                            ),
+                          obscureText: _isHidden,
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                          decoration: AyurezeTheme.textFieldDecoration(
+                            labelText: getTranslated(context, AppString.login_password_hint).toString(),
+                          ).copyWith(
+                            prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.forestDeep),
                             suffixIcon: IconButton(
-                              icon: Icon(
-                                _isHidden
-                                    ? AppIcons.visibility
-                                    : AppIcons.visibilityOff,
-                                color: hintColor,
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _isHidden = !_isHidden;
-                                });
-                              },
+                              icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.forestDeep),
+                              onPressed: () => setState(() => _isHidden = !_isHidden),
                             ),
                           ),
-                          obscureText: _isHidden,
                           validator: (String? value) {
                             if (value!.isEmpty) {
-                              return getTranslated(
-                                context,
-                                AppString.please_enter_password,
-                              ).toString();
-                            } else if (value.length < 6) {
-                              return getTranslated(
-                                context,
-                                AppString.please_enter_valid_password,
-                              ).toString();
+                              return getTranslated(context, AppString.login_password_validator).toString();
                             }
                             return null;
                           },
-                        ),
-                        const SizedBox(height: 18),
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (_formkey.currentState!.validate()) {
-                                callApiForLogin();
-                              }
-                            },
-                            child: Text(
-                              getTranslated(context, AppString.login_button)
-                                  .toString(),
-                            ),
-                          ),
                         ),
                         const SizedBox(height: 8),
                         Align(
                           alignment: Alignment.centerRight,
                           child: TextButton(
+                            onPressed: () => Navigator.pushNamed(context, 'forgotpassword'),
                             child: Text(
-                              getTranslated(
-                                context,
-                                AppString.login_forgot_password,
-                              ).toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
-                                color: ForgotPasswordScreen,
-                                fontWeight: FontWeight.w700,
-                              ),
+                              getTranslated(context, AppString.login_forgot_password).toString(),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AyurezeTheme.forestDeep),
                             ),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                context,
-                                'ForgotPasswordScreen',
-                              );
-                            },
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AyurezeTheme.forestDeep,
+                            foregroundColor: Colors.white,
+                            minimumSize: const Size(double.infinity, 56),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            elevation: 0,
+                          ),
+                          onPressed: () {
+                            if (_formkey.currentState!.validate()) {
+                              callApiForLogin();
+                            }
+                          },
+                          child: Text(
+                            getTranslated(context, AppString.login_button).toString(),
+                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
                         Row(
                           children: [
-                            Expanded(
-                              child: Divider(
-                                color: hintColor.withOpacity(0.18),
-                              ),
-                            ),
+                            Expanded(child: Divider(color: AyurezeTheme.textSecondary.withOpacity(0.1))),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
                               child: Text(
                                 "Or continue with",
-                                style: TextStyle(
-                                  color: hintColor,
-                                  fontSize: 12,
-                                ),
+                                style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AyurezeTheme.textSecondary.withOpacity(0.5)),
                               ),
                             ),
-                            Expanded(
-                              child: Divider(
-                                color: hintColor.withOpacity(0.18),
-                              ),
-                            ),
+                            Expanded(child: Divider(color: AyurezeTheme.textSecondary.withOpacity(0.1))),
                           ],
                         ),
-                        const SizedBox(height: 14),
-                        SizedBox(
-                          width: double.infinity,
-                          child: OutlinedButton(
-                            onPressed: _handleGoogleSignIn,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                SvgPicture.string(
-                                  '<svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>',
-                                  height: 24,
-                                  width: 24,
-                                ),
-                                const SizedBox(width: 12),
-                                Text(
-                                  "Sign in with Google",
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w700,
-                                    color: cardText,
-                                  ),
-                                ),
-                              ],
-                            ),
+                        const SizedBox(height: 20),
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                            minimumSize: const Size(double.infinity, 56),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+                            side: BorderSide(color: AyurezeTheme.textSecondary.withOpacity(0.1)),
+                          ),
+                          onPressed: _handleGoogleSignIn,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              SvgPicture.string(
+                                '<svg viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>',
+                                height: 24,
+                                width: 24,
+                              ),
+                              const SizedBox(width: 12),
+                              Text(
+                                "Sign in with Google",
+                                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AyurezeTheme.textPrimary),
+                              ),
+                            ],
                           ),
                         ),
                       ],
@@ -357,36 +278,21 @@ class _SignInState extends State<SignIn> {
                   const SizedBox(height: 18),
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.all(18),
-                    decoration: OslerTheme.mutedPanelDecoration(),
+                    padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                    decoration: AyurezeTheme.mutedPanelDecoration(),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Expanded(
-                          child: Text(
-                            getTranslated(
-                              context,
-                              AppString.login_dont_have_account,
-                            ).toString(),
-                            style: TextStyle(
-                              fontSize: width * 0.04,
-                              color: subheading,
-                            ),
-                          ),
+                        Text(
+                          getTranslated(context, AppString.login_dont_have_account).toString(),
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: AyurezeTheme.textSecondary),
                         ),
                         TextButton(
+                          onPressed: () => Navigator.pushNamed(context, 'signup'),
                           child: Text(
-                            getTranslated(context, AppString.login_sign_up)
-                                .toString(),
-                            style: TextStyle(
-                              fontSize: width * 0.04,
-                              color: loginButton,
-                              fontWeight: FontWeight.w800,
-                            ),
+                            getTranslated(context, AppString.login_sign_up).toString(),
+                            style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AyurezeTheme.forestDeep),
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, 'signup');
-                          },
                         ),
                       ],
                     ),
@@ -719,3 +625,4 @@ class _SignInState extends State<SignIn> {
     return BaseModel()..data = response;
   }
 }
+

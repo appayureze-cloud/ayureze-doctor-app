@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/screens/auth/SignIn.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 
 
 class AppointmentHistoryScreen extends StatefulWidget {
@@ -151,174 +151,106 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
 
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return OrientationBuilder(
-          builder: (context, orientation) {
-            return Scaffold(
-              key: _scaffoldKey,
-              backgroundColor: OslerTheme.canvas,
-              drawer: const ModernDrawer(),
-              appBar: PreferredSize(
-                  preferredSize: Size(20, 140),
-                  child: SafeArea(
-                      top: true,
-                      child: Column(children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pushNamedAndRemoveUntil(context, 'loginHome', (route) => false);
+        return false;
+      },
+      child: Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: AyurezeTheme.canvas,
+        drawer: const ModernDrawer(),
+        appBar: AppBar(
+          backgroundColor: AyurezeTheme.canvas,
+          elevation: 0,
+          leading: IconButton(
+            icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: AyurezeTheme.forestDeep),
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GestureDetector(
+                onTap: () => Navigator.pushNamed(context, "profile"),
+                child: Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    image: DecorationImage(
+                      image: NetworkImage(dFullImage ?? "https://via.placeholder.com/150"),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: RefreshIndicator(
+          onRefresh: appointmentHistoryScreen,
+          color: AyurezeTheme.forestDeep,
+          child: SingleChildScrollView(
+            padding: AyurezeTheme.screenPadding,
+            child: FutureBuilder(
+                future: appointment,
+                builder: (context, snapshot) {
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        padding: const EdgeInsets.all(22),
+                        decoration: AyurezeTheme.heroDecoration(),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Container(
-                              margin: EdgeInsets.only(
-                                  left: width * 0.06,
-                                  right: width * 0.06,
-                                  top: height * 0.00),
-                              child: Row(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        child: Text(
-                                          getTranslated(
-                                                  context,
-                                                  AppString
-                                                      .appointment_history_heading)
-                                              .toString(),
-                                          style: TextStyle(
-                                              fontSize: width * 0.05,
-                                              fontWeight: FontWeight.w800,
-                                              color: hintColor),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(),
-                                    child: IconButton(
-                                      onPressed: () {
-                                        _scaffoldKey.currentState!.openDrawer();
-                                      },
-                                      icon: SvgPicture.asset(
-                                        "assets/icons/dMenuBar.svg",
-                                        height: 16.0,
-                                        color: OslerTheme.forestDeep,
-                                        fit: BoxFit.fill,
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                            Text(
+                              getTranslated(context, AppString.drawer_appointments).toString(),
+                              style: const TextStyle(fontSize: 28, fontWeight: FontWeight.w800, color: Colors.white),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              "Manage and track your patient interactions.",
+                              style: TextStyle(fontSize: 14, color: Colors.white.withOpacity(0.8)),
                             ),
                           ],
                         ),
-                        Container(
-                          margin: EdgeInsets.only(top: height * 0.01),
-                          padding: EdgeInsets.all(10),
-                          child: Container(
-                            decoration: OslerTheme.panelDecoration(),
-                            child: Container(
-                                alignment: AlignmentDirectional.center,
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: width * 0.05, vertical: 6),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children: [
-                                    Container(
-                                      // height: height * 0.06,
-                                      width: width * 0.7,
-                                      child: TextField(
-                                        controller: _search,
-                                        decoration: InputDecoration(
-                                          border: InputBorder.none,
-                                          filled: false,
-                                          hintText: getTranslated(
-                                                  context,
-                                                  AppString
-                                                      .search_appointment_history)
-                                              .toString(),
-                                          hintStyle: TextStyle(
-                                            fontSize: width * 0.045,
-                                            color: hintColor.withOpacity(0.45),
-                                          ),
-                                        ),
-                                        onChanged: onSearchTextChanged,
-                                        textAlign: TextAlign.left,
-                                      ),
-                                    ),
-                                    Container(
-                                      child: SvgPicture.asset(
-                                        'assets/icons/dSearch.svg',
-                                        height: 20,
-                                        color: OslerTheme.forestDeep,
-                                      ),
-                                    ),
-                                  ],
-                                )),
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        decoration: AyurezeTheme.panelDecoration(),
+                        child: TextField(
+                          controller: _search,
+                          onChanged: onSearchTextChanged,
+                          decoration: InputDecoration(
+                            hintText: getTranslated(context, AppString.search_appointment_history).toString(),
+                            hintStyle: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 14),
+                            border: InputBorder.none,
+                            icon: Icon(Icons.search_rounded, color: AyurezeTheme.forestDeep, size: 20),
                           ),
                         ),
-                      ]))),
-              body: WillPopScope(
-                onWillPop: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, 'loginHome', (route) => false);
-                  return Future<bool>.value(false);
-                },
-                child: RefreshIndicator(
-                  onRefresh: appointmentHistoryScreen,
-                  child: FutureBuilder(
-                      future: appointment,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.done) {
-                          return GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              FocusScope.of(context)
-                                  .requestFocus(new FocusNode());
-                            },
-                            child: GestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              onTap: () {
-                                FocusScope.of(context)
-                                    .requestFocus(new FocusNode());
-                              },
-                              child: SingleChildScrollView(
-                                scrollDirection: Axis.vertical,
-                                physics: AlwaysScrollableScrollPhysics(),
-                                child: Center(
-                                  child: Column(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.only(top: 10),
-                                        decoration: BoxDecoration(
-                                          color: OslerTheme.surfaceMuted,
-                                          borderRadius: BorderRadius.circular(22),
-                                        ),
-                                        padding: EdgeInsets.all(10),
-                                        child: new TabBar(
-                                          labelColor: loginButton,
-                                          controller: _tabController,
-                                          indicatorSize:
-                                              TabBarIndicatorSize.tab,
-                                          indicatorColor: loginButton,
-                                          indicator: BoxDecoration(
-                                            color: OslerTheme.limeSoft,
-                                            borderRadius: BorderRadius.circular(16),
-                                          ),
-                                          tabs: tabList,
-                                          unselectedLabelColor: hintColor,
-                                        ),
-                                      ),
-                                      Container(
-                                        height: height * 0.65,
-                                        child: TabBarView(
-                                          controller: _tabController,
-                                          children: [
+                      ),
+                      const SizedBox(height: 20),
+                      Container(
+                        decoration: AyurezeTheme.panelDecoration(),
+                        padding: const EdgeInsets.all(10),
+                        child: TabBar(
+                          controller: _tabController,
+                          indicator: BoxDecoration(color: AyurezeTheme.limeSoft, borderRadius: BorderRadius.circular(16)),
+                          labelColor: AyurezeTheme.forestDeep,
+                          unselectedLabelColor: AyurezeTheme.textSecondary,
+                          labelStyle: const TextStyle(fontWeight: FontWeight.w700, fontSize: 13),
+                          tabs: tabList,
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        height: height * 0.7,
+                        child: TabBarView(
+                          controller: _tabController,
+                          children: [
                                             upcomingAppointmentReq.length == 0
                                                 ? Container(
                                                     child: Center(
@@ -1102,7 +1034,7 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                             ),
                           );
                         } else {
-                          return Center(child: CircularProgressIndicator(color: OslerTheme.forestDeep));
+                          return Center(child: CircularProgressIndicator(color: AyurezeTheme.forestDeep));
                         }
                       }),
                 ),

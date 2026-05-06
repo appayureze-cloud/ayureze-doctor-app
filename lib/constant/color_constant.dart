@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 
-// Osler-inspired palette
+// Ayureze-inspired palette
 const Color colorWhite = Color(0xFFFFFFFF);
 const Color colorBlack = Color(0xFF203126);
 const Color black = Color(0x12000000);

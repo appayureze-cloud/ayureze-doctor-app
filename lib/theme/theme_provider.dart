@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -16,11 +16,13 @@ class ThemeProvider extends ChangeNotifier {
   void _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
     _isDarkMode = prefs.getBool(Preferences.is_dark_mode) ?? false;
+    AyurezeTheme.updateThemeMode(_isDarkMode);
     notifyListeners();
   }
 
   Future<void> toggleDarkMode() async {
     _isDarkMode = !_isDarkMode;
+    AyurezeTheme.updateThemeMode(_isDarkMode);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Preferences.is_dark_mode, _isDarkMode);
     notifyListeners();
@@ -28,10 +30,11 @@ class ThemeProvider extends ChangeNotifier {
 
   Future<void> setDarkMode(bool value) async {
     _isDarkMode = value;
+    AyurezeTheme.updateThemeMode(_isDarkMode);
     final prefs = await SharedPreferences.getInstance();
     await prefs.setBool(Preferences.is_dark_mode, _isDarkMode);
     notifyListeners();
   }
 
-  ThemeData get theme => OslerTheme.theme(isDarkMode: _isDarkMode);
+  ThemeData get theme => AyurezeTheme.theme(isDarkMode: _isDarkMode);
 }

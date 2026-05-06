@@ -15,7 +15,7 @@ import 'package:doctro/chat/providers/auth_provider.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 
 class PhoneVerificationScreen extends StatefulWidget {
   final OtpData? data;
@@ -49,7 +49,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
     width = MediaQuery.of(context).size.width;
     height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: PreferredSize(
         preferredSize: Size(width * 0.05, height * 0.05),
         child: SafeArea(
@@ -57,7 +57,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
               alignment: AlignmentDirectional.topStart,
               margin: EdgeInsets.only(top: height * 0.025, left: width * 0.05),
               child: GestureDetector(
-                child: const Icon(Icons.arrow_back_ios, color: OslerTheme.forestDeep),
+                child: Icon(Icons.arrow_back_ios, color: AyurezeTheme.forestDeep),
                 onTap: () {
                   Navigator.pushNamed(context, 'SignIn');
                 },
@@ -76,7 +76,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                 style: TextStyle(
                     fontSize: width * 0.09,
                     fontWeight: FontWeight.bold,
-                    color: OslerTheme.textPrimary),
+                    color: AyurezeTheme.textPrimary),
               ),
             ),
             Container(
@@ -84,7 +84,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
               child: Text(
                 getTranslated(context, AppString.phone_enter_your_otp_code)
                     .toString(),
-                style: TextStyle(fontSize: width * 0.040, color: OslerTheme.textSecondary),
+                style: TextStyle(fontSize: width * 0.040, color: AyurezeTheme.textSecondary),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -112,7 +112,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
-                      color: OslerTheme.forestDeep,
+                      color: AyurezeTheme.forestDeep,
                       border: Border.all(
                         color: tealAccent.withOpacity(.2),
                       ),
@@ -121,7 +121,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5.0),
-                    color: OslerTheme.surface,
+                    color: AyurezeTheme.surface,
                     border: Border.all(
                       color: tealAccent.withOpacity(.2),
                     ),
@@ -131,7 +131,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                     padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5.0),
-                      color: OslerTheme.surface,
+                      color: AyurezeTheme.surface,
                       border: Border.all(
                         color: tealAccent.withOpacity(.2),
                       ),
@@ -146,7 +146,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   Text(
                     getTranslated(context, AppString.phone_otp_not_received)
                         .toString(),
-                    style: TextStyle(fontSize: width * 0.04, color: OslerTheme.textSecondary),
+                    style: TextStyle(fontSize: width * 0.04, color: AyurezeTheme.textSecondary),
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(vertical: width * 0.02),
@@ -161,7 +161,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                                     context, AppString.phone_resend_new_code)
                                 .toString(),
                             style: TextStyle(
-                                color: OslerTheme.forestDeep,
+                                color: AyurezeTheme.forestDeep,
                                 fontWeight: FontWeight.bold,
                                 fontSize: width * 0.04),
                           ),

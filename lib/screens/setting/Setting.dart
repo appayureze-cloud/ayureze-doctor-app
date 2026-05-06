@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -51,28 +51,28 @@ class _SettingScreenState extends State<SettingScreen> {
         SharedPreferenceHelper.getInt(Preferences.subscription_status) == 1;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           getTranslated(context, AppString.drawer_setting).toString(),
-          style: const TextStyle(
-            color: OslerTheme.textPrimary,
+          style: TextStyle(
+            color: AyurezeTheme.textPrimary,
             fontSize: 20,
             fontWeight: FontWeight.w800,
           ),
         ),
       ),
       body: SingleChildScrollView(
-        padding: OslerTheme.screenPadding,
+        padding: AyurezeTheme.screenPadding,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -187,7 +187,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       context,
                       AppString.drawer_subscription_history,
                     ).toString(),
-                    color: OslerTheme.lime,
+                    color: AyurezeTheme.lime,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -241,8 +241,8 @@ class _SettingScreenState extends State<SettingScreen> {
               child: OutlinedButton(
                 onPressed: _showDeleteAccountDialog,
                 style: OutlinedButton.styleFrom(
-                  foregroundColor: OslerTheme.danger,
-                  side: const BorderSide(color: OslerTheme.danger),
+                  foregroundColor: AyurezeTheme.danger,
+                  side: BorderSide(color: AyurezeTheme.danger),
                 ),
                 child: Text(
                   getTranslated(context, AppString.settings_delete_account)
@@ -260,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -281,7 +281,7 @@ class _SettingScreenState extends State<SettingScreen> {
           ),
           const SizedBox(height: 14),
           const Text(
-            "Tune how your Osler desk behaves day to day.",
+            "Tune how your Ayureze desk behaves day to day.",
             style: TextStyle(
               color: Colors.white,
               fontSize: 24,
@@ -314,27 +314,27 @@ class _SettingScreenState extends State<SettingScreen> {
           padding: const EdgeInsets.only(left: 4, bottom: 10),
           child: Text(
             title.toUpperCase(),
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w800,
-              color: OslerTheme.textSecondary,
+              color: AyurezeTheme.textSecondary,
               letterSpacing: 1.1,
             ),
           ),
         ),
         Container(
-          decoration: OslerTheme.panelDecoration(),
+          decoration: AyurezeTheme.panelDecoration(),
           child: Column(
             children: List.generate(items.length, (index) {
               return Column(
                 children: [
                   items[index],
                   if (index != items.length - 1)
-                    const Divider(
+                    Divider(
                       height: 1,
                       indent: 68,
                       endIndent: 18,
-                      color: OslerTheme.border,
+                      color: AyurezeTheme.border,
                     ),
                 ],
               );
@@ -358,10 +358,10 @@ class _SettingScreenState extends State<SettingScreen> {
       leading: _iconBadge(icon, color),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w700,
-          color: OslerTheme.textPrimary,
+          color: AyurezeTheme.textPrimary,
         ),
       ),
       subtitle: subtitle != null
@@ -369,17 +369,17 @@ class _SettingScreenState extends State<SettingScreen> {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 subtitle,
-                style: const TextStyle(
+                style: TextStyle(
                   fontSize: 12,
-                  color: OslerTheme.textSecondary,
+                  color: AyurezeTheme.textSecondary,
                 ),
               ),
             )
           : null,
       trailing: Switch.adaptive(
         value: value,
-        activeColor: OslerTheme.forestDeep,
-        activeTrackColor: OslerTheme.lime,
+        activeColor: AyurezeTheme.forestDeep,
+        activeTrackColor: AyurezeTheme.lime,
         onChanged: onChanged,
       ),
     );
@@ -397,16 +397,16 @@ class _SettingScreenState extends State<SettingScreen> {
       leading: _iconBadge(icon, color),
       title: Text(
         title,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w700,
-          color: OslerTheme.textPrimary,
+          color: AyurezeTheme.textPrimary,
         ),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.arrow_forward_ios_rounded,
         size: 14,
-        color: OslerTheme.textSecondary,
+        color: AyurezeTheme.textSecondary,
       ),
     );
   }
@@ -445,9 +445,9 @@ class _SettingScreenState extends State<SettingScreen> {
               Navigator.pop(context);
               Fluttertoast.showToast(msg: "Request submitted to admin");
             },
-            child: const Text(
+            child: Text(
               "Delete",
-              style: TextStyle(color: OslerTheme.danger),
+              style: TextStyle(color: AyurezeTheme.danger),
             ),
           ),
         ],
@@ -484,3 +484,4 @@ class _SettingScreenState extends State<SettingScreen> {
     return BaseModel()..data = response;
   }
 }
+

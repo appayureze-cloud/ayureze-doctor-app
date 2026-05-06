@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/services/astra_api_service.dart';
 import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/widgets/astra_fill_display.dart';
@@ -112,50 +112,6 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
     });
   }
 
-  Future<void> _suggestMedicines() async {
-    if (_diagnosisController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Please enter a diagnosis or symptoms first")));
-      return;
-    }
-    
-    setState(() => _isLoading = true);
-    try {
-      // Use the unified AI Shop Assist endpoint
-      final response = await _astraApiService.aiShopAssist({
-        'symptoms': [_diagnosisController.text],
-        'patient_id': widget.patientId,
-        'precise': true
-      });
-      
-      final suggestions = response['recommendations'] ?? response['medicines'] ?? [];
-      
-      if (!mounted) return;
-      if (suggestions.isNotEmpty) {
-        for (var med in suggestions) {
-          _addMedicine(med);
-        }
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Added ${suggestions.length} AI suggested medicines"),
-          backgroundColor: Colors.purple,
-        ));
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("No AI suggestions found. Try different symptoms or add medicines manually."),
-          backgroundColor: OslerTheme.warning,
-          duration: Duration(seconds: 3),
-        ));
-      }
-    } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("AI Suggestion failed: $e. Check your connection."),
-          backgroundColor: OslerTheme.danger,
-        ));
-      }
-    } finally {
-      if (mounted) setState(() => _isLoading = false);
-    }
-  }
 
   Future<void> _submitPrescription() async {
     if (_medicines.isEmpty) {
@@ -185,7 +141,6 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
         "signature_image": base64Encode(_signatureBytes!),
       };
 
-      // Use the unified executePrescriptionWorkflow instead of simple submit
       await _astraApiService.executePrescriptionWorkflow(payload);
       
       if (!mounted) return;
@@ -199,7 +154,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
 
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text(msg),
-        backgroundColor: allHaveShopify ? OslerTheme.forestDeep : OslerTheme.warning,
+        backgroundColor: allHaveShopify ? AyurezeTheme.forestDeep : AyurezeTheme.warning,
         duration: Duration(seconds: 4),
       ));
       
@@ -229,8 +184,8 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Prescription for ${widget.patientName}"),
-        backgroundColor: OslerTheme.canvas,
-        foregroundColor: OslerTheme.textPrimary,
+        backgroundColor: AyurezeTheme.canvas,
+        foregroundColor: AyurezeTheme.textPrimary,
         elevation: 0,
       ),
       body: _isLoading && _patientData == null
@@ -265,12 +220,12 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
 
                     return Card(
                       margin: EdgeInsets.only(bottom: 10),
-                      color: noShopify ? OslerTheme.warning.withOpacity(0.1) : OslerTheme.surface,
+                      color: noShopify ? AyurezeTheme.warning.withOpacity(0.1) : AyurezeTheme.surface,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
                         child: ListTile(
                           leading: CircleAvatar(
-                            backgroundColor: noShopify ? OslerTheme.warning : OslerTheme.forestDeep,
+                            backgroundColor: noShopify ? AyurezeTheme.warning : AyurezeTheme.forestDeep,
                             child: Text("${idx + 1}", style: TextStyle(color: Colors.white))),
                           title: Row(
                             children: [
@@ -278,7 +233,7 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                               if (noShopify)
                                 Tooltip(
                                   message: "Not available for Auto-Cart",
-                                   child: Icon(Icons.warning_amber_rounded, color: OslerTheme.warning, size: 20),
+                                   child: Icon(Icons.warning_amber_rounded, color: AyurezeTheme.warning, size: 20),
                                 ),
                             ],
                           ),
@@ -301,13 +256,13 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                                   ),
                                   Spacer(),
                                   if (med['price'] != null)
-                                     Text("₹ ${med['price']}", style: TextStyle(color: OslerTheme.forestDeep, fontWeight: FontWeight.bold)),
+                                     Text("₹ ${med['price']}", style: TextStyle(color: AyurezeTheme.forestDeep, fontWeight: FontWeight.bold)),
                                 ],
                               ),
                             ],
                           ),
                           trailing: IconButton(
-                            icon: Icon(AppIcons.delete, color: OslerTheme.danger),
+                            icon: Icon(AppIcons.delete, color: AyurezeTheme.danger),
                             onPressed: () => setState(() => _medicines.removeAt(idx)),
                           ),
                         ),
@@ -315,54 +270,41 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                     );
                   }).toList(),
                   
-                  SizedBox(height: 10),
+                  SizedBox(height: 16),
                   
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: _showSearchSheet,
-                          icon: Icon(AppIcons.add),
-                          label: Text("Add Medicine"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.blue.shade50,
-                            foregroundColor: Colors.blue,
-                          ),
-                        ),
+                  ElevatedButton.icon(
+                    onPressed: _showSearchSheet,
+                    icon: Icon(AppIcons.add, size: 18),
+                    label: Text("Add Medicine"),
+                    style: ElevatedButton.styleFrom(
+                      minimumSize: Size(double.infinity, 45),
+                      backgroundColor: AyurezeTheme.forestDeep.withOpacity(0.08),
+                      foregroundColor: AyurezeTheme.forestDeep,
+                      elevation: 0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        side: BorderSide(color: AyurezeTheme.forestDeep.withOpacity(0.2)),
                       ),
-                      SizedBox(width: 10),
-                      Expanded(
-                        child: ElevatedButton.icon(
-                          onPressed: _isLoading ? null : _suggestMedicines,
-                          icon: Icon(Icons.auto_awesome),
-                          label: Text("AI Suggest"),
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple.shade50,
-                            foregroundColor: Colors.purple,
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                   
-                  SizedBox(height: 30),
+                  SizedBox(height: 32),
 
-                  Text("Doctor Digital Signature", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                  SizedBox(height: 10),
+                  Text("Doctor Digital Signature", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme.textPrimary)),
+                  SizedBox(height: 12),
                   Container(
-                    height: 150,
+                    height: 160,
                     width: double.infinity,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade300),
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white,
-                    ),
-                    child: DoctorSignaturePad(
-                      onChanged: (bytes) {
-                        setState(() {
-                          _signatureBytes = bytes;
-                        });
-                      },
+                    decoration: AyurezeTheme.panelDecoration(),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(28),
+                      child: DoctorSignaturePad(
+                        onChanged: (bytes) {
+                          setState(() {
+                            _signatureBytes = bytes;
+                          });
+                        },
+                      ),
                     ),
                   ),
                   Align(
@@ -383,8 +325,8 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                       : Text("Submit & Automate (PDF + WhatsApp)"),
                     style: ElevatedButton.styleFrom(
                       minimumSize: Size(double.infinity, 50),
-          backgroundColor: OslerTheme.forestDeep,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      backgroundColor: AyurezeTheme.forestDeep,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
                     ),
                   ),
                 ],
@@ -427,33 +369,12 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
     setState(() => _isLoading = true);
     try {
       final results = await _astraApiService.getAvailableMedicines();
-      debugPrint("📦 Products received: ${results.length}");
-      if (results.isNotEmpty) {
-        debugPrint("First product: ${results.first}");
-      }
       if (mounted) {
         setState(() => _results = results);
-        if (results.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("⚠️ 0 products loaded. Tap 'Sync' to sync from Shopify."),
-            backgroundColor: OslerTheme.warning,
-            duration: Duration(seconds: 4),
-          ));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("✅ ${results.length} products loaded!"),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 2),
-          ));
-        }
       }
     } catch (e) {
-      debugPrint("❌ Load medicines error: $e");
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Failed to load medicines: $e"),
-          backgroundColor: OslerTheme.danger,
-        ));
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Failed to load medicines")));
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
@@ -463,63 +384,13 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
   Future<void> _syncShopify() async {
     setState(() => _isSyncing = true);
     try {
-      // First check the connection status
-      final status = await _astraApiService.getShopifyStatus();
-      debugPrint("🔗 Shopify Status: $status");
-      
-      if (status['connected'] != true) {
-        if (mounted) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("❌ Shopify not connected. Check server credentials."),
-            backgroundColor: OslerTheme.danger,
-            duration: Duration(seconds: 6),
-          ));
-        }
-        setState(() => _isSyncing = false);
-        return;
-      }
-      
-      // Now try sync
-      final response = await _astraApiService.syncShopifyProducts();
-      debugPrint("🔄 Sync Response: $response");
-      
-      // Also test get available directly
-      final available = await _astraApiService.getAvailableMedicines();
-      debugPrint("📦 Available Products: ${available.length}");
-      
+      await _astraApiService.syncShopifyProducts();
       await _loadAvailableMedicines();
       if (mounted) {
-        final count = response['count'] ?? response['products_synced'] ?? response['total'] ?? response['synced_count'] ?? 0;
-        final error = response['error'] ?? response['errors'];
-        
-        if (error != null) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Sync Error: $error"),
-            backgroundColor: OslerTheme.danger,
-            duration: Duration(seconds: 5),
-          ));
-        } else if (count > 0) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("✅ Shopify Sync: $count products loaded!"),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 4),
-          ));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("⚠️ Sync completed but 0 products. Check Shopify store has products."),
-            backgroundColor: OslerTheme.warning,
-            duration: Duration(seconds: 5),
-          ));
-        }
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Shopify Sync Complete")));
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("❌ Sync failed. Check connection."),
-          backgroundColor: OslerTheme.danger,
-          duration: Duration(seconds: 6),
-        ));
-      }
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Sync failed")));
     } finally {
       if (mounted) setState(() => _isSyncing = false);
     }
@@ -540,100 +411,13 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
     setState(() => _isLoading = true);
     try {
       final results = await _astraApiService.searchMedicineProducts(query);
-      debugPrint("🔍 Search for '$query': ${results.length} results");
       if (mounted) {
         setState(() => _results = results);
-        if (results.isEmpty) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("No medicines found for '$query'"),
-            backgroundColor: OslerTheme.warning,
-            duration: Duration(seconds: 2),
-          ));
-        } else {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text("Found ${results.length} products"),
-            backgroundColor: Colors.green,
-            duration: Duration(seconds: 2),
-          ));
-        }
       }
     } catch (e) {
-      debugPrint("❌ Search error: $e");
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Search failed: $e"),
-          backgroundColor: OslerTheme.danger,
-        ));
-      }
+      if (mounted) ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Search failed")));
     } finally {
       if (mounted) setState(() => _isLoading = false);
-    }
-  }
-
-  Future<void> _showAllProducts() async {
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        title: Text("Loading All Products..."),
-        content: Center(child: CircularProgressIndicator()),
-      ),
-    );
-    try {
-      final result = await _astraApiService.getAllShopifyProducts();
-      if (!mounted) return;
-      Navigator.pop(context);
-      
-      if (result['success'] == true) {
-        final products = result['products'] as List? ?? [];
-        showModalBottomSheet(
-          context: context,
-          isScrollControlled: true,
-          builder: (ctx) => Container(
-            height: MediaQuery.of(context).size.height * 0.8,
-            padding: EdgeInsets.all(16),
-            child: Column(
-              children: [
-                Text("All Shopify Products (${products.length})", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                SizedBox(height: 10),
-                Expanded(
-                  child: products.isEmpty 
-                    ? Center(child: Text("No products found"))
-                    : ListView.builder(
-                        itemCount: products.length,
-                        itemBuilder: (ctx, i) {
-                          final p = products[i];
-                          return ListTile(
-                            title: Text(p['title'] ?? p['medicine_name'] ?? 'Unknown'),
-                            subtitle: Text("₹${p['price'] ?? '0'}"),
-                            trailing: IconButton(
-                              icon: Icon(Icons.add_circle, color: Colors.green),
-                              onPressed: () {
-                                widget.onSelect(p);
-                                Navigator.pop(ctx);
-                              },
-                            ),
-                          );
-                        },
-                      ),
-                ),
-              ],
-            ),
-          ),
-        );
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text("Error: ${result['error']}"),
-          backgroundColor: OslerTheme.danger,
-        ));
-      }
-    } catch (e) {
-      if (!mounted) return;
-      Navigator.pop(context);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-        content: Text("Failed: $e"),
-        backgroundColor: OslerTheme.danger,
-      ));
     }
   }
 
@@ -647,27 +431,14 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text("Search Medicines", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                    Text("${_results.length} products loaded", style: TextStyle(fontSize: 12, color: OslerTheme.textSecondary)),
-                  ],
-                ),
-              ),
+              const Text("Search Medicines", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
               if (_isSyncing)
                 SizedBox(height: 20, width: 20, child: CircularProgressIndicator(strokeWidth: 2))
               else
                 TextButton.icon(
                   onPressed: _syncShopify,
                   icon: Icon(Icons.sync, size: 16),
-                  label: Text("Sync", style: TextStyle(fontSize: 12)),
-                ),
-              TextButton.icon(
-                  onPressed: _showAllProducts,
-                  icon: Icon(Icons.list, size: 16),
-                  label: Text("All", style: TextStyle(fontSize: 12)),
+                  label: Text("Sync Shopify"),
                 ),
             ],
           ),
@@ -675,7 +446,7 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: "Type medicine name (e.g. Ashwagandha)",
+              hintText: "Type medicine name",
               prefixIcon: Icon(AppIcons.search),
               border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
             ),
@@ -684,14 +455,14 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
           SizedBox(height: 10),
           Expanded(
             child: _isLoading 
-          ? Center(child: CircularProgressIndicator(color: OslerTheme.forestDeep))
+              ? Center(child: CircularProgressIndicator())
               : ListView.builder(
                   itemCount: _results.length,
                   itemBuilder: (context, index) {
                     final item = _results[index];
                     return ListTile(
                       title: Text(item['medicine_name'] ?? item['title'] ?? 'Unknown'),
-                      subtitle: Text("₹ ${item['price'] ?? (item['variants'] != null && (item['variants'] as List).isNotEmpty ? item['variants'][0]['price'] : '0')}"),
+                      subtitle: Text("₹ ${item['price'] ?? '0'}"),
                       trailing: Icon(Icons.add_circle, color: Colors.green),
                       onTap: () => widget.onSelect(item),
                     );

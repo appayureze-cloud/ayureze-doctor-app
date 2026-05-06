@@ -436,7 +436,7 @@ class AstraApiService {
   Future<List<dynamic>> searchMedicineProducts(String medicineName) async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/search/$medicineName');
-      return response.data ?? [];
+      return _extractProducts(response.data);
     } catch (e) {
       return [];
     }
@@ -446,7 +446,7 @@ class AstraApiService {
   Future<List<dynamic>> getAvailableMedicines() async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/available');
-      return response.data ?? [];
+      return _extractProducts(response.data);
     } catch (e) {
       return [];
     }
@@ -456,12 +456,13 @@ class AstraApiService {
   Future<Map<String, dynamic>> getAllShopifyProducts() async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/all');
-      return {'success': true, 'products': response.data, 'count': (response.data as List?)?.length ?? 0};
+      List products = _extractProducts(response.data);
+      return {'success': true, 'products': products, 'count': products.length};
     } catch (e) {
-      // Try alternative endpoint
       try {
         final response = await _dio.get('/api/v1/shopify/products');
-        return {'success': true, 'products': response.data, 'count': (response.data as List?)?.length ?? 0};
+        List products = _extractProducts(response.data);
+        return {'success': true, 'products': products, 'count': products.length};
       } catch (e2) {
         return {'success': false, 'error': e2.toString()};
       }
@@ -981,6 +982,20 @@ class AstraApiService {
       return AstraApiException(message, error.response?.statusCode);
     }
     return Exception('An unexpected error occurred: $error');
+  }
+
+  /// Extract products list from various response structures
+  List<dynamic> _extractProducts(dynamic data) {
+    if (data == null) return [];
+    if (data is List) return data;
+    if (data is Map) {
+      return data['products'] ?? 
+             data['recommendations'] ?? 
+             data['medicines'] ?? 
+             data['data'] ?? 
+             [];
+    }
+    return [];
   }
 }
 

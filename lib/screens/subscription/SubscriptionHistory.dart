@@ -6,7 +6,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,13 +34,13 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
@@ -48,10 +48,10 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         title: Text(
           getTranslated(context, AppString.subscription_history_heading)
               .toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
       ),
@@ -64,8 +64,8 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
           future: purchaseReq,
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done) {
-              return const Center(
-                child: CircularProgressIndicator(color: OslerTheme.forestDeep),
+              return Center(
+                child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
               );
             }
 
@@ -73,7 +73,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
                 _search.text.isNotEmpty ? _searchResult : purchaseDetail;
 
             return SingleChildScrollView(
-              padding: OslerTheme.screenPadding,
+              padding: AyurezeTheme.screenPadding,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -100,7 +100,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -145,7 +145,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
 
   Widget _buildSearchCard() {
     return Container(
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 6),
       child: TextField(
         controller: _search,
@@ -156,10 +156,10 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
             context,
             AppString.subscription_search_history,
           ).toString(),
-          hintStyle: const TextStyle(color: OslerTheme.textSecondary),
+          hintStyle: TextStyle(color: AyurezeTheme.textSecondary),
           suffixIcon: Icon(
             AppIcons.search,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
           ),
         ),
         onChanged: onSearchTextChanged,
@@ -174,24 +174,24 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         Text(
           getTranslated(context, AppString.subscription_history_heading)
               .toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: OslerTheme.limeSoft,
+            color: AyurezeTheme.limeSoft,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
             "${purchaseDetail.length} ${getTranslated(context, AppString.subscription_title).toString()}",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 12,
               fontWeight: FontWeight.w700,
-              color: OslerTheme.forestDeep,
+              color: AyurezeTheme.forestDeep,
             ),
           ),
         ),
@@ -211,7 +211,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.all(18),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -221,10 +221,10 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
               Expanded(
                 child: Text(
                   "${getTranslated(context, AppString.subscription_plan).toString()}: ${item.subscription?.name ?? ""}",
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w800,
-                    color: OslerTheme.textPrimary,
+                    color: AyurezeTheme.textPrimary,
                   ),
                 ),
               ),
@@ -249,8 +249,8 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
                         ).toString(),
                   style: TextStyle(
                     color: statusActive
-                        ? OslerTheme.forestDeep
-                        : OslerTheme.danger,
+                        ? AyurezeTheme.forestDeep
+                        : AyurezeTheme.danger,
                     fontSize: 11,
                     fontWeight: FontWeight.w800,
                   ),
@@ -263,25 +263,25 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
             item.amount == null
                 ? getTranslated(context, AppString.subscription_free).toString()
                 : "${getTranslated(context, AppString.subscription_payment).toString()}: ${item.amount}",
-            style: const TextStyle(
+            style: TextStyle(
               fontSize: 14,
-              color: OslerTheme.textSecondary,
+              color: AyurezeTheme.textSecondary,
             ),
           ),
           if (item.paymentType != null) ...[
             const SizedBox(height: 4),
             Text(
               "${getTranslated(context, AppString.subscription_payment_type).toString()} ${item.paymentType!}",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 14,
-                color: OslerTheme.textSecondary,
+                color: AyurezeTheme.textSecondary,
               ),
             ),
           ],
           const SizedBox(height: 14),
           Container(
             padding: const EdgeInsets.all(14),
-            decoration: OslerTheme.mutedPanelDecoration(),
+            decoration: AyurezeTheme.mutedPanelDecoration(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -301,19 +301,19 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
       children: [
         Text(
           label,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.w700,
-            color: OslerTheme.textSecondary,
+            color: AyurezeTheme.textSecondary,
           ),
         ),
         const SizedBox(height: 4),
         Text(
           value,
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
       ],
@@ -324,14 +324,14 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.symmetric(vertical: 36),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         children: [
           Image.asset("assets/images/no-data.png", height: 88),
           const SizedBox(height: 10),
-          const Text(
+          Text(
             "No subscription history yet.",
-            style: TextStyle(color: OslerTheme.textSecondary),
+            style: TextStyle(color: AyurezeTheme.textSecondary),
           ),
         ],
       ),
@@ -372,3 +372,4 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
     setState(() {});
   }
 }
+

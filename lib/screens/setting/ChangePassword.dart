@@ -7,7 +7,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -39,13 +39,13 @@ class _ChangePasswordState extends State<ChangePassword> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () {
@@ -54,10 +54,10 @@ class _ChangePasswordState extends State<ChangePassword> {
         ),
         title: Text(
           getTranslated(context, AppString.change_password_heading).toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
       ),
@@ -67,7 +67,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           FocusScope.of(context).requestFocus(FocusNode());
         },
         child: SingleChildScrollView(
-          padding: OslerTheme.screenPadding,
+          padding: AyurezeTheme.screenPadding,
           child: Form(
             key: _formKey,
             child: Column(
@@ -88,7 +88,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -119,7 +119,7 @@ class _ChangePasswordState extends State<ChangePassword> {
           ),
           const SizedBox(height: 8),
           Text(
-            "Update your password with a calmer Osler-style form that keeps the task focused and clear.",
+            "Update your password with a calmer Ayureze-style form that keeps the task focused and clear.",
             style: TextStyle(
               color: Colors.white.withOpacity(0.78),
               fontSize: 14,
@@ -135,7 +135,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(20),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -241,10 +241,10 @@ class _ChangePasswordState extends State<ChangePassword> {
       padding: const EdgeInsets.only(bottom: 8),
       child: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w700,
-          color: OslerTheme.textPrimary,
+          color: AyurezeTheme.textPrimary,
         ),
       ),
     );
@@ -254,7 +254,7 @@ class _ChangePasswordState extends State<ChangePassword> {
     return IconButton(
       icon: Icon(
         hidden ? AppIcons.visibility : AppIcons.visibilityOff,
-        color: OslerTheme.textSecondary,
+        color: AyurezeTheme.textSecondary,
       ),
       onPressed: onTap,
     );
@@ -283,3 +283,4 @@ class _ChangePasswordState extends State<ChangePassword> {
     return BaseModel()..data = response;
   }
 }
+

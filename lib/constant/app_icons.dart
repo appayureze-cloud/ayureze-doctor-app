@@ -5,150 +5,150 @@ class AppIcons {
   static const Color iconSecondary = Color(0xFF607063);
   static const Color iconAccent = Color(0xFF2E7D32);
 
-  static IconData get home => Icons.home_outlined;
-  static IconData get homeFilled => Icons.home;
+  static IconData get home => Icons.home_rounded;
+  static IconData get homeFilled => Icons.home_rounded;
 
-  static IconData get calendar => Icons.calendar_month_outlined;
-  static IconData get calendarFilled => Icons.calendar_month;
+  static IconData get calendar => Icons.calendar_month_rounded;
+  static IconData get calendarFilled => Icons.calendar_month_rounded;
 
-  static IconData get chat => Icons.chat_bubble_outline;
-  static IconData get chatFilled => Icons.chat_bubble;
+  static IconData get chat => Icons.chat_bubble_rounded;
+  static IconData get chatFilled => Icons.chat_bubble_rounded;
 
-  static IconData get profile => Icons.person_outline;
-  static IconData get profileFilled => Icons.person;
+  static IconData get profile => Icons.person_rounded;
+  static IconData get profileFilled => Icons.person_rounded;
 
-  static IconData get settings => Icons.settings_outlined;
-  static IconData get settingsFilled => Icons.settings;
+  static IconData get settings => Icons.settings_rounded;
+  static IconData get settingsFilled => Icons.settings_rounded;
 
-  static IconData get notifications => Icons.notifications_outlined;
-  static IconData get notificationsFilled => Icons.notifications;
+  static IconData get notifications => Icons.notifications_rounded;
+  static IconData get notificationsFilled => Icons.notifications_rounded;
 
-  static IconData get search => Icons.search;
+  static IconData get search => Icons.search_rounded;
 
-  static IconData get menu => Icons.menu;
+  static IconData get menu => Icons.menu_rounded;
 
-  static IconData get back => Icons.arrow_back_ios_new;
+  static IconData get back => Icons.arrow_back_ios_new_rounded;
 
-  static IconData get forward => Icons.arrow_forward_ios;
+  static IconData get forward => Icons.arrow_forward_ios_rounded;
 
-  static IconData get add => Icons.add_circle_outline;
-  static IconData get addFilled => Icons.add_circle;
+  static IconData get add => Icons.add_circle_rounded;
+  static IconData get addFilled => Icons.add_circle_rounded;
 
-  static IconData get edit => Icons.edit_outlined;
+  static IconData get edit => Icons.edit_rounded;
 
-  static IconData get delete => Icons.delete_outline;
+  static IconData get delete => Icons.delete_rounded;
 
-  static IconData get call => Icons.call_outlined;
-  static IconData get callEnd => Icons.call_end;
+  static IconData get call => Icons.call_rounded;
+  static IconData get callEnd => Icons.call_end_rounded;
 
-  static IconData get mic => Icons.mic;
+  static IconData get mic => Icons.mic_rounded;
 
-  static IconData get micOff => Icons.mic_off;
+  static IconData get micOff => Icons.mic_off_rounded;
 
-  static IconData get videoCall => Icons.videocam_outlined;
-  static IconData get videoCallOff => Icons.videocam_off_outlined;
+  static IconData get videoCall => Icons.videocam_rounded;
+  static IconData get videoCallOff => Icons.videocam_off_rounded;
 
-  static IconData get camera => Icons.camera_alt_outlined;
+  static IconData get camera => Icons.camera_alt_rounded;
 
-  static IconData get photo => Icons.photo_library_outlined;
+  static IconData get photo => Icons.photo_library_rounded;
 
-  static IconData get medical => Icons.medical_services_outlined;
+  static IconData get medical => Icons.medical_services_rounded;
 
-  static IconData get prescription => Icons.description_outlined;
+  static IconData get prescription => Icons.description_rounded;
 
-  static IconData get patient => Icons.people_outline;
+  static IconData get patient => Icons.people_rounded;
 
-  static IconData get appointment => Icons.event_outlined;
+  static IconData get appointment => Icons.event_rounded;
 
-  static IconData get payment => Icons.payment_outlined;
+  static IconData get payment => Icons.payment_rounded;
 
-  static IconData get subscription => Icons.card_membership_outlined;
+  static IconData get subscription => Icons.card_membership_rounded;
 
-  static IconData get language => Icons.language_outlined;
+  static IconData get language => Icons.language_rounded;
 
-  static IconData get password => Icons.lock_outline;
+  static IconData get password => Icons.lock_rounded;
 
-  static IconData get logout => Icons.logout;
+  static IconData get logout => Icons.logout_rounded;
 
-  static IconData get check => Icons.check_circle_outline;
+  static IconData get check => Icons.check_circle_rounded;
 
-  static IconData get warning => Icons.warning_amber_outlined;
+  static IconData get warning => Icons.warning_amber_rounded;
 
-  static IconData get error => Icons.error_outline;
+  static IconData get error => Icons.error_rounded;
 
-  static IconData get info => Icons.info_outline;
+  static IconData get info => Icons.info_rounded;
 
-  static IconData get time => Icons.access_time;
+  static IconData get time => Icons.access_time_rounded;
 
-  static IconData get date => Icons.calendar_today;
+  static IconData get date => Icons.calendar_today_rounded;
 
-  static IconData get send => Icons.send_outlined;
+  static IconData get send => Icons.send_rounded;
 
-  static IconData get attach => Icons.attach_file;
+  static IconData get attach => Icons.attach_file_rounded;
 
-  static IconData get document => Icons.insert_drive_file_outlined;
+  static IconData get document => Icons.insert_drive_file_rounded;
 
-  static IconData get folder => Icons.folder_outlined;
+  static IconData get folder => Icons.folder_rounded;
 
-  static IconData get star => Icons.star_outline;
-  static IconData get starFilled => Icons.star;
+  static IconData get star => Icons.star_rounded;
+  static IconData get starFilled => Icons.star_rounded;
 
-  static IconData get filter => Icons.filter_list;
+  static IconData get filter => Icons.filter_list_rounded;
 
-  static IconData get more => Icons.more_vert;
+  static IconData get more => Icons.more_vert_rounded;
 
-  static IconData get close => Icons.close;
+  static IconData get close => Icons.close_rounded;
 
-  static IconData get visibility => Icons.visibility_outlined;
-  static IconData get visibilityOff => Icons.visibility_off_outlined;
+  static IconData get visibility => Icons.visibility_rounded;
+  static IconData get visibilityOff => Icons.visibility_off_rounded;
 
-  static IconData get email => Icons.email_outlined;
+  static IconData get email => Icons.email_rounded;
 
-  static IconData get phone => Icons.phone_outlined;
+  static IconData get phone => Icons.phone_rounded;
 
-  static IconData get location => Icons.location_on_outlined;
+  static IconData get location => Icons.location_on_rounded;
 
-  static IconData get doctor => Icons.local_hospital_outlined;
+  static IconData get doctor => Icons.local_hospital_rounded;
 
-  static IconData get hospital => Icons.business_outlined;
+  static IconData get hospital => Icons.business_rounded;
 
-  static IconData get wallet => Icons.account_balance_wallet_outlined;
+  static IconData get wallet => Icons.account_balance_wallet_rounded;
 
-  static IconData get share => Icons.share_outlined;
+  static IconData get share => Icons.share_rounded;
 
-  static IconData get download => Icons.download_outlined;
+  static IconData get download => Icons.download_rounded;
 
-  static IconData get upload => Icons.cloud_upload_outlined;
+  static IconData get upload => Icons.cloud_upload_rounded;
 
-  static IconData get image => Icons.image_outlined;
+  static IconData get image => Icons.image_rounded;
 
-  static IconData get help => Icons.help_outline;
+  static IconData get help => Icons.help_rounded;
 
-  static IconData get privacy => Icons.privacy_tip_outlined;
+  static IconData get privacy => Icons.privacy_tip_rounded;
 
-  static IconData get terms => Icons.article_outlined;
+  static IconData get terms => Icons.article_rounded;
 
-  static IconData get about => Icons.info_outline;
+  static IconData get about => Icons.info_rounded;
 
-  static IconData get shield => Icons.shield_outlined;
+  static IconData get shield => Icons.shield_rounded;
 
-  static IconData get verified => Icons.verified_outlined;
+  static IconData get verified => Icons.verified_rounded;
 
-  static IconData get clock => Icons.schedule_outlined;
+  static IconData get clock => Icons.schedule_rounded;
 
-  static IconData get mail => Icons.mail_outline;
+  static IconData get mail => Icons.mail_rounded;
 
-  static IconData get sms => Icons.sms_outlined;
+  static IconData get sms => Icons.sms_rounded;
 
-  static IconData get wifi => Icons.wifi;
+  static IconData get wifi => Icons.wifi_rounded;
 
-  static IconData get refresh => Icons.refresh;
+  static IconData get refresh => Icons.refresh_rounded;
 
-  static IconData get list => Icons.list;
+  static IconData get list => Icons.list_rounded;
 
-  static IconData get grid => Icons.grid_view;
+  static IconData get grid => Icons.grid_view_rounded;
 
-  static IconData get analytics => Icons.analytics_outlined;
+  static IconData get analytics => Icons.analytics_rounded;
 
-  static IconData get language2 => Icons.translate;
+  static IconData get language2 => Icons.translate_rounded;
 }

@@ -11,7 +11,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 // import 'package:flutter_paystack/flutter_paystack.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -155,22 +155,22 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
     flutterWave = SharedPreferenceHelper.getInt(Preferences.FlutterWave);
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         elevation: 0,
         title: Text(
           getTranslated(context, AppString.payment_method_heading).toString(),
-          style: const TextStyle(
-            color: OslerTheme.textPrimary,
+          style: TextStyle(
+            color: AyurezeTheme.textPrimary,
             fontWeight: FontWeight.w800,
           ),
         ),
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.keyboard_backspace_outlined,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 35.0,
           ),
           onPressed: () {
@@ -179,7 +179,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
         ),
       ),
       body: Container(
-        color: OslerTheme.canvas,
+        color: AyurezeTheme.canvas,
         height: MediaQuery.of(context).size.height,
         width: MediaQuery.of(context).size.width,
         child: ListView(
@@ -189,7 +189,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
               width: double.infinity,
               padding: const EdgeInsets.all(22),
               margin: const EdgeInsets.only(bottom: 16),
-              decoration: OslerTheme.heroDecoration(),
+              decoration: AyurezeTheme.heroDecoration(),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -220,7 +220,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                   ),
                   const SizedBox(height: 8),
                   Text(
-                    "The payment methods below now sit inside the same Osler workspace language as the rest of the app.",
+                    "The payment methods below now sit inside the same Ayureze workspace language as the rest of the app.",
                     style: TextStyle(
                       color: Colors.white.withOpacity(0.78),
                       fontSize: 14,
@@ -242,7 +242,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: Offset(
@@ -301,7 +301,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: Offset(
@@ -360,7 +360,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: Offset(
@@ -419,7 +419,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                      color: OslerTheme.textSecondary.withOpacity(0.2),
+                                      color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                       spreadRadius: 2,
                                       blurRadius: 7,
                                       offset: Offset(0, 3)),
@@ -476,7 +476,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: Offset(0, 3),
@@ -534,7 +534,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                             decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                                     spreadRadius: 2,
                                     blurRadius: 7,
                                     offset: Offset(0, 3),
@@ -642,11 +642,11 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
             child: Container(
               decoration: BoxDecoration(boxShadow: [
                 BoxShadow(
-                    color: OslerTheme.textSecondary.withOpacity(0.2),
+                    color: AyurezeTheme.textSecondary.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 7,
                     offset: Offset(0, 3)),
-              ], borderRadius: BorderRadius.circular(20), color: OslerTheme.forestDeep),
+              ], borderRadius: BorderRadius.circular(20), color: AyurezeTheme.forestDeep),
               height: MediaQuery.of(context).size.height * 0.07,
               width: MediaQuery.of(context).size.width,
               child: Center(
@@ -861,3 +861,4 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
         toastLength: Toast.LENGTH_SHORT);
   }
 }
+

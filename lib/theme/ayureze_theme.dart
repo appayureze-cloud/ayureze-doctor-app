@@ -1,19 +1,42 @@
 import 'package:flutter/material.dart';
 
-class OslerTheme {
+class AyurezeTheme {
+  // Brand Colors
   static const Color forest = Color(0xFF536256);
   static const Color forestDeep = Color(0xFF24382C);
   static const Color moss = Color(0xFF70836F);
   static const Color lime = Color(0xFF2E7D32);
   static const Color limeSoft = Color(0xFFC8E6C9);
-  static const Color canvas = Color(0xFFE9EEE4);
-  static const Color surface = Color(0xFFF7F8F2);
-  static const Color surfaceMuted = Color(0xFFEFF3EA);
-  static const Color border = Color(0xFFD4DDCC);
-  static const Color textPrimary = Color(0xFF203126);
-  static const Color textSecondary = Color(0xFF607063);
   static const Color danger = Color(0xFFD95C4E);
   static const Color warning = Color(0xFFF0A534);
+
+  // Private state for dynamic theme support
+  static bool _isDark = false;
+  static void updateThemeMode(bool value) => _isDark = value;
+
+  // Semantic Colors - Light Definitions
+  static const Color lightCanvas = Color(0xFFE9EEE4);
+  static const Color lightSurface = Color(0xFFF7F8F2);
+  static const Color lightSurfaceMuted = Color(0xFFEFF3EA);
+  static const Color lightBorder = Color(0xFFD4DDCC);
+  static const Color lightTextPrimary = Color(0xFF203126);
+  static const Color lightTextSecondary = Color(0xFF607063);
+
+  // Semantic Colors - Dark Definitions
+  static const Color darkCanvas = Color(0xFF1A1A1A);
+  static const Color darkSurface = Color(0xFF2D2D2D);
+  static const Color darkSurfaceMuted = Color(0xFF3D3D3D);
+  static const Color darkBorder = Color(0xFF4D4D4D);
+  static const Color darkTextPrimary = Color(0xFFE0E0E0);
+  static const Color darkTextSecondary = Color(0xFFA0A0A0);
+
+  // Dynamic Getters
+  static Color get canvas => _isDark ? darkCanvas : lightCanvas;
+  static Color get surface => _isDark ? darkSurface : lightSurface;
+  static Color get surfaceMuted => _isDark ? darkSurfaceMuted : lightSurfaceMuted;
+  static Color get border => _isDark ? darkBorder : lightBorder;
+  static Color get textPrimary => _isDark ? darkTextPrimary : lightTextPrimary;
+  static Color get textSecondary => _isDark ? darkTextSecondary : lightTextSecondary;
 
   static const EdgeInsets screenPadding = EdgeInsets.symmetric(
     horizontal: 20,
@@ -33,11 +56,11 @@ class OslerTheme {
       brightness: Brightness.light,
       primary: lime,
       secondary: forest,
-      surface: surface,
+      surface: lightSurface,
     ).copyWith(
       onPrimary: forestDeep,
       onSecondary: Colors.white,
-      onSurface: textPrimary,
+      onSurface: lightTextPrimary,
       error: danger,
       onError: Colors.white,
     );
@@ -45,42 +68,42 @@ class OslerTheme {
     return ThemeData(
       useMaterial3: true,
       colorScheme: colorScheme,
-      scaffoldBackgroundColor: canvas,
-      cardColor: surface,
-      dividerColor: border,
+      scaffoldBackgroundColor: lightCanvas,
+      cardColor: lightSurface,
+      dividerColor: lightBorder,
       shadowColor: const Color(0x16000000),
       textTheme: const TextTheme(
         headlineLarge: TextStyle(
           fontSize: 32,
           height: 1.05,
           fontWeight: FontWeight.w800,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
         headlineMedium: TextStyle(
           fontSize: 24,
           height: 1.15,
           fontWeight: FontWeight.w800,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
         titleLarge: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
         titleMedium: TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
         bodyLarge: TextStyle(
           fontSize: 15,
           height: 1.4,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
         bodyMedium: TextStyle(
           fontSize: 14,
           height: 1.35,
-          color: textSecondary,
+          color: lightTextSecondary,
         ),
         labelLarge: TextStyle(
           fontSize: 14,
@@ -89,26 +112,26 @@ class OslerTheme {
         ),
       ),
       appBarTheme: const AppBarTheme(
-        backgroundColor: canvas,
+        backgroundColor: lightCanvas,
         surfaceTintColor: Colors.transparent,
-        foregroundColor: textPrimary,
+        foregroundColor: lightTextPrimary,
         elevation: 0,
         scrolledUnderElevation: 0,
         centerTitle: false,
         titleTextStyle: TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.w800,
-          color: textPrimary,
+          color: lightTextPrimary,
         ),
       ),
       cardTheme: CardThemeData(
-        color: surface,
+        color: lightSurface,
         elevation: 0,
         margin: EdgeInsets.zero,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(28),
-          side: const BorderSide(color: border),
+          side: const BorderSide(color: lightBorder),
         ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
@@ -128,10 +151,10 @@ class OslerTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          backgroundColor: surface,
-          foregroundColor: textPrimary,
+          backgroundColor: lightSurface,
+          foregroundColor: lightTextPrimary,
           minimumSize: const Size.fromHeight(56),
-          side: const BorderSide(color: border),
+          side: const BorderSide(color: lightBorder),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),
@@ -143,16 +166,16 @@ class OslerTheme {
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
-        fillColor: surface,
-        hintStyle: const TextStyle(color: textSecondary),
-        labelStyle: const TextStyle(color: textSecondary),
+        fillColor: lightSurface,
+        hintStyle: const TextStyle(color: lightTextSecondary),
+        labelStyle: const TextStyle(color: lightTextSecondary),
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 18,
           vertical: 18,
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: const BorderSide(color: border),
+          borderSide: const BorderSide(color: lightBorder),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
@@ -169,7 +192,7 @@ class OslerTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: limeSoft,
-        disabledColor: surfaceMuted,
+        disabledColor: lightSurfaceMuted,
         selectedColor: lime,
         secondarySelectedColor: lime,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
@@ -232,13 +255,6 @@ class OslerTheme {
   }
 
   static ThemeData darkTheme() {
-    const Color darkCanvas = Color(0xFF1A1A1A);
-    const Color darkSurface = Color(0xFF2D2D2D);
-    const Color darkSurfaceMuted = Color(0xFF3D3D3D);
-    const Color darkBorder = Color(0xFF4D4D4D);
-    const Color darkTextPrimary = Color(0xFFE0E0E0);
-    const Color darkTextSecondary = Color(0xFFA0A0A0);
-
     final colorScheme = ColorScheme.fromSeed(
       seedColor: forest,
       brightness: Brightness.dark,

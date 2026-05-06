@@ -37,7 +37,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'theme/osler_theme.dart';
+import 'theme/ayureze_theme.dart';
 import 'theme/theme_provider.dart';
 import 'VideoCall/overlay_handler.dart';
 import 'chat/pages/home_page.dart';
@@ -616,7 +616,7 @@ class _MyAppState extends State<MyApp> {
                 builder: (context, themeProvider, child) {
                   return MaterialApp(
                     navigatorKey: navigatorKey,
-                    title: "Doctor",
+                    title: "Ayureze",
                     debugShowCheckedModeBanner: false,
                     theme: themeProvider.theme,
                     home: SharedPreferenceHelper.getBoolean(Preferences.is_logged_in)

@@ -28,7 +28,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:doctro/screens/astra/astra_ai_chat_screen.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -211,13 +211,13 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
       onWillPop: onWillPop,
       child: Scaffold(
         key: _scaffoldKey,
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         drawer: const ModernDrawer(),
         appBar: AppBar(
-          backgroundColor: OslerTheme.canvas,
+          backgroundColor: AyurezeTheme.canvas,
           elevation: 0,
           leading: IconButton(
-            icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: OslerTheme.forestDeep),
+            icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: AyurezeTheme.forestDeep),
             onPressed: () => _scaffoldKey.currentState!.openDrawer(),
           ),
           actions: [
@@ -242,10 +242,10 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
         ),
         body: RefreshIndicator(
           onRefresh: todayAppointmentsFunction,
-          color: OslerTheme.forestDeep,
+          color: AyurezeTheme.forestDeep,
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
-            padding: OslerTheme.screenPadding,
+            padding: AyurezeTheme.screenPadding,
             child: FutureBuilder(
                 future: todayAppointment,
                 builder: (context, snapshot) {
@@ -278,7 +278,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
             },
             label: const Text("Astra AI", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
             icon: Icon(AppIcons.analytics, color: Colors.white),
-            backgroundColor: OslerTheme.forestDeep,
+            backgroundColor: AyurezeTheme.forestDeep,
           ),
         ),
       ),
@@ -289,7 +289,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(22),
-      decoration: OslerTheme.heroDecoration(),
+      decoration: AyurezeTheme.heroDecoration(),
       child: Row(
         children: [
           Expanded(
@@ -334,10 +334,10 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: OslerTheme.lime,
+              color: AyurezeTheme.lime,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(AppIcons.medical, color: OslerTheme.forestDeep, size: 30),
+            child: Icon(AppIcons.medical, color: AyurezeTheme.forestDeep, size: 30),
           ),
         ],
       ),
@@ -353,10 +353,10 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
       mainAxisSpacing: 15,
       childAspectRatio: 1.6,
       children: [
-        _buildStatCard(getTranslated(context, AppString.dashboard_today_appointments).toString(), todayAppointments.length.toString(), AppIcons.calendar, OslerTheme.forestDeep),
-        _buildStatCard(getTranslated(context, AppString.dashboard_total_revenue).toString(), "₹${totalEarnings.toInt()}", AppIcons.wallet, OslerTheme.lime),
-        _buildStatCard(getTranslated(context, AppString.dashboard_active_patients).toString(), patientCount.toString(), AppIcons.patient, OslerTheme.lime),
-        _buildStatCard(getTranslated(context, AppString.dashboard_feedbacks).toString(), reviewCount.toString(), AppIcons.star, OslerTheme.forestDeep),
+        _buildStatCard(getTranslated(context, AppString.dashboard_today_appointments).toString(), todayAppointments.length.toString(), AppIcons.calendar, AyurezeTheme.forestDeep),
+        _buildStatCard(getTranslated(context, AppString.dashboard_total_revenue).toString(), "₹${totalEarnings.toInt()}", AppIcons.wallet, AyurezeTheme.lime),
+        _buildStatCard(getTranslated(context, AppString.dashboard_active_patients).toString(), patientCount.toString(), AppIcons.patient, AyurezeTheme.lime),
+        _buildStatCard(getTranslated(context, AppString.dashboard_feedbacks).toString(), reviewCount.toString(), AppIcons.star, AyurezeTheme.forestDeep),
       ],
     );
   }
@@ -364,7 +364,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
   Widget _buildStatCard(String title, String value, IconData icon, Color color) {
     return Container(
       padding: const EdgeInsets.all(16),
-      decoration: OslerTheme.panelDecoration(),
+      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -377,15 +377,15 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
                 decoration: BoxDecoration(color: color.withOpacity(0.18), borderRadius: BorderRadius.circular(12)),
                 child: Icon(icon, size: 18, color: color),
               ),
-              Icon(Icons.arrow_forward_ios, size: 12, color: OslerTheme.textSecondary.withOpacity(0.5)),
+              Icon(Icons.arrow_forward_ios, size: 12, color: AyurezeTheme.textSecondary.withOpacity(0.5)),
             ],
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: OslerTheme. textPrimary)),
+              Text(value, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
               const SizedBox(height: 2),
-              Text(title, style: const TextStyle(fontSize: 12, color: OslerTheme.textSecondary)),
+              Text(title, style: TextStyle(fontSize: 12, color: AyurezeTheme.textSecondary)),
             ],
           ),
         ],
@@ -397,15 +397,15 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(getTranslated(context, AppString.dashboard_quick_actions).toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: OslerTheme. textPrimary)),
+        Text(getTranslated(context, AppString.dashboard_quick_actions).toString(), style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
         SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildActionButton(getTranslated(context, AppString.drawer_schedule_timing).toString(), AppIcons.clock, OslerTheme.lime, () => Navigator.pushNamed(context, 'Schedule Timings')),
-_buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, OslerTheme.forestDeep, () => Navigator.pushNamed(context, 'profile')),
-        _buildActionButton(getTranslated(context, AppString.chats).toString(), AppIcons.chat, OslerTheme.lime, () => Navigator.pushNamed(context, 'ChatHome')),
-        _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, OslerTheme.forestDeep, () => Navigator.pushNamed(context, 'Settings')),
+            _buildActionButton(getTranslated(context, AppString.drawer_schedule_timing).toString(), AppIcons.clock, AyurezeTheme.lime, () => Navigator.pushNamed(context, 'Schedule Timings')),
+_buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'profile')),
+        _buildActionButton(getTranslated(context, AppString.chats).toString(), AppIcons.chat, AyurezeTheme.lime, () => Navigator.pushNamed(context, 'ChatHome')),
+        _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'Settings')),
           ],
         ),
       ],
@@ -420,7 +420,7 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
           onTap: onTap,
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 14),
-            decoration: OslerTheme.panelDecoration(),
+            decoration: AyurezeTheme.panelDecoration(),
             child: Column(
               children: [
                 Container(
@@ -435,7 +435,7 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
                 SizedBox(height: 10),
                 Text(
                   label,
-                  style: TextStyle(fontSize: 11, color: OslerTheme. textPrimary, fontWeight: FontWeight.w700),
+                  style: TextStyle(fontSize: 11, color: AyurezeTheme. textPrimary, fontWeight: FontWeight.w700),
                   textAlign: TextAlign.center,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -452,15 +452,15 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: OslerTheme. textPrimary)),
+        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
         if (count > 0)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: OslerTheme.limeSoft,
+              color: AyurezeTheme.limeSoft,
               borderRadius: BorderRadius.circular(999),
             ),
-            child: Text("$count Active", style: const TextStyle(fontSize: 12, color: OslerTheme.forestDeep, fontWeight: FontWeight.w700)),
+            child: Text("$count Active", style: TextStyle(fontSize: 12, color: AyurezeTheme.forestDeep, fontWeight: FontWeight.w700)),
           ),
       ],
     );
@@ -468,7 +468,7 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
 
   Widget _buildAppointmentList(bool isLoading) {
     if (isLoading) {
-      return Center(child: CircularProgressIndicator(color: OslerTheme.forestDeep));
+      return Center(child: CircularProgressIndicator(color: AyurezeTheme.forestDeep));
     }
     
     List<Widget> sections = [];
@@ -497,13 +497,13 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
       return Container(
         height: 150,
         width: double.infinity,
-        decoration: OslerTheme.panelDecoration(),
+        decoration: AyurezeTheme.panelDecoration(),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset("assets/images/no-data.png", height: 80),
             SizedBox(height: 10),
-            Text(getTranslated(context, AppString.no_user).toString(), style: const TextStyle(color: OslerTheme.textSecondary)),
+            Text(getTranslated(context, AppString.no_user).toString(), style: TextStyle(color: AyurezeTheme.textSecondary)),
           ],
         ),
       );
@@ -518,8 +518,8 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: OslerTheme. textPrimary)),
-          Text("${getTranslated(context, AppString.view_more).toString()} ($count)", style: const TextStyle(fontSize: 12, color: OslerTheme.forest)),
+          Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
+          Text("${getTranslated(context, AppString.view_more).toString()} ($count)", style: TextStyle(fontSize: 12, color: AyurezeTheme.forest)),
         ],
       ),
     );
@@ -531,7 +531,7 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
       child: Container(
         margin: EdgeInsets.only(bottom: 12),
         padding: EdgeInsets.all(16),
-        decoration: OslerTheme.panelDecoration(),
+        decoration: AyurezeTheme.panelDecoration(),
         child: Row(
           children: [
             ClipRRect(
@@ -549,13 +549,13 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(app.patientName ?? "Patient", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: OslerTheme. textPrimary)),
+                  Text(app.patientName ?? "Patient", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: AyurezeTheme. textPrimary)),
                   const SizedBox(height: 4),
-                  Text(app.time ?? "", style: const TextStyle(color: OslerTheme.textSecondary, fontSize: 13)),
+                  Text(app.time ?? "", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
                 ],
               ),
             ),
-            Icon(Icons.chevron_right, color: OslerTheme.textSecondary.withOpacity(0.6)),
+            Icon(Icons.chevron_right, color: AyurezeTheme.textSecondary.withOpacity(0.6)),
           ],
         ),
       ),
@@ -677,7 +677,7 @@ _buildActionButton(getTranslated(context, AppString.profile_personal_information
                     .toString(),
                 style: TextStyle(
                     fontSize: 20,
-                    color: OslerTheme. textPrimary,
+                    color: AyurezeTheme. textPrimary,
                     decoration: TextDecoration.none),
                 textAlign: TextAlign.center,
               )),

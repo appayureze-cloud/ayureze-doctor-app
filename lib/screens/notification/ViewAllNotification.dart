@@ -8,7 +8,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 
 class ViewAllNotification extends StatefulWidget {
@@ -35,23 +35,23 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: AppBar(
-        backgroundColor: OslerTheme.canvas,
+        backgroundColor: AyurezeTheme.canvas,
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: OslerTheme.forestDeep,
+            color: AyurezeTheme.forestDeep,
             size: 20,
           ),
           onPressed: () => Navigator.pop(context),
         ),
         title: Text(
           getTranslated(context, AppString.notification_heading).toString(),
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.w800,
-            color: OslerTheme.textPrimary,
+            color: AyurezeTheme.textPrimary,
           ),
         ),
       ),
@@ -59,21 +59,21 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
         future: loadData,
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
-            return const Center(
-              child: CircularProgressIndicator(color: OslerTheme.forestDeep),
+            return Center(
+              child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
             );
           }
 
           return SingleChildScrollView(
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: OslerTheme.screenPadding,
+            padding: AyurezeTheme.screenPadding,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   width: double.infinity,
                   padding: const EdgeInsets.all(22),
-                  decoration: OslerTheme.heroDecoration(),
+                  decoration: AyurezeTheme.heroDecoration(),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -113,14 +113,14 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
                   Container(
                     width: double.infinity,
                     padding: const EdgeInsets.symmetric(vertical: 36),
-                    decoration: OslerTheme.panelDecoration(),
+                    decoration: AyurezeTheme.panelDecoration(),
                     child: Column(
                       children: [
                         Image.asset("assets/images/no-data.png", height: 88),
                         const SizedBox(height: 10),
-                        const Text(
+                        Text(
                           "No notifications yet.",
-                          style: TextStyle(color: OslerTheme.textSecondary),
+                          style: TextStyle(color: AyurezeTheme.textSecondary),
                         ),
                       ],
                     ),
@@ -163,7 +163,7 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
       child: Container(
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
-        decoration: OslerTheme.panelDecoration(),
+        decoration: AyurezeTheme.panelDecoration(),
         child: Row(
           children: [
             ClipRRect(
@@ -177,10 +177,10 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
                   return Container(
                     width: 58,
                     height: 58,
-                    color: OslerTheme.surfaceMuted,
+                    color: AyurezeTheme.surfaceMuted,
                     child: Icon(
                       AppIcons.profile,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   );
                 },
@@ -196,18 +196,18 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
                       Expanded(
                         child: Text(
                           item.user?.name ?? "",
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w800,
-                            color: OslerTheme.textPrimary,
+                            color: AyurezeTheme.textPrimary,
                           ),
                         ),
                       ),
                       Text(
                         date,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
-                          color: OslerTheme.textSecondary,
+                          color: AyurezeTheme.textSecondary,
                         ),
                       ),
                     ],
@@ -217,9 +217,9 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
                     item.message ?? "",
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 13,
-                      color: OslerTheme.textSecondary,
+                      color: AyurezeTheme.textSecondary,
                     ),
                   ),
                 ],
@@ -246,3 +246,4 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
     return BaseModel()..data = response;
   }
 }
+

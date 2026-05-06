@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/screens/home%20page/login_home.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 
 class RegistrationSuccessScreen extends StatelessWidget {
   final String doctorName;
@@ -21,7 +21,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 30),
@@ -35,7 +35,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 28,
                   fontWeight: FontWeight.bold,
-                  color: OslerTheme.textPrimary,
+                  color: AyurezeTheme.textPrimary,
                   letterSpacing: -1,
                 ),
                 textAlign: TextAlign.center,
@@ -45,7 +45,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
                 subtitle ?? "Your professional account has been successfully created and secured.",
                 style: TextStyle(
                   fontSize: 16,
-                  color: OslerTheme.textSecondary,
+                  color: AyurezeTheme.textSecondary,
                   height: 1.5,
                 ),
                 textAlign: TextAlign.center,
@@ -100,9 +100,9 @@ class RegistrationSuccessScreen extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
-        color: OslerTheme.surface,
+        color: AyurezeTheme.surface,
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: OslerTheme.border),
+        border: Border.all(color: AyurezeTheme.border),
       ),
       child: Column(
         children: [
@@ -130,7 +130,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
           style: TextStyle(
             fontSize: 11,
             fontWeight: FontWeight.w800,
-              color: OslerTheme.textSecondary,
+              color: AyurezeTheme.textSecondary,
             letterSpacing: 0.5,
           ),
         ),
@@ -143,7 +143,7 @@ class RegistrationSuccessScreen extends StatelessWidget {
               fontWeight: isPrimary || isStatus ? FontWeight.bold : FontWeight.w600,
               color: isStatus 
                 ? Colors.orange[800] 
-                : (isPrimary ? OslerTheme.forestDeep : OslerTheme.textPrimary),
+                : (isPrimary ? AyurezeTheme.forestDeep : AyurezeTheme.textPrimary),
             ),
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,
@@ -166,12 +166,12 @@ class RegistrationSuccessScreen extends StatelessWidget {
           );
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: OslerTheme.forestDeep,
+          backgroundColor: AyurezeTheme.forestDeep,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(18),
           ),
           elevation: 5,
-          shadowColor: OslerTheme.forestDeep.withOpacity(0.3),
+          shadowColor: AyurezeTheme.forestDeep.withOpacity(0.3),
         ),
         child: const Text(
           "Get Started",

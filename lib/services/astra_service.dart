@@ -200,7 +200,11 @@ class AstraService {
   Future<List<dynamic>> searchMedicines(String query) async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/search/$query');
-      return response.data ?? [];
+      if (response.data is List) return response.data;
+      if (response.data is Map) {
+        return response.data['products'] ?? response.data['data'] ?? [];
+      }
+      return [];
     } catch (e) {
       return [];
     }
@@ -210,7 +214,11 @@ class AstraService {
   Future<List<dynamic>> getAvailableMedicines() async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/available');
-      return response.data ?? [];
+      if (response.data is List) return response.data;
+      if (response.data is Map) {
+        return response.data['products'] ?? response.data['data'] ?? [];
+      }
+      return [];
     } catch (e) {
       return [];
     }

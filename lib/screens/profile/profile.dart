@@ -22,7 +22,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/theme/osler_theme.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -168,7 +168,7 @@ class _ProfileScreen extends State<ProfileScreen> {
     height = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: OslerTheme.canvas,
+      backgroundColor: AyurezeTheme.canvas,
       appBar: PreferredSize(
         preferredSize: Size(width! * 0.3, 220),
         child: SafeArea(
@@ -176,7 +176,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           child: Padding(
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 0),
             child: Container(
-              decoration: OslerTheme.heroDecoration(),
+              decoration: AyurezeTheme.heroDecoration(),
               padding: const EdgeInsets.all(18),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -231,7 +231,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: OslerTheme.lime,
+                                        color: AyurezeTheme.lime,
                                         width: 2,
                                       ),
                                     ),
@@ -249,7 +249,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: OslerTheme.lime,
+                                        color: AyurezeTheme.lime,
                                         width: 2,
                                       ),
                                     ),
@@ -265,8 +265,8 @@ class _ProfileScreen extends State<ProfileScreen> {
                                         ),
                                       ),
                                       placeholder: (context, url) =>
-                                          const CircularProgressIndicator(
-                                        color: OslerTheme.lime,
+                                          CircularProgressIndicator(
+                                        color: AyurezeTheme.lime,
                                       ),
                                       errorWidget: (context, url, error) =>
                                           Image.asset("images/no_image.png"),
@@ -280,11 +280,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                                   chooseProfileImage();
                                 },
                                 child: CircleAvatar(
-                                  backgroundColor: OslerTheme.lime,
+                                  backgroundColor: AyurezeTheme.lime,
                                   radius: 14,
-                                  child: const Icon(
+                                  child: Icon(
                                     Icons.add,
-                                    color: OslerTheme.forestDeep,
+                                    color: AyurezeTheme.forestDeep,
                                   ),
                                 ),
                               ),
@@ -333,8 +333,8 @@ class _ProfileScreen extends State<ProfileScreen> {
               return Theme(
                 data: Theme.of(context).copyWith(
                   colorScheme: Theme.of(context).colorScheme.copyWith(
-                        primary: OslerTheme.forestDeep,
-                        secondary: OslerTheme.lime,
+                        primary: AyurezeTheme.forestDeep,
+                        secondary: AyurezeTheme.lime,
                       ),
                 ),
                 child: Container(
@@ -379,219 +379,131 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_doctor_name)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: width! * 0.04,
-                                                    color: hintColor),
+                                                getTranslated(context, AppString.profile_doctor_name).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                               ),
+                                              const SizedBox(height: 8),
                                               TextFormField(
                                                 controller: _pName,
-                                                enableInteractiveSelection:
-                                                    false,
-                                                keyboardType:
-                                                    TextInputType.name,
+                                                keyboardType: TextInputType.name,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(
-                                                          RegExp("[a-zA-Z ]")),
+                                                  FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]")),
                                                 ],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: passwordVisibility),
-                                                decoration: InputDecoration(
-                                                  hintText: getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .profile_enter_name_hint)
-                                                      .toString(),
-                                                  hintStyle: TextStyle(
-                                                      fontSize: width! * 0.035,
-                                                      color:
-                                                          passwordVisibility),
+                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                decoration: AyurezeTheme.textFieldDecoration(
+                                                  hintText: getTranslated(context, AppString.profile_enter_name_hint).toString(),
                                                 ),
                                                 validator: (String? value) {
                                                   if (value!.isEmpty) {
-                                                    return getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .please_enter_profile_valid_name)
-                                                        .toString();
-                                                  } else if (value
-                                                          .trim()
-                                                          .length <
-                                                      1) {
-                                                    return getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .please_enter_valid_name)
-                                                        .toString();
+                                                    return getTranslated(context, AppString.please_enter_profile_valid_name).toString();
+                                                  } else if (value.trim().length < 1) {
+                                                    return getTranslated(context, AppString.please_enter_valid_name).toString();
                                                   }
                                                   return null;
                                                 },
-                                                onSaved: (String? name) {},
                                               ),
                                             ],
                                           ),
                                         ),
+                                        const SizedBox(height: 16),
                                         Container(
                                           alignment: Alignment.topLeft,
-                                          margin: EdgeInsets.only(
-                                              top: width! * 0.01),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_date_of_birth)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: width! * 0.04,
-                                                    color: hintColor),
+                                                getTranslated(context, AppString.profile_date_of_birth).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                               ),
+                                              const SizedBox(height: 8),
                                               TextFormField(
-                                                textCapitalization:
-                                                    TextCapitalization.words,
-                                                enableInteractiveSelection:
-                                                    false,
-                                                style: TextStyle(
-                                                  fontSize: 16,
-                                                  color: hintColor,
-                                                ),
                                                 controller: _pDob,
                                                 readOnly: true,
-                                                decoration: InputDecoration(
-                                                  hintText: getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .profile_date_of_birth_hint)
-                                                      .toString(),
-                                                  hintStyle: TextStyle(
-                                                    fontSize: width! * 0.04,
-                                                    color: hintColor,
-                                                  ),
-                                                ),
+                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                decoration: AyurezeTheme.textFieldDecoration(
+                                                  hintText: getTranslated(context, AppString.profile_date_of_birth_hint).toString(),
+                                                ).copyWith(suffixIcon: Icon(Icons.calendar_today_rounded, size: 20, color: AyurezeTheme.forestDeep)),
                                                 validator: (String? value) {
                                                   if (value!.isEmpty) {
-                                                    return getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .please_enter_birth_date)
-                                                        .toString();
+                                                    return getTranslated(context, AppString.please_enter_birth_date).toString();
                                                   }
                                                   return null;
                                                 },
-                                                onTap: () {
-                                                  _selectDate(context);
-                                                },
+                                                onTap: () => _selectDate(context),
                                               ),
                                             ],
                                           ),
                                         ),
-                                        SizedBox(height: 10),
+                                        const SizedBox(height: 24),
                                         Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(context,
-                                                      AppString.select_hospital)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.04,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.select_hospital).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
-                                            ListView.builder(
-                                              shrinkWrap: true,
-                                              physics:
-                                                  NeverScrollableScrollPhysics(),
-                                              itemCount: hospitalReq.length,
-                                              itemBuilder: (context, index) {
-                                                return CheckboxListTile(
-                                                  value: hospitalReq[index]
-                                                      .isSelected,
-                                                  title: Text(
-                                                      hospitalReq[index].name!),
-                                                  onChanged: (val) {
-                                                    setState(
-                                                      () {
-                                                        hospitalReq[index]
-                                                            .isSelected = val!;
-                                                      },
-                                                    );
-                                                  },
-                                                );
-                                              },
+                                            const SizedBox(height: 12),
+                                            Container(
+                                              decoration: AyurezeTheme.panelDecoration(),
+                                              child: ListView.separated(
+                                                shrinkWrap: true,
+                                                physics: const NeverScrollableScrollPhysics(),
+                                                itemCount: hospitalReq.length,
+                                                separatorBuilder: (context, index) => Divider(height: 1, color: AyurezeTheme.border),
+                                                itemBuilder: (context, index) {
+                                                  return CheckboxListTile(
+                                                    activeColor: AyurezeTheme.forestDeep,
+                                                    checkColor: Colors.white,
+                                                    value: hospitalReq[index].isSelected,
+                                                    title: Text(
+                                                      hospitalReq[index].name!,
+                                                      style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                    ),
+                                                    onChanged: (val) {
+                                                      setState(() {
+                                                        hospitalReq[index].isSelected = val!;
+                                                      });
+                                                    },
+                                                  );
+                                                },
+                                              ),
                                             ),
                                           ],
                                         ),
-                                        Divider(
-                                          height: 4,
-                                        ),
+                                        const SizedBox(height: 24),
                                         Container(
                                           alignment: Alignment.topLeft,
-                                          margin: EdgeInsets.only(
-                                              top: width! * 0.02),
                                           child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_gender)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: width! * 0.038,
-                                                    color: hintColor),
+                                                getTranslated(context, AppString.profile_gender).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                               ),
+                                              const SizedBox(height: 8),
                                               StatefulBuilder(
                                                 builder: (context, myState) {
-                                                  return DropdownButtonFormField<
-                                                      String>(
-                                                    hint: Text(getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .profile_gender_hint)
-                                                        .toString()),
+                                                  return DropdownButtonFormField<String>(
+                                                    decoration: AyurezeTheme.textFieldDecoration(
+                                                      hintText: getTranslated(context, AppString.profile_gender_hint).toString(),
+                                                    ),
                                                     value: _genderSelect,
                                                     isExpanded: true,
-                                                    iconSize: 35,
-                                                    items:
-                                                        gender.map((genders) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        child:
-                                                            new Text(genders),
+                                                    icon: Icon(Icons.keyboard_arrow_down_rounded, color: AyurezeTheme.forestDeep),
+                                                    items: gender.map((genders) {
+                                                      return DropdownMenuItem<String>(
                                                         value: genders,
+                                                        child: Text(genders, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary)),
                                                       );
                                                     }).toList(),
-                                                    onSaved: (value) {
-                                                      myState(() {
-                                                        _genderSelect = value;
-                                                      });
-                                                    },
                                                     onChanged: (newValue) {
                                                       myState(() {
-                                                        _genderSelect =
-                                                            newValue;
+                                                        _genderSelect = newValue;
                                                       });
                                                     },
                                                     validator: (value) {
-                                                      if (_genderSelect ==
-                                                          null) {
-                                                        return getTranslated(
-                                                                context,
-                                                                AppString
-                                                                    .please_enter_profile_valid_name)
-                                                            .toString();
+                                                      if (_genderSelect == null) {
+                                                        return getTranslated(context, AppString.please_enter_profile_valid_name).toString();
                                                       }
                                                       return null;
                                                     },
@@ -601,71 +513,36 @@ class _ProfileScreen extends State<ProfileScreen> {
                                             ],
                                           ),
                                         ),
+                                        const SizedBox(height: 24),
                                         Container(
                                           alignment: Alignment.topLeft,
-                                          margin: EdgeInsets.only(
-                                              top: width! * 0.02),
                                           child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
+                                            crossAxisAlignment: CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_description)
-                                                    .toString(),
-                                                style: TextStyle(
-                                                    fontSize: width! * 0.04,
-                                                    color: hintColor),
+                                                getTranslated(context, AppString.profile_description).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                               ),
+                                              const SizedBox(height: 8),
                                               TextFormField(
                                                 controller: _pDesc,
-                                                enableInteractiveSelection:
-                                                    false,
-                                                keyboardType:
-                                                    TextInputType.name,
+                                                keyboardType: TextInputType.multiline,
+                                                maxLines: 3,
                                                 inputFormatters: [
-                                                  FilteringTextInputFormatter
-                                                      .allow(RegExp(
-                                                          "[a-zA-Z &.,]")),
+                                                  FilteringTextInputFormatter.allow(RegExp("[a-zA-Z &.,]")),
                                                 ],
-                                                style: TextStyle(
-                                                    fontSize: 14,
-                                                    color: passwordVisibility),
-                                                decoration: InputDecoration(
-                                                  hintText: getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .profile_description_hint)
-                                                      .toString(),
-                                                  hintStyle: TextStyle(
-                                                      fontSize: width! * 0.035,
-                                                      color:
-                                                          passwordVisibility),
+                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                decoration: AyurezeTheme.textFieldDecoration(
+                                                  hintText: getTranslated(context, AppString.profile_description_hint).toString(),
                                                 ),
                                                 validator: (String? value) {
                                                   if (value!.isEmpty) {
-                                                    return getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .please_enter_description)
-                                                        .toString();
-                                                  } else if (value
-                                                          .trim()
-                                                          .length <
-                                                      1) {
-                                                    return getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .please_enter_valid_description)
-                                                        .toString();
+                                                    return getTranslated(context, AppString.please_enter_description).toString();
+                                                  } else if (value.trim().length < 1) {
+                                                    return getTranslated(context, AppString.please_enter_valid_description).toString();
                                                   }
                                                   return null;
                                                 },
-                                                onSaved: (String? name) {},
                                               ),
                                             ],
                                           ),
@@ -677,9 +554,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                               ),
                             ),
                             isActive: _currentStep >= 0,
-                            state: _currentStep >= 0
-                                ? StepState.complete
-                                : StepState.disabled,
+                            state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
                           ),
                           // Step 2 //
                           Step(
@@ -706,157 +581,84 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Text(
-                                              getTranslated(context,
-                                                      AppString.profile_degree)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
-                                            ),
-                                            TextFormField(
-                                              controller: _pDegree,
-                                              keyboardType: TextInputType.text,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_degree_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              Text(
+                                                getTranslated(context, AppString.profile_degree).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                               ),
-                                              validator: (String? value) {
-                                                if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_degree)
-                                                      .toString();
-                                                } else if (value.trim().length <
-                                                    1) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_valid_degree)
-                                                      .toString();
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (String? name) {},
-                                            ),
-                                          ],
+                                              const SizedBox(height: 8),
+                                              TextFormField(
+                                                controller: _pDegree,
+                                                keyboardType: TextInputType.text,
+                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                decoration: AyurezeTheme.textFieldDecoration(
+                                                  hintText: getTranslated(context, AppString.profile_degree_hint).toString(),
+                                                ),
+                                                validator: (String? value) {
+                                                  if (value!.isEmpty) {
+                                                    return getTranslated(context, AppString.please_enter_degree).toString();
+                                                  } else if (value.trim().length < 1) {
+                                                    return getTranslated(context, AppString.please_enter_valid_degree).toString();
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                      ),
+                                        const SizedBox(height: 16),
+                                        Container(
+                                          alignment: Alignment.topLeft,
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                getTranslated(context, AppString.profile_college).toString(),
+                                                style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
+                                              ),
+                                              const SizedBox(height: 8),
+                                              TextFormField(
+                                                controller: _pCollege,
+                                                keyboardType: TextInputType.text,
+                                                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                                decoration: AyurezeTheme.textFieldDecoration(
+                                                  hintText: getTranslated(context, AppString.profile_college_hint).toString(),
+                                                ),
+                                                validator: (String? value) {
+                                                  if (value!.isEmpty) {
+                                                    return getTranslated(context, AppString.please_enter_college).toString();
+                                                  } else if (value.trim().length < 1) {
+                                                    return getTranslated(context, AppString.please_enter_valid_college).toString();
+                                                  }
+                                                  return null;
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                       Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.01),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(context,
-                                                      AppString.profile_college)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_year_of_completion).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
-                                            TextFormField(
-                                              controller: _pCollege,
-                                              keyboardType: TextInputType.text,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_college_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
-                                              ),
-                                              validator: (String? value) {
-                                                if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_college)
-                                                      .toString();
-                                                } else if (value.trim().length <
-                                                    1) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_valid_college)
-                                                      .toString();
-                                                }
-                                                return null;
-                                              },
-                                              onSaved: (String? name) {},
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.01),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_year_of_completion)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
-                                            ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
                                               controller: _pCollegeYear,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
-                                              inputFormatters: [
-                                                new FilteringTextInputFormatter
-                                                    .allow(RegExp("[0-9]"))
-                                              ],
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_year_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              keyboardType: TextInputType.number,
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_year_hint).toString(),
                                               ),
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_year_of_completion)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_year_of_completion).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
@@ -867,144 +669,62 @@ class _ProfileScreen extends State<ProfileScreen> {
                                               context: context,
                                               builder: (context) {
                                                 return AlertDialog(
-                                                  insetPadding:
-                                                      EdgeInsets.all(10),
-                                                  title: Text(getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .profile_education_certificate)
-                                                      .toString()),
-                                                  content: Container(
-                                                    height: height * 0.3,
-                                                    width: width! * 1.0,
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                                                  backgroundColor: AyurezeTheme.surface,
+                                                  title: Text(
+                                                    getTranslated(context, AppString.profile_education_information).toString(),
+                                                    style: const TextStyle(fontWeight: FontWeight.w800),
+                                                  ),
+                                                  content: SizedBox(
+                                                    height: height * 0.25,
+                                                    width: width! * 0.9,
                                                     child: Column(
                                                       children: [
                                                         TextField(
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              valueDegree =
-                                                                  value;
-                                                            });
-                                                          },
                                                           controller: _degree,
-                                                          decoration: InputDecoration(
-                                                              hintText: getTranslated(
-                                                                      context,
-                                                                      AppString
-                                                                          .profile_dialog_degree_hint)
-                                                                  .toString()),
+                                                          decoration: AyurezeTheme.textFieldDecoration(
+                                                            hintText: getTranslated(context, AppString.profile_degree).toString(),
+                                                          ),
                                                         ),
+                                                        const SizedBox(height: 12),
                                                         TextField(
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              valueCollege =
-                                                                  value;
-                                                            });
-                                                          },
                                                           controller: _college,
-                                                          decoration: InputDecoration(
-                                                              hintText: getTranslated(
-                                                                      context,
-                                                                      AppString
-                                                                          .profile_dialog_education)
-                                                                  .toString()),
+                                                          decoration: AyurezeTheme.textFieldDecoration(
+                                                            hintText: getTranslated(context, AppString.profile_college).toString(),
+                                                          ),
                                                         ),
+                                                        const SizedBox(height: 12),
                                                         TextField(
-                                                          onChanged: (value) {
-                                                            setState(() {
-                                                              valueYear = value;
-                                                            });
-                                                          },
-                                                          controller:
-                                                              _completeYear,
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .numberWithOptions(
-                                                                      decimal:
-                                                                          true),
-                                                          inputFormatters: [
-                                                            new FilteringTextInputFormatter
-                                                                .allow(
-                                                                RegExp("[0-9]"))
-                                                          ],
-                                                          decoration: InputDecoration(
-                                                              hintText: getTranslated(
-                                                                      context,
-                                                                      AppString
-                                                                          .profile_dialog_year_of_completion)
-                                                                  .toString()),
+                                                          controller: _completeYear,
+                                                          keyboardType: TextInputType.number,
+                                                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                                          decoration: AyurezeTheme.textFieldDecoration(
+                                                            hintText: getTranslated(context, AppString.profile_dialog_year_of_completion).toString(),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
                                                   ),
                                                   actions: <Widget>[
-                                                    OutlinedButton(
-                                                      child: Text(getTranslated(
-                                                              context,
-                                                              AppString
-                                                                  .profile_dialog_ok_button)
-                                                          .toString()),
+                                                    TextButton(
+                                                      child: Text("Cancel", style: TextStyle(color: AyurezeTheme.textSecondary)),
+                                                      onPressed: () => Navigator.pop(context),
+                                                    ),
+                                                    ElevatedButton(
+                                                      child: Text(getTranslated(context, AppString.profile_dialog_ok_button).toString()),
                                                       onPressed: () {
                                                         setState(() {
-                                                          if (_degree.text
-                                                                  .isNotEmpty &&
-                                                              _college.text
-                                                                  .isNotEmpty &&
-                                                              _completeYear.text
-                                                                  .isNotEmpty) {
-                                                            String addDegree =
-                                                                "";
-                                                            String addCollege =
-                                                                "";
-                                                            String addYear = "";
-                                                            callDegree =
-                                                                valueDegree;
-                                                            callCollege =
-                                                                valueCollege;
-                                                            callYear =
-                                                                valueYear;
-                                                            addDegree = _pDegree
-                                                                    .text +
-                                                                "," +
-                                                                _degree.text;
-                                                            addCollege =
-                                                                _pCollege.text +
-                                                                    "," +
-                                                                    _college
-                                                                        .text;
-                                                            addYear =
-                                                                _pCollegeYear
-                                                                        .text +
-                                                                    "," +
-                                                                    _completeYear
-                                                                        .text;
+                                                          if (_degree.text.isNotEmpty && _college.text.isNotEmpty && _completeYear.text.isNotEmpty) {
+                                                            _pDegree.text = _pDegree.text.isEmpty ? _degree.text : "${_pDegree.text},${_degree.text}";
+                                                            _pCollege.text = _pCollege.text.isEmpty ? _college.text : "${_pCollege.text},${_college.text}";
+                                                            _pCollegeYear.text = _pCollegeYear.text.isEmpty ? _completeYear.text : "${_pCollegeYear.text},${_completeYear.text}";
 
-                                                            _pDegree.text =
-                                                                addDegree;
-                                                            _pCollege.text =
-                                                                addCollege;
-                                                            _pCollegeYear.text =
-                                                                addYear;
                                                             _degree.clear();
                                                             _college.clear();
-                                                            _completeYear
-                                                                .clear();
-                                                            Navigator.pop(
-                                                                context);
+                                                            _completeYear.clear();
+                                                            Navigator.pop(context);
                                                           } else {
-                                                            Fluttertoast
-                                                                .showToast(
-                                                              msg: getTranslated(
-                                                                      context,
-                                                                      AppString
-                                                                          .please_fill_data)
-                                                                  .toString(),
-                                                              toastLength: Toast
-                                                                  .LENGTH_SHORT,
-                                                              gravity:
-                                                                  ToastGravity
-                                                                      .BOTTOM,
-                                                            );
+                                                            Fluttertoast.showToast(msg: getTranslated(context, AppString.please_fill_data).toString());
                                                           }
                                                         });
                                                       },
@@ -1014,292 +734,153 @@ class _ProfileScreen extends State<ProfileScreen> {
                                               });
                                         },
                                         child: Container(
-                                          margin: EdgeInsets.only(
-                                              top: height * 0.01),
-                                          height: width! * 0.10,
-                                          width: width! * 0.35,
+                                          margin: const EdgeInsets.only(top: 16),
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                          decoration: AyurezeTheme.mutedPanelDecoration(),
                                           child: Row(
+                                            mainAxisSize: MainAxisSize.min,
                                             children: [
-                                              Card(
-                                                color: divider,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            45)),
-                                                child: Icon(AppIcons.add,
-                                                    size: width! * 0.06,
-                                                    color: loginButton),
-                                              ),
-                                              Text(getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_add_more_button)
-                                                  .toString())
+                                              Icon(Icons.add_rounded, color: AyurezeTheme.forestDeep, size: 20),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                getTranslated(context, AppString.profile_add_more_button).toString(),
+                                                style: TextStyle(fontWeight: FontWeight.w700, color: AyurezeTheme.forestDeep),
+                                              )
                                             ],
                                           ),
                                         ),
                                       ),
-                                      Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.03),
                                         child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_dialog_certificate)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        controller: _pCertificate,
-                                        keyboardType: TextInputType.text,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: passwordVisibility),
-                                        decoration: InputDecoration(
-                                          hintText: getTranslated(
-                                                  context,
-                                                  AppString
-                                                      .profile_dialog_certificate_hint)
-                                              .toString(),
-                                          hintStyle: TextStyle(
-                                              fontSize: width! * 0.035,
-                                              color: passwordVisibility),
-                                        ),
-                                        validator: (String? value) {
-                                          if (value!.isEmpty) {
-                                            return getTranslated(
-                                                    context,
-                                                    AppString
-                                                        .dialog_please_enter_certificate)
-                                                .toString();
-                                          } else if (value.trim().length < 1) {
-                                            return getTranslated(
-                                                    context,
-                                                    AppString
-                                                        .dialog_please_enter_valid_certificate)
-                                                .toString();
-                                          }
-                                          return null;
-                                        },
-                                        onSaved: (String? name) {},
-                                      ),
-                                      Container(
-                                        alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
-                                        child: Column(
-                                          children: [
-                                            Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_dialog_certificate_year)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      TextFormField(
-                                        controller: _pCertificateYear,
-                                        keyboardType:
-                                            TextInputType.numberWithOptions(
-                                                decimal: true),
-                                        inputFormatters: [
-                                          new FilteringTextInputFormatter.allow(
-                                              RegExp("[0-9]"))
-                                        ],
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            color: passwordVisibility),
-                                        decoration: InputDecoration(
-                                          hintText: getTranslated(
-                                                  context,
-                                                  AppString
-                                                      .profile_dialog_certificate_year_hint)
-                                              .toString(),
-                                          hintStyle: TextStyle(
-                                              fontSize: width! * 0.035,
-                                              color: passwordVisibility),
-                                        ),
-                                        validator: (String? value) {
-                                          if (value!.isEmpty) {
-                                            return getTranslated(
-                                                    context,
-                                                    AppString
-                                                        .dialog_please_enter_certificate_year)
-                                                .toString();
-                                          }
-                                          return null;
-                                        },
-                                        onSaved: (String? name) {},
-                                      ),
-                                      Container(
-                                        margin:
-                                            EdgeInsets.only(top: height * 0.02),
-                                        height: width! * 0.10,
-                                        width: width! * 0.35,
-                                        child: GestureDetector(
-                                          onTap: () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (context) {
-                                                  return AlertDialog(
-                                                    insetPadding:
-                                                        EdgeInsets.all(10),
-                                                    title: Text(getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .profile_dialog_certificate)
-                                                        .toString()),
-                                                    content: Container(
-                                                      height: height * 0.2,
-                                                      width: width! * 1.0,
-                                                      child: Column(
-                                                        children: [
-                                                          TextField(
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                certificate =
-                                                                    value;
-                                                              });
-                                                            },
-                                                            controller:
-                                                                _certificate,
-                                                            decoration: InputDecoration(
-                                                                hintText: getTranslated(
-                                                                        context,
-                                                                        AppString
-                                                                            .profile_dialog_certificate)
-                                                                    .toString()),
-                                                          ),
-                                                          TextField(
-                                                            onChanged: (value) {
-                                                              setState(() {
-                                                                certificateYear =
-                                                                    value;
-                                                              });
-                                                            },
-                                                            controller: _year,
-                                                            keyboardType:
-                                                                TextInputType
-                                                                    .numberWithOptions(
-                                                                        decimal:
-                                                                            true),
-                                                            inputFormatters: [
-                                                              new FilteringTextInputFormatter
-                                                                  .allow(RegExp(
-                                                                      "[0-9]"))
-                                                            ],
-                                                            decoration: InputDecoration(
-                                                                hintText: getTranslated(
-                                                                        context,
-                                                                        AppString
-                                                                            .profile_dialog_year)
-                                                                    .toString()),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    actions: <Widget>[
-                                                      OutlinedButton(
-                                                        child: Text(getTranslated(
-                                                                context,
-                                                                AppString
-                                                                    .profile_dialog_ok_button)
-                                                            .toString()),
-                                                        onPressed: () {
-                                                          setState(() {
-                                                            if (_certificate
-                                                                    .text
-                                                                    .isNotEmpty &&
-                                                                _year.text
-                                                                    .isNotEmpty) {
-                                                              String
-                                                                  addCertificate =
-                                                                  "";
-                                                              String
-                                                                  addCertificateYear =
-                                                                  "";
-                                                              callCertificate =
-                                                                  certificate;
-                                                              callCertificateYear =
-                                                                  certificateYear;
-
-                                                              addCertificate =
-                                                                  _pCertificate
-                                                                          .text +
-                                                                      "," +
-                                                                      _certificate
-                                                                          .text;
-                                                              addCertificateYear =
-                                                                  _pCertificateYear
-                                                                          .text +
-                                                                      "," +
-                                                                      _year
-                                                                          .text;
-                                                              _pCertificate
-                                                                      .text =
-                                                                  addCertificate;
-                                                              _pCertificateYear
-                                                                      .text =
-                                                                  addCertificateYear;
-
-                                                              _certificate
-                                                                  .clear();
-                                                              _year.clear();
-                                                              Navigator.pop(
-                                                                  context);
-                                                            } else {
-                                                              Fluttertoast
-                                                                  .showToast(
-                                                                msg: getTranslated(
-                                                                        context,
-                                                                        AppString
-                                                                            .please_fill_data)
-                                                                    .toString(),
-                                                                toastLength: Toast
-                                                                    .LENGTH_SHORT,
-                                                                gravity:
-                                                                    ToastGravity
-                                                                        .BOTTOM,
-                                                              );
-                                                            }
-                                                          });
-                                                        },
-                                                      ),
-                                                    ],
-                                                  );
-                                                });
-                                          },
-                                          child: Row(
-                                            children: [
-                                              Card(
-                                                color: divider,
-                                                shape: RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            45)),
-                                                child: Icon(AppIcons.add,
-                                                    size: width! * 0.06,
-                                                    color: loginButton),
+                                              getTranslated(context, AppString.profile_dialog_certificate).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            TextFormField(
+                                              controller: _pCertificate,
+                                              keyboardType: TextInputType.text,
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_dialog_certificate_hint).toString(),
                                               ),
-                                              Text(getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_add_more_button)
-                                                  .toString())
+                                              validator: (String? value) {
+                                                if (value!.isEmpty) {
+                                                  return getTranslated(context, AppString.dialog_please_enter_certificate).toString();
+                                                } else if (value.trim().length < 1) {
+                                                  return getTranslated(context, AppString.dialog_please_enter_valid_certificate).toString();
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(height: 16),
+                                      Container(
+                                        alignment: Alignment.topLeft,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              getTranslated(context, AppString.profile_dialog_certificate_year).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
+                                            ),
+                                            const SizedBox(height: 8),
+                                            TextFormField(
+                                              controller: _pCertificateYear,
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_dialog_certificate_year_hint).toString(),
+                                              ),
+                                              validator: (String? value) {
+                                                if (value!.isEmpty) {
+                                                  return getTranslated(context, AppString.dialog_please_enter_certificate_year).toString();
+                                                }
+                                                return null;
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      GestureDetector(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return AlertDialog(
+                                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                                                  backgroundColor: AyurezeTheme.surface,
+                                                  title: Text(
+                                                    getTranslated(context, AppString.profile_dialog_certificate).toString(),
+                                                    style: const TextStyle(fontWeight: FontWeight.w800),
+                                                  ),
+                                                  content: SizedBox(
+                                                    height: height * 0.2,
+                                                    width: width! * 0.9,
+                                                    child: Column(
+                                                      children: [
+                                                        TextField(
+                                                          controller: _certificate,
+                                                          decoration: AyurezeTheme.textFieldDecoration(
+                                                            hintText: getTranslated(context, AppString.profile_dialog_certificate).toString(),
+                                                          ),
+                                                        ),
+                                                        const SizedBox(height: 12),
+                                                        TextField(
+                                                          controller: _year,
+                                                          keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                          inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                                          decoration: AyurezeTheme.textFieldDecoration(
+                                                            hintText: getTranslated(context, AppString.profile_dialog_year).toString(),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                  actions: <Widget>[
+                                                    TextButton(
+                                                      child: Text("Cancel", style: TextStyle(color: AyurezeTheme.textSecondary)),
+                                                      onPressed: () => Navigator.pop(context),
+                                                    ),
+                                                    ElevatedButton(
+                                                      child: Text(getTranslated(context, AppString.profile_dialog_ok_button).toString()),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          if (_certificate.text.isNotEmpty && _year.text.isNotEmpty) {
+                                                            _pCertificate.text = _pCertificate.text.isEmpty ? _certificate.text : "${_pCertificate.text},${_certificate.text}";
+                                                            _pCertificateYear.text = _pCertificateYear.text.isEmpty ? _year.text : "${_pCertificateYear.text},${_year.text}";
+
+                                                            _certificate.clear();
+                                                            _year.clear();
+                                                            Navigator.pop(context);
+                                                          } else {
+                                                            Fluttertoast.showToast(msg: getTranslated(context, AppString.please_fill_data).toString());
+                                                          }
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                );
+                                              });
+                                        },
+                                        child: Container(
+                                          margin: const EdgeInsets.only(top: 16),
+                                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                          decoration: AyurezeTheme.mutedPanelDecoration(),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.min,
+                                            children: [
+                                              Icon(Icons.add_rounded, color: AyurezeTheme.forestDeep, size: 20),
+                                              const SizedBox(width: 8),
+                                              Text(
+                                                getTranslated(context, AppString.profile_add_more_button).toString(),
+                                                style: TextStyle(fontWeight: FontWeight.w700, color: AyurezeTheme.forestDeep),
+                                              )
                                             ],
                                           ),
                                         ),
@@ -1328,166 +909,90 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 child: Container(
                                   child: Column(
                                     children: [
-                                      Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_experience)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_experience).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _pExperience,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
-                                              inputFormatters: [
-                                                new FilteringTextInputFormatter
-                                                    .allow(RegExp("[0-9]")),
-                                              ],
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_experience_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_experience_hint).toString(),
                                               ),
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_experience)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_experience).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Video call fee",
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _vAppointmentFees,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
-                                              inputFormatters: [
-                                                new FilteringTextInputFormatter
-                                                    .allow(RegExp("[0-9]")),
-                                              ],
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_appointment_fees_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_appointment_fees_hint).toString(),
                                               ),
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_appointment_fees)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_appointment_fees).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
+                                      const SizedBox(height: 16),
                                       Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
                                               "Audio call fee",
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _aAppointmentFees,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
-                                              inputFormatters: [
-                                                new FilteringTextInputFormatter
-                                                    .allow(RegExp("[0-9]")),
-                                              ],
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_appointment_fees_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_appointment_fees_hint).toString(),
                                               ),
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_appointment_fees)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_appointment_fees).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
+                                      const SizedBox(height: 16),
                                       Container(
                                         alignment: Alignment.topLeft,
                                         margin:
@@ -1496,77 +1001,53 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
+                                        alignment: Alignment.topLeft,
+                                        child: Column(
+                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                          children: [
                                             Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_time_slot)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_time_slot).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _pTimeSlot,
-                                              keyboardType: TextInputType
-                                                  .numberWithOptions(
-                                                      decimal: true),
-                                              inputFormatters: [
-                                                new FilteringTextInputFormatter
-                                                    .allow(RegExp("[0-9]")),
-                                              ],
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_time_slot_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
+                                              keyboardType: TextInputType.number,
+                                              inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[0-9]"))],
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_time_slot_hint).toString(),
                                               ),
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_time_slot)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_time_slot).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
+                                      const SizedBox(height: 16),
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(context,
-                                                      AppString.revenue_model)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              "Revenue model",
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             DropdownButtonFormField<String>(
                                               value: ["Commission", "Subscription"].contains(_pBasedOn.text) ? _pBasedOn.text : null,
-                                              hint: Text(getTranslated(context, AppString.revenue_model_hint).toString()),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.revenue_model_hint).toString(),
+                                              ),
+                                              icon: Icon(Icons.keyboard_arrow_down_rounded, color: AyurezeTheme.forestDeep),
                                               items: ["Commission", "Subscription"].map((String value) {
                                                 return DropdownMenuItem<String>(
                                                   value: value,
-                                                  child: Text(value),
+                                                  child: Text(value, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary)),
                                                 );
                                               }).toList(),
                                               onChanged: (newValue) {
@@ -1576,256 +1057,160 @@ class _ProfileScreen extends State<ProfileScreen> {
                                               },
                                               validator: (value) {
                                                 if (_pBasedOn.text.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_based_on)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_based_on).toString();
                                                 }
                                                 return null;
                                               },
-                                              decoration: InputDecoration(
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
-                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
+                                      const SizedBox(height: 16),
                                       Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_start_time)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_start_time).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _pStartTime,
                                               readOnly: true,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_start_time_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
-                                              ),
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_start_time_hint).toString(),
+                                              ).copyWith(suffixIcon: Icon(Icons.access_time_rounded, size: 20, color: AyurezeTheme.forestDeep)),
                                               onTap: () async {
-                                                final TimeOfDay? result =
-                                                    await showTimePicker(
-                                                        context: context,
-                                                        initialTime:
-                                                            TimeOfDay.now(),
-                                                        builder:
-                                                            (context, child) {
-                                                          return MediaQuery(
-                                                              data: MediaQuery.of(
-                                                                      context)
-                                                                  .copyWith(
-                                                                // Using 12-Hour format
-                                                                alwaysUse24HourFormat:
-                                                                    false,
-                                                              ),
-                                                              // If you want 24-Hour format, just change alwaysUse24HourFormat to true
-                                                              child: child!);
-                                                        });
+                                                final TimeOfDay? result = await showTimePicker(
+                                                    context: context,
+                                                    initialTime: TimeOfDay.now(),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context).copyWith(
+                                                          colorScheme: const ColorScheme.light(
+                                                            primary: AyurezeTheme.forestDeep,
+                                                            onPrimary: Colors.white,
+                                                            onSurface: AyurezeTheme.forestDeep,
+                                                          ),
+                                                        ),
+                                                        child: MediaQuery(
+                                                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                                            child: child!),
+                                                      );
+                                                    });
                                                 if (result != null) {
                                                   setState(() {
-                                                    String data = result
-                                                        .format(context)
-                                                        .toLowerCase();
-                                                    String str;
-                                                    var parts;
-                                                    String? startPart;
-
-                                                    int checkData;
-                                                    str = data;
-                                                    parts = str.split(":");
-                                                    startPart = parts[0].trim();
-                                                    checkData =
-                                                        int.parse(startPart!);
+                                                    String data = result.format(context).toLowerCase();
+                                                    var parts = data.split(":");
+                                                    String startPart = parts[0].trim();
+                                                    int checkData = int.parse(startPart);
                                                     if (checkData > 9) {
-                                                      _pStartTime.text = result
-                                                          .format(context)
-                                                          .toLowerCase();
+                                                      _pStartTime.text = data;
                                                     } else {
-                                                      _pStartTime.text = "0" +
-                                                          result
-                                                              .format(context)
-                                                              .toLowerCase();
+                                                      _pStartTime.text = "0$data";
                                                     }
                                                   });
                                                 }
                                               },
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_start_time)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_start_time).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(
-                                                      context,
-                                                      AppString
-                                                          .profile_end_time)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_end_time).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
+                                            const SizedBox(height: 8),
                                             TextFormField(
-                                              enableInteractiveSelection: false,
                                               controller: _pEndTime,
                                               readOnly: true,
-                                              style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: passwordVisibility),
-                                              decoration: InputDecoration(
-                                                hintText: getTranslated(
-                                                        context,
-                                                        AppString
-                                                            .profile_end_time_hint)
-                                                    .toString(),
-                                                hintStyle: TextStyle(
-                                                    fontSize: width! * 0.035,
-                                                    color: passwordVisibility),
-                                              ),
+                                              style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
+                                              decoration: AyurezeTheme.textFieldDecoration(
+                                                hintText: getTranslated(context, AppString.profile_end_time_hint).toString(),
+                                              ).copyWith(suffixIcon: Icon(Icons.access_time_rounded, size: 20, color: AyurezeTheme.forestDeep)),
                                               onTap: () async {
-                                                final TimeOfDay? result =
-                                                    await showTimePicker(
-                                                        context: context,
-                                                        initialTime:
-                                                            TimeOfDay.now(),
-                                                        builder:
-                                                            (context, child) {
-                                                          return MediaQuery(
-                                                              data: MediaQuery.of(
-                                                                      context)
-                                                                  .copyWith(
-                                                                      // Using 12-Hour format
-                                                                      alwaysUse24HourFormat:
-                                                                          false),
-                                                              // If you want 24-Hour format, just change alwaysUse24HourFormat to true
-                                                              child: child!);
-                                                        });
+                                                final TimeOfDay? result = await showTimePicker(
+                                                    context: context,
+                                                    initialTime: TimeOfDay.now(),
+                                                    builder: (context, child) {
+                                                      return Theme(
+                                                        data: Theme.of(context).copyWith(
+                                                          colorScheme: const ColorScheme.light(
+                                                            primary: AyurezeTheme.forestDeep,
+                                                            onPrimary: Colors.white,
+                                                            onSurface: AyurezeTheme.forestDeep,
+                                                          ),
+                                                        ),
+                                                        child: MediaQuery(
+                                                            data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: false),
+                                                            child: child!),
+                                                      );
+                                                    });
                                                 if (result != null) {
                                                   setState(() {
-                                                    String data = result
-                                                        .format(context)
-                                                        .toLowerCase();
-                                                    String str;
-                                                    var parts;
-                                                    String? startPart;
-
-                                                    int checkData;
-                                                    str = data;
-                                                    parts = str.split(":");
-                                                    startPart = parts[0].trim();
-                                                    checkData =
-                                                        int.parse(startPart!);
+                                                    String data = result.format(context).toLowerCase();
+                                                    var parts = data.split(":");
+                                                    String startPart = parts[0].trim();
+                                                    int checkData = int.parse(startPart);
                                                     if (checkData > 9) {
-                                                      _pEndTime.text = result
-                                                          .format(context)
-                                                          .toLowerCase();
+                                                      _pEndTime.text = data;
                                                     } else {
-                                                      _pEndTime.text = "0" +
-                                                          result
-                                                              .format(context)
-                                                              .toLowerCase();
+                                                      _pEndTime.text = "0$data";
                                                     }
                                                   });
                                                 }
                                               },
                                               validator: (String? value) {
                                                 if (value!.isEmpty) {
-                                                  return getTranslated(
-                                                          context,
-                                                          AppString
-                                                              .please_enter_end_time)
-                                                      .toString();
+                                                  return getTranslated(context, AppString.please_enter_end_time).toString();
                                                 }
                                                 return null;
                                               },
-                                              onSaved: (String? name) {},
                                             ),
                                           ],
                                         ),
                                       ),
-                                      Container(
+                                      const SizedBox(height: 16),
                                         alignment: Alignment.topLeft,
-                                        margin:
-                                            EdgeInsets.only(top: width! * 0.02),
                                         child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
+                                          crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              getTranslated(context,
-                                                      AppString.profile_popular)
-                                                  .toString(),
-                                              style: TextStyle(
-                                                  fontSize: width! * 0.038,
-                                                  color: hintColor),
+                                              getTranslated(context, AppString.profile_popular).toString(),
+                                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
                                             ),
-                                            DropdownButton(
-                                              hint: Text(getTranslated(context,
-                                                      AppString.profile_popular)
-                                                  .toString()),
+                                            const SizedBox(height: 8),
+                                            DropdownButtonFormField<String>(
+                                              hint: Text(getTranslated(context, AppString.profile_popular).toString()),
                                               value: _selectedPopular == '0'
-                                                  ? getTranslated(context,
-                                                          AppString.popular_no)
-                                                      .toString()
-                                                  : getTranslated(context,
-                                                          AppString.popular_yes)
-                                                      .toString(),
-                                              isExpanded: true,
-                                              iconSize: 35,
-                                              onChanged: (dynamic newValue) {
-                                                setState(() {
-                                                  _selectedPopular = newValue;
-                                                });
-                                              },
-                                              items: popular.map((popular) {
-                                                return DropdownMenuItem(
-                                                  child: new Text(popular),
-                                                  value: popular,
+                                                  ? getTranslated(context, AppString.popular_no).toString()
+                                                  : getTranslated(context, AppString.popular_yes).toString(),
+                                              decoration: AyurezeTheme.textFieldDecoration(),
+                                              icon: Icon(Icons.keyboard_arrow_down_rounded, color: AyurezeTheme.forestDeep),
+                                              items: popular.map((pop) {
+                                                return DropdownMenuItem<String>(
+                                                  value: pop,
+                                                  child: Text(pop, style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary)),
                                                 );
                                               }).toList(),
+                                              onChanged: (newValue) {
+                                                setState(() {
+                                                  _selectedPopular = newValue!;
+                                                });
+                                              },
                                             ),
                                           ],
                                         ),
@@ -1859,43 +1244,42 @@ class _ProfileScreen extends State<ProfileScreen> {
                 ),
               );
             } else {
-              return const Center(
+              return Center(
                 child: CircularProgressIndicator(
-                  color: OslerTheme.forestDeep,
+                  color: AyurezeTheme.forestDeep,
                 ),
               );
             }
           }),
       bottomNavigationBar: Container(
-        color: OslerTheme.canvas,
-        padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-        height: width! * 0.18,
+        decoration: BoxDecoration(
+          color: AyurezeTheme.surface,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 10,
+              offset: const Offset(0, -5),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
         child: ElevatedButton(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (_currentStep == 0)
-                Text(
-                  getTranslated(context, AppString.profile_continue_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-              if (_currentStep == 1)
-                Text(
-                  getTranslated(context, AppString.profile_continue_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-              if (_currentStep == 2)
-                Text(
-                  getTranslated(context, AppString.profile_submit_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-            ],
+          style: ElevatedButton.styleFrom(
+            backgroundColor: AyurezeTheme.forestDeep,
+            foregroundColor: Colors.white,
+            minimumSize: const Size(double.infinity, 56),
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+            elevation: 0,
+          ),
+          child: Text(
+            _currentStep == 2 
+                ? getTranslated(context, AppString.profile_submit_button).toString()
+                : getTranslated(context, AppString.profile_continue_button).toString(),
+            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
           ),
           onPressed: () {
             if (_currentStep == 0 && _step1.currentState!.validate()) {
+              selectedHospitals.clear();
               for (int i = 0; i < hospitalReq.length; i++) {
                 if (hospitalReq[i].isSelected == true) {
                   selectedHospitals.add(hospitalReq[i].id.toString());
@@ -1905,49 +1289,40 @@ class _ProfileScreen extends State<ProfileScreen> {
               if (selectedHospitals.isNotEmpty) {
                 continued();
               } else {
-                Fluttertoast.showToast(
-                    msg:
-                        getTranslated(context, AppString.please_select_hospital)
-                            .toString());
+                Fluttertoast.showToast(msg: getTranslated(context, AppString.please_select_hospital).toString());
               }
             } else if (_currentStep == 1 && _step2.currentState!.validate()) {
-              List<String> degree = [];
-              List<String> college = [];
-              List<String> year = [];
-              List<String> certificate = [];
-              List<String> certificateYear = [];
-
-              degree = _pDegree.text.toString().split(",");
-              college = _pCollege.text.toString().split(',');
-              year = _pCollegeYear.text.toString().split(',');
-
-              certificate = _pCertificate.text.toString().split(',');
-              certificateYear = _pCertificateYear.text.toString().split(',');
+              List<String> degree = _pDegree.text.toString().split(",");
+              List<String> college = _pCollege.text.toString().split(',');
+              List<String> year = _pCollegeYear.text.toString().split(',');
+              List<String> certificate = _pCertificate.text.toString().split(',');
+              List<String> certificateYear = _pCertificateYear.text.toString().split(',');
 
               educationList.clear();
               certificateList.clear();
 
               for (int i = 0; i < degree.length; i++) {
-                EducationModel education = new EducationModel();
-                education.degree = degree[i];
-                education.college = college[i];
-                education.year = year[i];
-                educationList.add(education);
+                if (degree[i].trim().isNotEmpty) {
+                  EducationModel education = EducationModel();
+                  education.degree = degree[i].trim();
+                  education.college = college[i].trim();
+                  education.year = year[i].trim();
+                  educationList.add(education);
+                }
               }
 
               for (int i = 0; i < certificate.length; i++) {
-                EducationCertificate certificateData =
-                    new EducationCertificate();
-                certificateData.certificate = certificate[i];
-                certificateData.certificateYear = certificateYear[i];
-                certificateList.add(certificateData);
+                if (certificate[i].trim().isNotEmpty) {
+                  EducationCertificate certificateData = EducationCertificate();
+                  certificateData.certificate = certificate[i].trim();
+                  certificateData.certificateYear = certificateYear[i].trim();
+                  certificateList.add(certificateData);
+                }
               }
 
               continued();
-            } else {
-              if (_currentStep == 2 && _formkey.currentState!.validate()) {
-                updateProfile();
-              }
+            } else if (_currentStep == 2 && _formkey.currentState!.validate()) {
+              updateProfile();
             }
           },
         ),
@@ -2404,3 +1779,4 @@ class DateUtil {
     return DateFormat(DATE_FORMAT).format(dateTime);
   }
 }
+
