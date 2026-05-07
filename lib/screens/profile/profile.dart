@@ -363,10 +363,10 @@ class _ProfileScreen extends State<ProfileScreen> {
                       ),
                 ),
                 child: Container(
-                width: width,
-                margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                child: Column(
-                  children: [
+                  width: width,
+                  margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                  child: Column(
+                    children: [
                     Expanded(
                       child: Stepper(
                         type: stepperType,
@@ -569,15 +569,12 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                   return null;
                                                 },
                                               ),
-                                            ],
-                                          ),
                                         ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
                             isActive: _currentStep >= 0,
                             state: _currentStep >= 0 ? StepState.complete : StepState.disabled,
                           ),
@@ -775,6 +772,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           ),
                                         ),
                                       ),
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -934,6 +932,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                 child: Container(
                                   child: Column(
                                     children: [
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -961,6 +960,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           ],
                                         ),
                                       ),
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1026,10 +1026,11 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                        alignment: Alignment.topLeft,
-                                        child: Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
+                                            Container(
+                                              alignment: Alignment.topLeft,
+                                              child: Column(
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                children: [
                                             Text(
                                               getTranslated(context, AppString.profile_time_slot).toString(),
                                               style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary),
@@ -1054,6 +1055,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 16),
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1150,6 +1152,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           ],
                                         ),
                                       ),
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1209,6 +1212,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                         ),
                                       ),
                                       const SizedBox(height: 16),
+                                      Container(
                                         alignment: Alignment.topLeft,
                                         child: Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1240,16 +1244,20 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           ],
                                         ),
                                       ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
-                            isActive: _currentStep >= 0,
-                            state: _currentStep >= 2
-                                ? StepState.complete
-                                : StepState.disabled,
                           ),
+                        ),
+                      ),
+                      isActive: _currentStep >= 2,
+                      state: _currentStep >= 2
+                          ? StepState.complete
+                          : StepState.disabled,
+                    ),
                         ],
                         controlsBuilder:
                             (BuildContext context, ControlsDetails controls) {

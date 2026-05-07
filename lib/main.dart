@@ -56,7 +56,7 @@ import 'screens/home page/login_home.dart';
 import 'screens/home page/patient_information.dart';
 import 'screens/notification/notifications.dart';
 import 'screens/paymentScreen/payment.dart';
-import 'screens/profile/profile.dart';
+import 'screens/profile/profile.dart' hide Container;
 import 'screens/review/rate&review.dart';
 import 'screens/videoCall/video_Call.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -578,7 +578,7 @@ class _MyAppState extends State<MyApp> {
 
   Widget build(BuildContext context) {
     if (_locale == null) {
-      return Container(
+      return SizedBox(
         child: Center(
           child: CircularProgressIndicator(),
         ),

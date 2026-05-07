@@ -639,6 +639,16 @@ class AstraApiService {
     }
   }
 
+  /// Get the latest Astra Fill record for a patient
+  Future<Map<String, dynamic>> getLatestAstraFill(String patientId) async {
+    try {
+      final response = await _dio.get('/api/v1/astra-fill/latest/$patientId');
+      return response.data ?? {};
+    } catch (e) {
+      return {};
+    }
+  }
+
   // ============================================================
   // DOCUMENT MANAGEMENT
   // ============================================================

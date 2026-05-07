@@ -399,5 +399,28 @@ class AyurezeTheme {
       ],
     );
   }
+  static InputDecoration textFieldDecoration({String? labelText, String? hintText}) {
+    return InputDecoration(
+      labelText: labelText,
+      hintText: hintText,
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(color: border),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(color: border),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(20),
+        borderSide: BorderSide(color: forestDeep, width: 2),
+      ),
+      filled: true,
+      fillColor: surface,
+      labelStyle: TextStyle(color: textSecondary, fontSize: 14),
+      hintStyle: TextStyle(color: textSecondary.withOpacity(0.6), fontSize: 14),
+    );
+  }
 
 }

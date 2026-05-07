@@ -22,6 +22,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/services/supabase_service.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'dart:io';
 
 class CreateAccount extends StatefulWidget {

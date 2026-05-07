@@ -193,7 +193,8 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
             child: FutureBuilder(
                 future: appointment,
                 builder: (context, snapshot) {
-                  return Column(
+                  if (snapshot.connectionState == ConnectionState.done) {
+                    return Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
@@ -433,7 +434,9 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                                                                                 ],
                                                                               ),
                                                                             ),
-                                                                          ])));
+                                                                                                                                                      );
+                                                                          },
+                                                                        )
                                                             },
                                                           )
                                                         : Center(
@@ -633,7 +636,9 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                                                                             ],
                                                                           ),
                                                                         ),
-                                                                      ])));
+                                                                                                                                                  );
+                                                                          },
+                                                                        )
                                                         },
                                                       ),
                                             pastAppointmentReq.length == 0
@@ -816,7 +821,9 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                                                                                 ],
                                                                               ),
                                                                             ),
-                                                                          ])));
+                                                                                                                                                      );
+                                                                          },
+                                                                        )
                                                             },
                                                           )
                                                         : Center(
@@ -1019,29 +1026,28 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                                                                             ],
                                                                           ),
                                                                         ),
-                                                                      ])));
+                                                                                                                                                  );
+                                                                          },
+                                                                        )
                                                         },
                                                       ),
                                           ],
                                         ),
                                       ),
                                     ],
-                                  ),
-                                ),
-                              ),
+                                  );
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              color: AyurezeTheme.forestDeep,
                             ),
                           );
-                        } else {
-                          return Center(child: CircularProgressIndicator(color: AyurezeTheme.forestDeep));
                         }
                       }),
                 ),
               ),
-            );
-          },
-        );
-      },
-    );
+            ),
+          );
   }
 
   Future<BaseModel<AppointmentHistory>> appointmentHistoryScreen() async {
