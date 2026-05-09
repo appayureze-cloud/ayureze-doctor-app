@@ -1006,6 +1006,8 @@ class AstraApiService {
         message = 'Connection timeout. Please check your internet.';
       } else if (error.type == DioExceptionType.receiveTimeout) {
         message = 'Request timeout. Please try again.';
+      } else if (error.type == DioExceptionType.connectionError) {
+        message = 'Unable to reach Astra server. Check internet/VPN or try again in a moment.';
       }
       
       return AstraApiException(message, error.response?.statusCode);
