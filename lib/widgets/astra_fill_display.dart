@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/services/astra_api_service.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 
 /// Widget to display Astra Fill health intake records submitted by patient
 /// This shows symptoms, vitals, medical history that patient filled in their app
@@ -275,7 +276,7 @@ class _AstraFillDisplayWidgetState extends State<AstraFillDisplayWidget> {
                                  "${hasThyroid ? '⚠️ Thyroid\n' : ''}"
                                  "${hasBp ? '⚠️ Blood Pressure\n' : ''}"
                                  "${pastHistory.toString().isNotEmpty ? 'Details: $pastHistory' : ''}".trim(),
-                        iconColor: Colors.purple,
+                        iconColor: AyurezeTheme.forestDeep,
                       ),
                       
                     // Previous Treatment
@@ -465,8 +466,8 @@ class _AstraFillDisplayWidgetState extends State<AstraFillDisplayWidget> {
       icon: Icons.history,
       title: "Medical History",
       items: conditions,
-      chipColor: Colors.purple.shade50,
-      textColor: Colors.purple.shade700,
+      chipColor: AyurezeTheme.surfaceMuted,
+      textColor: AyurezeTheme.forestDeep,
     );
   }
 
