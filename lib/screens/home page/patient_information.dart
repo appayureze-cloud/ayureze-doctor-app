@@ -322,7 +322,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                     imageBuilder: (context, imageProvider) =>
                                         CircleAvatar(
                                       radius: 50,
-                                      backgroundColor: loginButton,
+                                      backgroundColor: AyurezeTheme.textPrimary,
                                       child: CircleAvatar(
                                         radius: 52,
                                         backgroundImage: imageProvider,
@@ -341,7 +341,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                     child: Text(
                                       '${name ?? ''}',
                                       style: TextStyle(
-                                          fontSize: 20, color: loginButton),
+                                          fontSize: 20, color: AyurezeTheme.textPrimary),
                                     )),
                                 Text(
                                   getTranslated(context,
@@ -349,7 +349,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                           .toString() +
                                       '$appointmentId',
                                   style: TextStyle(
-                                      fontSize: 14, color: loginButton),
+                                      fontSize: 14, color: AyurezeTheme.textPrimary),
                                 ),
                               ],
                             ),
@@ -478,11 +478,11 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                         color: divider,
                         padding: EdgeInsets.all(15),
                         child: new TabBar(
-                          labelColor: loginButton,
+                          labelColor: AyurezeTheme.textPrimary,
                           controller: _tabController,
                           indicatorSize: TabBarIndicatorSize.tab,
                           tabs: tabList,
-                          unselectedLabelColor: hintColor,
+                          unselectedLabelColor: AyurezeTheme.textSecondary,
                         ),
                       ),
                       new Container(

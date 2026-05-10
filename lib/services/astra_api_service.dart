@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:dio/dio.dart';
+import 'package:dio/io.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:doctro/retrofit/apis.dart';
@@ -34,6 +35,19 @@ class AstraApiService {
       connectTimeout: const Duration(seconds: 45),
       receiveTimeout: const Duration(seconds: 90),
     ));
+
+    // Mobile network/TLS resilience for Astra endpoints
+    if (_dio.httpClientAdapter is IOHttpClientAdapter) {
+      final adapter = _dio.httpClientAdapter as IOHttpClientAdapter;
+      adapter.createHttpClient = () {
+        final client = HttpClient();
+        client.connectionTimeout = const Duration(seconds: 45);
+        client.badCertificateCallback = (cert, host, port) {
+          return host.contains('astra.ayureze.in');
+        };
+        return client;
+      };
+    }
 
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
@@ -465,9 +479,24 @@ class AstraApiService {
   Future<List<dynamic>> getAvailableMedicines() async {
     try {
       final response = await _dio.get('/api/v1/shopify/products/available');
-      return _extractProducts(response.data);
+      final products = _extractProducts(response.data);
+      if (products.isNotEmpty) return products;
+
+      // Fallback 1: generic products endpoint
+      final fallbackResponse = await _dio.get('/api/v1/shopify/products');
+      final fallbackProducts = _extractProducts(fallbackResponse.data);
+      if (fallbackProducts.isNotEmpty) return fallbackProducts;
+
+      // Fallback 2: explicit all-products endpoint
+      final allResponse = await _dio.get('/api/v1/shopify/products/all');
+      return _extractProducts(allResponse.data);
     } catch (e) {
-      return [];
+      try {
+        final allResponse = await _dio.get('/api/v1/shopify/products/all');
+        return _extractProducts(allResponse.data);
+      } catch (_) {
+        return [];
+      }
     }
   }
 
@@ -1020,11 +1049,22 @@ class AstraApiService {
     if (data == null) return [];
     if (data is List) return data;
     if (data is Map) {
-      return data['products'] ?? 
-             data['recommendations'] ?? 
-             data['medicines'] ?? 
-             data['data'] ?? 
-             [];
+      final dynamic direct = data['products'] ??
+          data['recommendations'] ??
+          data['medicines'] ??
+          data['items'];
+      if (direct is List) return direct;
+
+      final dynamic nestedData = data['data'];
+      if (nestedData is List) return nestedData;
+      if (nestedData is Map) {
+        final dynamic nestedProducts = nestedData['products'] ??
+            nestedData['items'] ??
+            nestedData['medicines'];
+        if (nestedProducts is List) return nestedProducts;
+      }
+
+      return [];
     }
     return [];
   }

@@ -207,11 +207,6 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
 
     setState(() => _isLoading = true);
     try {
-      final bool astraOnline = await _astraApiService.checkHealth();
-      if (!astraOnline) {
-        throw Exception("Astra service is unreachable. Check internet and try again.");
-      }
-
       final String doctorId = (widget.doctorId != null && widget.doctorId!.isNotEmpty)
           ? widget.doctorId!
           : SharedPreferenceHelper.getString(Preferences.doctorId);

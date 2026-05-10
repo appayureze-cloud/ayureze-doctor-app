@@ -75,11 +75,6 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
     _scrollToBottom();
 
     try {
-      final bool astraOnline = await _apiService.checkHealth();
-      if (!astraOnline) {
-        throw Exception("Astra service is temporarily unreachable. Please check internet and try again.");
-      }
-
       final user = FirebaseAuth.instance.currentUser;
       final String fallbackUserId =
           SharedPreferenceHelper.getString(Preferences.uniqueId) != 'N_A'
