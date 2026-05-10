@@ -29,11 +29,33 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
   String? _recordingPath;
 
   bool _isLoading = false;
+  bool _isBrainOnline = true;
+  String _brainStatusLabel = "Always Active";
 
   @override
   void initState() {
     super.initState();
     _addInitialMessage();
+    _refreshBrainStatus();
+  }
+
+  Future<void> _refreshBrainStatus() async {
+    try {
+      final health = await _apiService.checkBrainHealth();
+      final engine = health['engine_api'];
+      final bool engineOnline = engine is Map && engine['status'] == 'online';
+      if (!mounted) return;
+      setState(() {
+        _isBrainOnline = engineOnline;
+        _brainStatusLabel = engineOnline ? "Always Active" : "Brain Offline";
+      });
+    } catch (_) {
+      if (!mounted) return;
+      setState(() {
+        _isBrainOnline = false;
+        _brainStatusLabel = "Brain Offline";
+      });
+    }
   }
 
   @override
@@ -262,9 +284,16 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
                   style: TextStyle(color: AyurezeTheme.textPrimary, fontSize: 16, fontWeight: FontWeight.bold)),
                 Row(
                   children: [
-                    Container(width: 8, height: 8, decoration: const BoxDecoration(color: Colors.green, shape: BoxShape.circle)),
+                    Container(
+                      width: 8,
+                      height: 8,
+                      decoration: BoxDecoration(
+                        color: _isBrainOnline ? Colors.green : AyurezeTheme.warning,
+                        shape: BoxShape.circle,
+                      ),
+                    ),
                     const SizedBox(width: 4),
-                    Text("Always Active", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 10)),
+                    Text(_brainStatusLabel, style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 10)),
                   ],
                 ),
               ],

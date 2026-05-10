@@ -248,8 +248,14 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
       
       Navigator.pop(context);
     } catch (e) {
-      String message = "Submission failed. Please try again.";
       final String err = e.toString();
+      String message = err
+          .replaceFirst('Exception: ', '')
+          .replaceFirst('AstraApiException: ', '')
+          .trim();
+      if (message.isEmpty) {
+        message = "Submission failed. Please try again.";
+      }
       if (err.contains("Doctor ID missing")) {
         message = "Doctor session missing. Please login again.";
       } else if (err.contains("unreachable") || err.contains("Network error") || err.contains("connection") || err.contains("timeout")) {
@@ -472,7 +478,13 @@ class _SearchMedicineSheetState extends State<SearchMedicineSheet> {
   Future<void> _loadAvailableMedicines() async {
     setState(() => _isLoading = true);
     try {
-      final results = await _astraApiService.getAvailableMedicines();
+      List results = await _astraApiService.getAvailableMedicines();
+      if (results.isEmpty) {
+        final all = await _astraApiService.getAllShopifyProducts();
+        if (all['success'] == true && all['products'] is List) {
+          results = List.from(all['products']);
+        }
+      }
       if (mounted) {
         setState(() => _results = results);
       }
