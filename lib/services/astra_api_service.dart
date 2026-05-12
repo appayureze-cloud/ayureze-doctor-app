@@ -562,7 +562,7 @@ class AstraApiService {
         data['user_metadata']['role'] = 'doctor';
       }
       
-      final response = await _dio.post(Apis.astra_brain_chat, data: data);
+      final response = await _postWithDnsFallback(Apis.astra_brain_chat, data: data);
       return response.data;
     } catch (e) {
       throw _handleError(e);
@@ -990,7 +990,7 @@ class AstraApiService {
   /// Check Astra Brain health
   Future<Map<String, dynamic>> checkBrainHealth() async {
     try {
-      final response = await _dio.get('/api/v1/brain/health');
+      final response = await _getWithDnsFallback('/api/v1/brain/health');
       return response.data;
     } catch (e) {
       return {'status': 'offline'};
@@ -1067,6 +1067,106 @@ class AstraApiService {
       return [];
     }
     return [];
+  }
+
+  bool _isConnectionLevelError(DioException error) {
+    if (error.type == DioExceptionType.connectionError ||
+        error.type == DioExceptionType.connectionTimeout ||
+        error.type == DioExceptionType.receiveTimeout) {
+      return true;
+    }
+    final String text = (error.message ?? '').toLowerCase();
+    return text.contains('socketexception') ||
+        text.contains('failed host lookup') ||
+        text.contains('network is unreachable') ||
+        text.contains('timed out');
+  }
+
+  Future<Response<dynamic>> _postWithDnsFallback(String path, {dynamic data}) async {
+    try {
+      return await _dio.post(path, data: data);
+    } on DioException catch (e) {
+      if (!_isConnectionLevelError(e)) rethrow;
+      return await _postViaIpv4(path, data: data);
+    }
+  }
+
+  Future<Response<dynamic>> _getWithDnsFallback(String path) async {
+    try {
+      return await _dio.get(path);
+    } on DioException catch (e) {
+      if (!_isConnectionLevelError(e)) rethrow;
+      return await _getViaIpv4(path);
+    }
+  }
+
+  Future<Response<dynamic>> _postViaIpv4(String path, {dynamic data}) async {
+    final dio = await _createIpv4Dio();
+    return dio.post(path, data: data);
+  }
+
+  Future<Response<dynamic>> _getViaIpv4(String path) async {
+    final dio = await _createIpv4Dio();
+    return dio.get(path);
+  }
+
+  Future<Dio> _createIpv4Dio() async {
+    final Uri uri = Uri.parse(baseUrl);
+    final String host = uri.host;
+    final List<InternetAddress> addresses =
+        await InternetAddress.lookup(host, type: InternetAddressType.IPv4);
+    if (addresses.isEmpty) {
+      throw Exception('No IPv4 address resolved for Astra server.');
+    }
+
+    final String ipBaseUrl = '${uri.scheme}://${addresses.first.address}';
+    final Dio fallbackDio = Dio(BaseOptions(
+      baseUrl: ipBaseUrl,
+      connectTimeout: const Duration(seconds: 45),
+      receiveTimeout: const Duration(seconds: 90),
+      headers: {
+        'Host': host,
+      },
+    ));
+
+    if (fallbackDio.httpClientAdapter is IOHttpClientAdapter) {
+      final adapter = fallbackDio.httpClientAdapter as IOHttpClientAdapter;
+      adapter.createHttpClient = () {
+        final client = HttpClient();
+        client.connectionTimeout = const Duration(seconds: 45);
+        client.badCertificateCallback = (cert, _, __) => true;
+        return client;
+      };
+    }
+
+    fallbackDio.interceptors.add(InterceptorsWrapper(
+      onRequest: (options, handler) async {
+        User? user = FirebaseAuth.instance.currentUser;
+        if (user != null) {
+          String? token = await user.getIdToken();
+          if (token != null) {
+            options.headers['Authorization'] = 'Bearer $token';
+          }
+        }
+
+        if (options.headers['Authorization'] == null) {
+          final String appToken =
+              SharedPreferenceHelper.getString(Preferences.auth_token);
+          if (appToken.isNotEmpty && appToken != 'N_A') {
+            options.headers['Authorization'] = 'Bearer $appToken';
+          }
+        }
+
+        options.headers['X-Role'] = 'doctor';
+        if (options.headers['Content-Type'] == null) {
+          options.headers['Content-Type'] = 'application/json';
+        }
+        options.headers['Host'] = host;
+        return handler.next(options);
+      },
+    ));
+
+    return fallbackDio;
   }
 }
 
