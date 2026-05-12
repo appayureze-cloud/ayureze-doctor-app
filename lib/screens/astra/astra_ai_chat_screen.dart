@@ -182,16 +182,17 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
       }
     } catch (e) {
       final String errorText = e.toString();
-      String friendlyMessage = "Unable to contact Astra right now. Please try again.";
+      // Improved error reporting
+      String friendlyMessage = "Connection failed: $errorText. Please check internet.";
 
-      if (errorText.contains('Unauthorized') || errorText.contains('401')) {
-        friendlyMessage = "Session expired. Please login again.";
-      } else if (errorText.contains('Astra service is temporarily unreachable') ||
-          errorText.contains('Network error') ||
-          errorText.contains('connection') ||
-          errorText.contains('timeout')) {
-        friendlyMessage = "Astra server unreachable. Check network/VPN and try again.";
+      if (errorText.contains('401') || errorText.contains('Unauthorized')) {
+        friendlyMessage = "Session expired. Please re-login.";
+      } else if (errorText.contains('500') || errorText.contains('Server')) {
+        friendlyMessage = "Astra server error. Please try again in a few moments.";
+      } else if (errorText.contains('Timeout')) {
+        friendlyMessage = "Astra server taking too long to respond. Please try again.";
       }
+
 
       if (mounted) {
         setState(() {
