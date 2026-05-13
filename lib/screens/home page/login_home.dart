@@ -411,9 +411,8 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             _buildActionButton(getTranslated(context, AppString.drawer_schedule_timing).toString(), AppIcons.clock, AyurezeTheme.lime, () => Navigator.pushNamed(context, 'Schedule Timings')),
-_buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'profile')),
-        _buildActionButton(getTranslated(context, AppString.chats).toString(), AppIcons.chat, AyurezeTheme.lime, () => Navigator.pushNamed(context, 'ChatHome')),
-        _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'Settings')),
+            _buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'profile')),
+            _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'Settings')),
           ],
         ),
       ],

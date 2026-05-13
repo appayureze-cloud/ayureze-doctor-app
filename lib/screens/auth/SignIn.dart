@@ -369,8 +369,9 @@ class _SignInState extends State<SignIn> {
     } else {
       String errorText = "Google Sign In Failed or Canceled";
       if (authProvider.status == Status.authenticateError) {
-        errorText =
-            "Sign-in error: Please check your Google account settings or connection.";
+        errorText = "Google Sign In Error: Please ensure:\n1. Internet connection is active\n2. Google Play Services are installed\n3. Your Google account is properly configured";
+      } else if (authProvider.status == Status.authenticateCanceled) {
+        errorText = "Google Sign In was canceled";
       }
       Fluttertoast.showToast(msg: errorText);
     }

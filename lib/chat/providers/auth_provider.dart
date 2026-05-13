@@ -111,9 +111,17 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: Platform.isIOS ? '298839588168-up4rcmclffgne2hnlemg7n4e29qtovn2.apps.googleusercontent.com' : null,
+        clientId: Platform.isIOS ? '298839588168-up4rcmclffgne2hnlemg7n4e29qtovn2.apps.googleusercontent.com' : '298839588168-6ut75u7g4rqc8grmujtcl4m7obnq3oml.apps.googleusercontent.com',
         serverClientId: '298839588168-6ut75u7g4rqc8grmujtcl4m7obnq3oml.apps.googleusercontent.com',
+        scopes: <String>[
+          'email',
+          'https://www.googleapis.com/auth/userinfo.profile',
+        ],
       );
+      
+      // Sign out first to ensure clean state
+      await googleSignIn.signOut();
+      
       GoogleSignInAccount? googleUser = await googleSignIn.signIn();
       if (googleUser != null) {
         GoogleSignInAuthentication googleAuth = await googleUser.authentication;

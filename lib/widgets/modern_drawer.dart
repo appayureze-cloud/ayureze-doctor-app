@@ -102,7 +102,6 @@ class ModernDrawer extends StatelessWidget {
                   _drawerItem(context, AppIcons.payment, getTranslated(context, AppString.drawer_payments).toString(), () => Navigator.popAndPushNamed(context, 'payment')),
                   _drawerItem(context, AppIcons.star, getTranslated(context, AppString.drawer_review).toString(), () => Navigator.popAndPushNamed(context, 'rateAndReviewRoutes')),
                   _drawerItem(context, AppIcons.notifications, getTranslated(context, AppString.drawer_notification).toString(), () => Navigator.popAndPushNamed(context, 'notifications')),
-                  _drawerItem(context, AppIcons.chat, getTranslated(context, AppString.chats).toString(), () => Navigator.popAndPushNamed(context, 'ChatHome')),
                   _drawerItem(context, AppIcons.verified, "Profile & Registration", () {
                     Navigator.pop(context);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ProfessionalRegistrationScreen()));
