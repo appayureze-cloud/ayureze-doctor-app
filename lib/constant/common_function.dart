@@ -1,6 +1,7 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/localization/localization_constant.dart';
+import 'package:doctro/widgets/osler_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -19,7 +20,7 @@ class CommonFunction {
             child: new Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                new CircularProgressIndicator(),
+                new OslerLoader(),
                 SizedBox(width: 20),
                 new Text(
                     getTranslated(context, AppString.please_wait).toString()),

@@ -2,8 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
-import 'package:doctro/constant/app_icons.dart';
-import 'package:doctro/constant/color_constant.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
@@ -474,15 +473,9 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
                   SizedBox(
                     width: double.infinity,
                     height: 58,
-                    child: ElevatedButton(
+                    child: OslerButton(
+                      text: widget.personalData != null ? "Complete Registration" : "Save Profile Details",
                       onPressed: _submitData,
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: purple,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-                        elevation: 0,
-                      ),
-                      child: Text(widget.personalData != null ? "Complete Registration" : "Save Profile Details", 
-                        style: const TextStyle(fontSize: 17, fontWeight: FontWeight.bold, color: Colors.white)),
                     ),
                   ),
                   const SizedBox(height: 30),
@@ -534,7 +527,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
       children: [
         Icon(icon, color: purple, size: 22),
         const SizedBox(width: 10),
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: Colors.black87.withOpacity(0.8))),
+        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme.textPrimary)),
       ],
     );
   }
@@ -542,7 +535,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
   Widget _buildLabel(String label) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 8, left: 4),
-      child: Text(label, style: TextStyle(fontWeight: FontWeight.w700, color: Colors.black54, fontSize: 13)),
+      child: Text(label, style: TextStyle(fontWeight: FontWeight.w700, color: AyurezeTheme.textSecondary, fontSize: 13)),
     );
   }
 
@@ -694,7 +687,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
       children: [
         Icon(icon, size: 18, color: purple),
         const SizedBox(width: 12),
-        Text("$label: ", style: TextStyle(color: Colors.grey[600], fontSize: 13)),
+        Text("$label: ", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
         Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
       ],
     );
@@ -747,9 +740,9 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
                 Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.grey[50],
+                    color: AyurezeTheme.surfaceMuted,
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey[200]!),
+                    border: Border.all(color: AyurezeTheme.borderMuted),
                   ),
                   child: Column(
                     children: [
@@ -765,7 +758,8 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
                 SizedBox(
                   width: double.infinity,
                   height: 50,
-                  child: ElevatedButton(
+                  child: OslerButton(
+                    text: "Continue",
                     onPressed: () {
                       Navigator.pushAndRemoveUntil(
                          context,
@@ -773,11 +767,6 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
                          (route) => false,
                       );
                     },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: purple,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                    ),
-                    child: const Text("Continue", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold)),
                   ),
                 ),
               ],
@@ -800,7 +789,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
             style: TextStyle(
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               fontSize: 14,
-              color: isBold ? purple : Colors.black87,
+              color: isBold ? purple : AyurezeTheme.textPrimary,
             ),
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,

@@ -13,6 +13,7 @@ import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/paymentScreen/PaymentGateway.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:flutter/material.dart';
 
 class SubSubscription extends StatefulWidget {
@@ -48,7 +49,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
         leading: IconButton(
           icon: Icon(
             AppIcons.back,
-            color: AyurezeTheme.forestDeep,
+            color: AyurezeTheme.healingGreen100,
             size: 20,
           ),
           onPressed: () {
@@ -69,7 +70,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
         builder: (context, snapshot) {
           if (snapshot.connectionState != ConnectionState.done) {
             return Center(
-              child: CircularProgressIndicator(color: AyurezeTheme.forestDeep),
+              child: CircularProgressIndicator(color: AyurezeTheme.healingGreen100),
             );
           }
 
@@ -161,7 +162,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                 decoration: BoxDecoration(
-                  color: AyurezeTheme.forestDeep,
+                  color: AyurezeTheme.healingGreen100,
                   borderRadius: BorderRadius.circular(16),
                 ),
                 child: Text(
@@ -207,7 +208,8 @@ class _SubSubscriptionState extends State<SubSubscription> {
           const SizedBox(height: 16),
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton(
+            child: OslerButton(
+              text: "Subscribe Now",
               onPressed: () {
                 if (data.name == 'free') {
                   return;
@@ -226,7 +228,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor:
-                    data.name == 'free' ? AyurezeTheme.moss : AyurezeTheme.forestDeep,
+                    data.name == 'free' ? AyurezeTheme.oslerGray50 : AyurezeTheme.healingGreen100,
               ),
               child: Text(
                 getTranslated(context, AppString.subscription_buy).toString(),
@@ -300,10 +302,10 @@ class _SubSubscriptionState extends State<SubSubscription> {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: selected ? AyurezeTheme.limeSoft : AyurezeTheme.surfaceMuted,
+          color: selected ? AyurezeTheme.healingGreen50Soft : AyurezeTheme.surfaceMuted,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
-            color: selected ? AyurezeTheme.lime : AyurezeTheme.border,
+            color: selected ? AyurezeTheme.healingGreen50 : AyurezeTheme.border,
           ),
         ),
         child: Row(
@@ -312,7 +314,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
               selected
                   ? Icons.radio_button_checked_rounded
                   : Icons.radio_button_off_rounded,
-              color: selected ? AyurezeTheme.forestDeep : AyurezeTheme.textSecondary,
+              color: selected ? AyurezeTheme.healingGreen100 : AyurezeTheme.textSecondary,
             ),
             const SizedBox(width: 12),
             Expanded(

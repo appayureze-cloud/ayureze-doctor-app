@@ -183,7 +183,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: AyurezeTheme.limeSoft,
+            color: AyurezeTheme.healingGreen50Soft,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(

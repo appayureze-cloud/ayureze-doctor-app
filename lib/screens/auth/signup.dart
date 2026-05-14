@@ -1,4 +1,5 @@
 import 'dart:core';
+import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
 import 'package:doctro/constant/app_icons.dart';
@@ -11,7 +12,11 @@ import 'package:doctro/model/register.dart';
 import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/screens/auth/registration_success_screen.dart';
 import 'package:doctro/screens/auth/phoneverification.dart';
-
+import 'package:doctro/screens/auth/professional_registration_screen.dart';
+import 'package:doctro/services/supabase_service.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_input.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
@@ -20,10 +25,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
-import 'package:doctro/screens/auth/professional_registration_screen.dart';
-import 'package:doctro/services/supabase_service.dart';
-import 'package:doctro/theme/ayureze_theme.dart';
-import 'dart:io';
 
 class CreateAccount extends StatefulWidget {
   final Map<String, dynamic>? prefillData;
@@ -33,14 +34,11 @@ class CreateAccount extends StatefulWidget {
 }
 
 class _CreateAccountState extends State<CreateAccount> {
-  //Set Height/Width Using MediaQuery
   late double width;
   late double height;
 
-  //Set Password Visibility
   bool _isHidden = true;
 
-//Set DropDown For Male/Female
   List<String> gender = ["Male", "Female"];
   String? _genderSelect;
 
@@ -71,14 +69,11 @@ class _CreateAccountState extends State<CreateAccount> {
     super.dispose();
   }
 
-  //Select Dob
   DateTime? _selectedDate;
   String newDateApiPass = "";
 
-  //Set Empty Data Validation
   final _formkey = GlobalKey<FormState>();
 
-  //Set TextInput Controller
   TextEditingController _name = TextEditingController();
   TextEditingController _email = TextEditingController();
   TextEditingController _dob = TextEditingController();
@@ -86,7 +81,6 @@ class _CreateAccountState extends State<CreateAccount> {
   TextEditingController _password = TextEditingController();
   TextEditingController _phoneCode = TextEditingController(text: "+91");
 
-  // Face Verification State
   bool _isFaceVerified = false;
   String? _capturedImagePath;
   final SupabaseService _supabaseService = SupabaseService();
@@ -139,15 +133,14 @@ class _CreateAccountState extends State<CreateAccount> {
                   decoration: AyurezeTheme.panelDecoration(),
                   child: Column(
                     children: [
-                      TextFormField(
+                      OslerInput(
+                        label: getTranslated(context, AppString.register_full_name).toString(),
+                        hint: "Enter your full name",
                         controller: _name,
                         keyboardType: TextInputType.name,
                         inputFormatters: [FilteringTextInputFormatter.allow(RegExp("[a-zA-Z ]"))],
                         textCapitalization: TextCapitalization.words,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: AyurezeTheme.textFieldDecoration(
-                          labelText: getTranslated(context, AppString.register_full_name).toString(),
-                        ).copyWith(prefixIcon: Icon(Icons.person_outline_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        prefixIcon: Icon(Icons.person_outline_rounded, size: 20, color: AyurezeTheme.healingGreen100),
                         validator: (String? value) {
                           if (value!.isEmpty) {
                             return getTranslated(context, AppString.please_enter_full_name).toString();
@@ -156,13 +149,12 @@ class _CreateAccountState extends State<CreateAccount> {
                         },
                       ),
                       const SizedBox(height: 14),
-                      TextFormField(
+                      OslerInput(
+                        label: getTranslated(context, AppString.register_email_hint).toString(),
+                        hint: "Enter your email",
                         controller: _email,
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: AyurezeTheme.textFieldDecoration(
-                          labelText: getTranslated(context, AppString.register_email_hint).toString(),
-                        ).copyWith(prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                        prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.healingGreen100),
                         validator: (String? value) {
                           if (value!.isEmpty) {
                             return getTranslated(context, AppString.please_enter_email).toString();
@@ -176,12 +168,11 @@ class _CreateAccountState extends State<CreateAccount> {
                         children: [
                           Expanded(
                             flex: 2,
-                            child: TextFormField(
+                            child: OslerInput(
+                              label: "Code",
+                              hint: "+91",
                               controller: _phoneCode,
                               readOnly: true,
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: AyurezeTheme.textPrimary),
-                              decoration: AyurezeTheme.textFieldDecoration(labelText: "Code"),
                               onTap: () {
                                 showCountryPicker(
                                   context: context,
@@ -194,14 +185,13 @@ class _CreateAccountState extends State<CreateAccount> {
                           const SizedBox(width: 12),
                           Expanded(
                             flex: 5,
-                            child: TextFormField(
+                            child: OslerInput(
+                              label: getTranslated(context, AppString.register_phone_no).toString(),
+                              hint: "Enter phone number",
                               controller: _phone,
                               keyboardType: TextInputType.phone,
                               inputFormatters: [FilteringTextInputFormatter.digitsOnly, LengthLimitingTextInputFormatter(10)],
-                              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                              decoration: AyurezeTheme.textFieldDecoration(
-                                labelText: getTranslated(context, AppString.register_phone_no).toString(),
-                              ).copyWith(prefixIcon: Icon(Icons.phone_iphone_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                              prefixIcon: Icon(Icons.phone_iphone_rounded, size: 20, color: AyurezeTheme.healingGreen100),
                               validator: (String? value) {
                                 if (value!.isEmpty) return getTranslated(context, AppString.please_enter_phone_no).toString();
                                 if (value.length != 10) return getTranslated(context, AppString.please_enter_valid_number).toString();
@@ -212,14 +202,13 @@ class _CreateAccountState extends State<CreateAccount> {
                         ],
                       ),
                       const SizedBox(height: 14),
-                      TextFormField(
+                      OslerInput(
+                        label: getTranslated(context, AppString.register_birth_date_hint).toString(),
+                        hint: "Select your DOB",
                         controller: _dob,
                         readOnly: true,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: AyurezeTheme.textFieldDecoration(
-                          labelText: getTranslated(context, AppString.register_birth_date_hint).toString(),
-                        ).copyWith(prefixIcon: Icon(Icons.calendar_month_rounded, size: 20, color: AyurezeTheme.forestDeep)),
                         onTap: () => _selectDate(context),
+                        prefixIcon: Icon(Icons.calendar_month_rounded, size: 20, color: AyurezeTheme.healingGreen100),
                         validator: (String? value) {
                           if (value!.isEmpty) return getTranslated(context, AppString.please_select_birth_date).toString();
                           return null;
@@ -229,26 +218,28 @@ class _CreateAccountState extends State<CreateAccount> {
                       DropdownButtonFormField<String>(
                         value: _genderSelect,
                         style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: AyurezeTheme.textFieldDecoration(
+                        decoration: InputDecoration(
                           labelText: getTranslated(context, AppString.register_select_gender_hint).toString(),
-                        ).copyWith(prefixIcon: Icon(Icons.people_alt_rounded, size: 20, color: AyurezeTheme.forestDeep)),
+                          filled: true,
+                          fillColor: AyurezeTheme.oslerGray10,
+                          prefixIcon: Icon(Icons.people_alt_rounded, size: 20, color: AyurezeTheme.healingGreen100),
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
+                        ),
                         items: gender.map((String value) => DropdownMenuItem(value: value, child: Text(value))).toList(),
                         onChanged: (newValue) => setState(() => _genderSelect = newValue),
                         validator: (value) => value == null ? getTranslated(context, AppString.please_select_gender).toString() : null,
                       ),
                       const SizedBox(height: 14),
-                      TextFormField(
+                      OslerInput(
+                        label: getTranslated(context, AppString.register_password_hint).toString(),
+                        hint: "••••••••",
                         controller: _password,
-                        obscureText: _isHidden,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: AyurezeTheme.textFieldDecoration(
-                          labelText: getTranslated(context, AppString.register_password_hint).toString(),
-                        ).copyWith(
-                          prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.forestDeep),
-                          suffixIcon: IconButton(
-                            icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.forestDeep),
-                            onPressed: () => setState(() => _isHidden = !_isHidden),
-                          ),
+                        isPassword: _isHidden,
+                        prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.healingGreen100),
+                        suffixIcon: IconButton(
+                          icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.healingGreen100),
+                          onPressed: () => setState(() => _isHidden = !_isHidden),
                         ),
                         validator: (String? value) {
                           if (value!.isEmpty) return getTranslated(context, AppString.please_enter_password).toString();
@@ -256,14 +247,8 @@ class _CreateAccountState extends State<CreateAccount> {
                         },
                       ),
                       const SizedBox(height: 24),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AyurezeTheme.forestDeep,
-                          foregroundColor: Colors.white,
-                          minimumSize: const Size(double.infinity, 56),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          elevation: 0,
-                        ),
+                      OslerButton(
+                        text: getTranslated(context, AppString.register_button).toString(),
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
                             Map<String, dynamic> personalData = {
@@ -283,10 +268,6 @@ class _CreateAccountState extends State<CreateAccount> {
                             );
                           }
                         },
-                        child: Text(
-                          getTranslated(context, AppString.register_button).toString(),
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
                       ),
                     ],
                   ),
@@ -306,7 +287,7 @@ class _CreateAccountState extends State<CreateAccount> {
                         onPressed: () => Navigator.pushNamed(context, 'SignIn'),
                         child: Text(
                           getTranslated(context, AppString.register_sign_in).toString(),
-                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AyurezeTheme.forestDeep),
+                          style: TextStyle(fontSize: 14, fontWeight: FontWeight.w800, color: AyurezeTheme.healingGreen100),
                         ),
                       ),
                     ],
@@ -331,24 +312,20 @@ class _CreateAccountState extends State<CreateAccount> {
       Fluttertoast.showToast(msg: "Please select your birth date");
       return BaseModel()..setException(ServerError.withError(error: "Date not selected"));
     }
-    
-    newDateApiPass =
-        DateUtilForPass().formattedDate(_selectedDate!);
+
+    newDateApiPass = DateUtilForPass().formattedDate(_selectedDate!);
 
     Register response;
     try {
       CommonFunction.onLoading(context);
-      
-      // 1. Generate Unique Doctor ID
+
       final doctorId = _supabaseService.generateDoctorID();
 
-      // 2. Upload captured photo to Supabase
       String? photoUrl;
       if (_capturedImagePath != null) {
         photoUrl = await _supabaseService.uploadProfilePhoto(File(_capturedImagePath!), doctorId);
       }
 
-      // 3. Create Request Body for Super Admin MySQL
       Map<String, dynamic> body = {
         "name": _name.text,
         "email": _email.text,
@@ -362,7 +339,6 @@ class _CreateAccountState extends State<CreateAccount> {
         "photo_url": photoUrl ?? "",
       };
 
-      // 4. Save to Supabase
       await _supabaseService.saveDoctorProfile(
         doctorId: doctorId,
         name: _name.text,
@@ -374,13 +350,11 @@ class _CreateAccountState extends State<CreateAccount> {
         isFaceVerified: _isFaceVerified,
       );
 
-      // 5. Call existing registration API (ayureze.org)
-      response = await RestClient(await RetroApi().dioData(context))
-          .registerRequest(body);
-      
+      response = await RestClient(await RetroApi().dioData(context)).registerRequest(body);
+
       CommonFunction.hideDialog(context);
       final data = OtpData(otp: response.data!.otp, id: response.data!.id);
-      
+
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -435,8 +409,7 @@ class _CreateAccountState extends State<CreateAccount> {
       _dob
         ..text = DateFormat('dd-MM-yyyy').format(_selectedDate!)
         ..selection = TextSelection.fromPosition(
-          TextPosition(
-              offset: _dob.text.length, affinity: TextAffinity.upstream),
+          TextPosition(offset: _dob.text.length, affinity: TextAffinity.upstream),
         );
     }
   }

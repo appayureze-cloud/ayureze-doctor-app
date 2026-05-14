@@ -1,5 +1,6 @@
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/ForgotPassword.dart';
 import 'package:doctro/retrofit/api_header.dart';
@@ -90,23 +91,13 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                         },
                       ),
                       const SizedBox(height: 24),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: AyurezeTheme.forestDeep,
-                          foregroundColor: Colors.white,
-                          minimumSize: const Size(double.infinity, 56),
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                          elevation: 0,
-                        ),
+                      OslerButton(
+                        text: getTranslated(context, AppString.forgot_reset_button).toString(),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             forgotPasswordScreenRequest();
                           }
                         },
-                        child: Text(
-                          getTranslated(context, AppString.forgot_reset_button).toString(),
-                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                        ),
                       ),
                     ],
                   ),

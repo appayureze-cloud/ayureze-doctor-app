@@ -8,6 +8,8 @@ import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_loader.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -303,6 +305,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                             child: Container(
                               child: SvgPicture.asset(
                                 'assets/icons/call_dialler.svg',
+                                colorFilter: ColorFilter.mode(AyurezeTheme.iconPrimary, BlendMode.srcIn),
                               ),
                             ),
                           ),
@@ -329,7 +332,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                       ),
                                     ),
                                     placeholder: (context, url) =>
-                                        CircularProgressIndicator(),
+                                        CircularProgressIndicator(color: AyurezeTheme.healingGreen50),
                                     errorWidget: (context, url, error) =>
                                         Image.asset(
                                             "assets/images/no_image.jpg"),
@@ -376,6 +379,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                             },
                             child: SvgPicture.asset(
                               'assets/icons/message_dialler.svg',
+                              colorFilter: ColorFilter.mode(AyurezeTheme.iconPrimary, BlendMode.srcIn),
                             ),
                           ),
                           StreamBuilder<QuerySnapshot>(
@@ -531,21 +535,13 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                                             top: 5,
                                                             left:
                                                                 width! * 0.06),
-                                                        child: ElevatedButton(
+                                                        child: OslerButton(
+                                                          text: getTranslated(context, AppString.information_complete_status).toString(),
                                                           onPressed: () {
                                                             setState(() {
-                                                              statusChangeRequest(
-                                                                  "complete");
+                                                              statusChangeRequest("complete");
                                                             });
-                                                            setState(() {});
                                                           },
-                                                          child: Text(
-                                                            getTranslated(
-                                                                    context,
-                                                                    AppString
-                                                                        .information_complete_status)
-                                                                .toString(),
-                                                          ),
                                                         ),
                                                       )
                                                     : Container(),
@@ -576,33 +572,24 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                                                   MainAxisAlignment.spaceAround,
                                               children: [
                                                 Container(
-                                                  child: ElevatedButton(
+                                                  child: OslerButton(
+                                                    text: getTranslated(context, AppString.information_approve_status).toString(),
                                                     onPressed: () {
                                                       myState(() {
-                                                        statusChangeRequest(
-                                                            "approve");
+                                                        statusChangeRequest("approve");
                                                       });
                                                     },
-                                                    child: Text(getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .information_approve_status)
-                                                        .toString()),
                                                   ),
                                                 ),
                                                 Container(
-                                                  child: ElevatedButton(
+                                                  child: OslerButton(
+                                                    text: getTranslated(context, AppString.information_cancel_status).toString(),
+                                                    customColor: AyurezeTheme.remoteRed50,
                                                     onPressed: () {
                                                       setState(() {
-                                                        statusChangeRequest(
-                                                            "cancel");
+                                                        statusChangeRequest("cancel");
                                                       });
                                                     },
-                                                    child: Text(getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .information_cancel_status)
-                                                        .toString()),
                                                   ),
                                                 ),
                                               ],
@@ -1111,7 +1098,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
                 ),
               );
             } else {
-              return Center(child: CircularProgressIndicator());
+              return Center(child: OslerLoader());
             }
           }),
     );

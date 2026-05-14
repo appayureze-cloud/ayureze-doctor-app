@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AyurezeTheme {
-  // Brand Colors
-  static const Color forest = Color(0xFF536256);
-  static const Color forestDeep = Color(0xFF24382C);
-  static const Color moss = Color(0xFF70836F);
-  static const Color lime = Color(0xFF2E7D32);
-  static const Color limeSoft = Color(0xFFC8E6C9);
-  static const Color danger = Color(0xFFD95C4E);
-  static const Color warning = Color(0xFFF0A534);
+  // Osler UI Kit Colors
+  static const Color oslerGray100 = Color(0xFF111A14);
+  static const Color oslerGray50 = Color(0xFF849087);
+  static const Color oslerGray10 = Color(0xFFF5F5F5);
+
+  static const Color healingGreen100 = Color(0xFF1A2E05); // Primary Dark
+  static const Color healingGreen50 = Color(0xFF84CC16);  // Primary Brand Color
+  static const Color healingGreen10 = Color(0xFFECFCCB);  // Primary Light
+
+  static const Color remoteRed100 = Color(0xFF4C050B);
+  static const Color remoteRed50 = Color(0xFFF43F5E);
+  static const Color remoteRed10 = Color(0xFFFFE4E7);
+
+  static const Color sunshineYellow100 = Color(0xFF422006);
+  static const Color sunshineYellow50 = Color(0xFFF59E0B);
+  static const Color sunshineYellow10 = Color(0xFFFEF9C3);
+
+  static const Color caringViolet100 = Color(0xFF311065);
+  static const Color caringViolet50 = Color(0xFF8B5CF6);
+  static const Color caringViolet10 = Color(0xFFEDE9FE);
+
+  static const Color connectivityBlue100 = Color(0xFF172554);
+  static const Color connectivityBlue50 = Color(0xFF3B82F6);
+  static const Color connectivityBlue10 = Color(0xFFEFF6FF);
 
   // Private state for dynamic theme support
   static bool _isDark = false;
@@ -37,6 +54,17 @@ class AyurezeTheme {
   static Color get border => _isDark ? darkBorder : lightBorder;
   static Color get textPrimary => _isDark ? darkTextPrimary : lightTextPrimary;
   static Color get textSecondary => _isDark ? darkTextSecondary : lightTextSecondary;
+  
+  // Dynamic Icon/SVG Colors - ensures visibility in both modes
+  static Color get iconPrimary => _isDark ? Colors.white : healingGreen100;
+  static Color get iconSecondary => _isDark ? darkTextSecondary : oslerGray50;
+  static Color get iconOnDark => _isDark ? Colors.white : Colors.white;
+  static Color get iconOnLight => _isDark ? Colors.white : Colors.white;
+  static Color get logoColor => _isDark ? Colors.white : Colors.white;
+  
+  // Action button colors for dark/light mode
+  static Color get actionButtonPrimary => _isDark ? healingGreen50 : healingGreen100;
+  static Color get actionButtonSecondary => _isDark ? oslerGray50 : healingGreen50;
 
   static const EdgeInsets screenPadding = EdgeInsets.symmetric(
     horizontal: 20,
@@ -52,16 +80,16 @@ class AyurezeTheme {
 
   static ThemeData lightTheme() {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: forest,
+      seedColor: healingGreen100,
       brightness: Brightness.light,
-      primary: lime,
-      secondary: forest,
+      primary: healingGreen50,
+      secondary: oslerGray50,
       surface: lightSurface,
     ).copyWith(
-      onPrimary: forestDeep,
+      onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: lightTextPrimary,
-      error: danger,
+      error: remoteRed50,
       onError: Colors.white,
     );
 
@@ -72,40 +100,42 @@ class AyurezeTheme {
       cardColor: lightSurface,
       dividerColor: lightBorder,
       shadowColor: const Color(0x16000000),
-      textTheme: const TextTheme(
-        headlineLarge: TextStyle(
+      textTheme: GoogleFonts.nunitoTextTheme(
+        ThemeData.light().textTheme,
+      ).copyWith(
+        headlineLarge: const TextStyle(
           fontSize: 32,
           height: 1.05,
           fontWeight: FontWeight.w800,
           color: lightTextPrimary,
         ),
-        headlineMedium: TextStyle(
+        headlineMedium: const TextStyle(
           fontSize: 24,
           height: 1.15,
           fontWeight: FontWeight.w800,
           color: lightTextPrimary,
         ),
-        titleLarge: TextStyle(
+        titleLarge: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
           color: lightTextPrimary,
         ),
-        titleMedium: TextStyle(
+        titleMedium: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
           color: lightTextPrimary,
         ),
-        bodyLarge: TextStyle(
+        bodyLarge: const TextStyle(
           fontSize: 15,
           height: 1.4,
           color: lightTextPrimary,
         ),
-        bodyMedium: TextStyle(
+        bodyMedium: const TextStyle(
           fontSize: 14,
           height: 1.35,
           color: lightTextSecondary,
         ),
-        labelLarge: TextStyle(
+        labelLarge: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.2,
@@ -136,12 +166,11 @@ class AyurezeTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: forestDeep,
+          backgroundColor: healingGreen100,
           foregroundColor: Colors.white,
-          elevation: 0,
           minimumSize: const Size.fromHeight(56),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(999),
           ),
           textStyle: const TextStyle(
             fontSize: 15,
@@ -191,17 +220,17 @@ class AyurezeTheme {
         ),
       ),
       chipTheme: ChipThemeData(
-        backgroundColor: limeSoft,
+        backgroundColor: healingGreen10,
         disabledColor: lightSurfaceMuted,
-        selectedColor: lime,
-        secondarySelectedColor: lime,
+        selectedColor: healingGreen50,
+        secondarySelectedColor: healingGreen50,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
         labelStyle: const TextStyle(
-          color: forestDeep,
+          color: healingGreen100,
           fontWeight: FontWeight.w700,
         ),
         secondaryLabelStyle: const TextStyle(
-          color: forestDeep,
+          color: healingGreen100,
           fontWeight: FontWeight.w700,
         ),
         brightness: Brightness.light,
@@ -217,7 +246,7 @@ class AyurezeTheme {
     return BoxDecoration(
       borderRadius: BorderRadius.circular(32),
       gradient: const LinearGradient(
-        colors: [forest, forestDeep],
+        colors: [healingGreen50, healingGreen100],
         begin: Alignment.topLeft,
         end: Alignment.bottomRight,
       ),
@@ -256,16 +285,16 @@ class AyurezeTheme {
 
   static ThemeData darkTheme() {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: forest,
+      seedColor: healingGreen100,
       brightness: Brightness.dark,
-      primary: lime,
-      secondary: moss,
+      primary: healingGreen50,
+      secondary: oslerGray50,
       surface: darkSurface,
     ).copyWith(
       onPrimary: Colors.white,
       onSecondary: Colors.white,
       onSurface: darkTextPrimary,
-      error: danger,
+      error: remoteRed50,
       onError: Colors.white,
     );
 
@@ -276,40 +305,42 @@ class AyurezeTheme {
       cardColor: darkSurface,
       dividerColor: darkBorder,
       shadowColor: const Color(0x40000000),
-      textTheme: const TextTheme(
-        headlineLarge: TextStyle(
+      textTheme: GoogleFonts.nunitoTextTheme(
+        ThemeData.dark().textTheme,
+      ).copyWith(
+        headlineLarge: const TextStyle(
           fontSize: 32,
           height: 1.05,
           fontWeight: FontWeight.w800,
           color: darkTextPrimary,
         ),
-        headlineMedium: TextStyle(
+        headlineMedium: const TextStyle(
           fontSize: 24,
           height: 1.15,
           fontWeight: FontWeight.w800,
           color: darkTextPrimary,
         ),
-        titleLarge: TextStyle(
+        titleLarge: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.w700,
           color: darkTextPrimary,
         ),
-        titleMedium: TextStyle(
+        titleMedium: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.w700,
           color: darkTextPrimary,
         ),
-        bodyLarge: TextStyle(
+        bodyLarge: const TextStyle(
           fontSize: 15,
           height: 1.4,
           color: darkTextPrimary,
         ),
-        bodyMedium: TextStyle(
+        bodyMedium: const TextStyle(
           fontSize: 14,
           height: 1.35,
           color: darkTextSecondary,
         ),
-        labelLarge: TextStyle(
+        labelLarge: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w700,
           color: darkTextPrimary,
@@ -328,7 +359,7 @@ class AyurezeTheme {
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: lime,
+          backgroundColor: healingGreen50,
           foregroundColor: Colors.white,
           elevation: 0,
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
@@ -338,8 +369,8 @@ class AyurezeTheme {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          foregroundColor: lime,
-          side: const BorderSide(color: lime, width: 1.5),
+          foregroundColor: healingGreen50,
+          side: const BorderSide(color: healingGreen50, width: 1.5),
           padding: const EdgeInsets.symmetric(horizontal: 28, vertical: 16),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         ),
@@ -358,11 +389,11 @@ class AyurezeTheme {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: lime, width: 2),
+          borderSide: const BorderSide(color: healingGreen50, width: 2),
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(16),
-          borderSide: const BorderSide(color: danger),
+          borderSide: const BorderSide(color: remoteRed50),
         ),
         hintStyle: const TextStyle(color: darkTextSecondary),
       ),
@@ -374,14 +405,14 @@ class AyurezeTheme {
       iconTheme: const IconThemeData(color: darkTextPrimary),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: darkSurface,
-        selectedItemColor: lime,
+        selectedItemColor: healingGreen50,
         unselectedItemColor: darkTextSecondary,
       ),
       drawerTheme: const DrawerThemeData(backgroundColor: darkSurface),
       dialogTheme: DialogThemeData(backgroundColor: darkSurface, shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24))),
-      floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: lime, foregroundColor: Colors.white),
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(backgroundColor: healingGreen50, foregroundColor: Colors.white),
       chipTheme: ChipThemeData(backgroundColor: darkSurfaceMuted, labelStyle: const TextStyle(color: darkTextPrimary)),
-      tabBarTheme: TabBarThemeData(labelColor: lime, unselectedLabelColor: darkTextSecondary),
+      tabBarTheme: TabBarThemeData(labelColor: healingGreen50, unselectedLabelColor: darkTextSecondary),
     );
   }
 

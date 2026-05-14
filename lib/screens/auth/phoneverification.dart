@@ -1,5 +1,6 @@
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/ResentOtp.dart';
 import 'package:doctro/model/otp_verify.dart';
@@ -171,17 +172,10 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
                   ),
                   Container(
                     margin: EdgeInsets.only(top: height * 0.02),
-                    child: ElevatedButton(
-                        child: Text(
-                          getTranslated(context, AppString.phone_verify_otp)
-                              .toString(),
-                          style: TextStyle(
-                              fontSize: width * 0.04, height: height * 0.0018),
-                          textAlign: TextAlign.center,
-                        ),
-                        onPressed: () {
-                          otpVerify();
-                        }),
+                    child: OslerButton(
+                        text: getTranslated(context, AppString.phone_verify_otp).toString(),
+                        onPressed: () => otpVerify()
+                    ),
                   ),
                 ],
               ),

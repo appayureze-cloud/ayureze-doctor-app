@@ -11,6 +11,8 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -399,14 +401,13 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                                     ],
                                                   ),
                                                 ),
-                                                actions: <Widget>[
+actions: <Widget>[
                                                   TextButton(
                                                     child: Text("Cancel", style: TextStyle(color: AyurezeTheme.textSecondary)),
                                                     onPressed: () => Navigator.pop(context),
                                                   ),
-                                                  ElevatedButton(
-                                                    style: ElevatedButton.styleFrom(minimumSize: const Size(100, 45)),
-                                                    child: Text(getTranslated(context, AppString.schedule_ok_button).toString()),
+                                                  OslerButton(
+                                                    text: getTranslated(context, AppString.schedule_ok_button).toString(),
                                                     onPressed: () {
                                                       bool isOk = true;
                                                       for (int i = 0; i < listDynamic.length; i++) {
@@ -424,8 +425,6 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                                       } else {
                                                         Fluttertoast.showToast(
                                                           msg: getTranslated(context, AppString.please_enter_start_end_time).toString(),
-                                                          toastLength: Toast.LENGTH_SHORT,
-                                                          gravity: ToastGravity.BOTTOM,
                                                         );
                                                       }
                                                     },

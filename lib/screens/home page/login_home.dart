@@ -30,6 +30,7 @@ import 'package:doctro/screens/astra/astra_ai_chat_screen.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -221,9 +222,9 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
         appBar: AppBar(
           backgroundColor: AyurezeTheme.canvas,
           elevation: 0,
-          leading: IconButton(
-            icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: AyurezeTheme.forestDeep),
-            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
+leading: IconButton(
+            icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: AyurezeTheme.iconPrimary),
+            onPressed: () => _scaffoldKey.currentState!.openDrawer()),
           ),
           actions: [
             Padding(
@@ -250,7 +251,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
         ),
         body: RefreshIndicator(
           onRefresh: todayAppointmentsFunction,
-          color: AyurezeTheme.forestDeep,
+          color: AyurezeTheme.healingGreen100Deep,
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             padding: AyurezeTheme.screenPadding,
@@ -286,7 +287,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
             },
             label: const Text("Astra AI", style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white)),
             icon: Icon(AppIcons.analytics, color: Colors.white),
-            backgroundColor: AyurezeTheme.forestDeep,
+            backgroundColor: AyurezeTheme.healingGreen100Deep,
           ),
         ),
       ),
@@ -342,10 +343,10 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
             width: 64,
             height: 64,
             decoration: BoxDecoration(
-              color: AyurezeTheme.lime,
+              color: AyurezeTheme.healingGreen50,
               borderRadius: BorderRadius.circular(20),
             ),
-            child: Icon(AppIcons.medical, color: AyurezeTheme.forestDeep, size: 30),
+            child: Icon(AppIcons.medical, color: AyurezeTheme.healingGreen100Deep, size: 30),
           ),
         ],
       ),
@@ -361,10 +362,10 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
       mainAxisSpacing: 15,
       childAspectRatio: 1.6,
       children: [
-        _buildStatCard(getTranslated(context, AppString.dashboard_today_appointments).toString(), todayAppointments.length.toString(), AppIcons.calendar, AyurezeTheme.forestDeep),
-        _buildStatCard(getTranslated(context, AppString.dashboard_total_revenue).toString(), "₹${totalEarnings.toInt()}", AppIcons.wallet, AyurezeTheme.lime),
-        _buildStatCard(getTranslated(context, AppString.dashboard_active_patients).toString(), patientCount.toString(), AppIcons.patient, AyurezeTheme.lime),
-        _buildStatCard(getTranslated(context, AppString.dashboard_feedbacks).toString(), reviewCount.toString(), AppIcons.star, AyurezeTheme.forestDeep),
+        _buildStatCard(getTranslated(context, AppString.dashboard_today_appointments).toString(), todayAppointments.length.toString(), AppIcons.calendar, AyurezeTheme.healingGreen100Deep),
+        _buildStatCard(getTranslated(context, AppString.dashboard_total_revenue).toString(), "₹${totalEarnings.toInt()}", AppIcons.wallet, AyurezeTheme.healingGreen50),
+        _buildStatCard(getTranslated(context, AppString.dashboard_active_patients).toString(), patientCount.toString(), AppIcons.patient, AyurezeTheme.healingGreen50),
+        _buildStatCard(getTranslated(context, AppString.dashboard_feedbacks).toString(), reviewCount.toString(), AppIcons.star, AyurezeTheme.healingGreen100Deep),
       ],
     );
   }
@@ -410,9 +411,9 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            _buildActionButton(getTranslated(context, AppString.drawer_schedule_timing).toString(), AppIcons.clock, AyurezeTheme.lime, () => Navigator.pushNamed(context, 'Schedule Timings')),
-            _buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'profile')),
-            _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, AyurezeTheme.forestDeep, () => Navigator.pushNamed(context, 'Settings')),
+            _buildActionButton(getTranslated(context, AppString.drawer_schedule_timing).toString(), AppIcons.clock, AyurezeTheme.actionButtonPrimary, () => Navigator.pushNamed(context, 'Schedule Timings')),
+            _buildActionButton(getTranslated(context, AppString.profile_personal_information).toString(), AppIcons.profile, AyurezeTheme.actionButtonSecondary, () => Navigator.pushNamed(context, 'profile')),
+            _buildActionButton(getTranslated(context, AppString.drawer_setting).toString(), AppIcons.settings, AyurezeTheme.actionButtonSecondary, () => Navigator.pushNamed(context, 'Settings')),
           ],
         ),
       ],
@@ -459,15 +460,15 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
+        Text(title, style: TextStyle(fontSize: 18, fontWeight: FontWeight.w800, color: AyurezeTheme.textPrimary)),
         if (count > 0)
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
             decoration: BoxDecoration(
-              color: AyurezeTheme.limeSoft,
+              color: AyurezeTheme.healingGreen10,
               borderRadius: BorderRadius.circular(999),
             ),
-            child: Text("$count Active", style: TextStyle(fontSize: 12, color: AyurezeTheme.forestDeep, fontWeight: FontWeight.w700)),
+            child: Text("$count Active", style: TextStyle(fontSize: 12, color: AyurezeTheme.healingGreen100, fontWeight: FontWeight.w700)),
           ),
       ],
     );
@@ -475,7 +476,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
 
   Widget _buildAppointmentList(bool isLoading) {
     if (isLoading) {
-      return Center(child: CircularProgressIndicator(color: AyurezeTheme.forestDeep));
+      return Center(child: CircularProgressIndicator(color: AyurezeTheme.healingGreen50));
     }
     
     List<Widget> sections = [];
@@ -526,7 +527,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(title, style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: AyurezeTheme. textPrimary)),
-          Text("${getTranslated(context, AppString.view_more).toString()} ($count)", style: TextStyle(fontSize: 12, color: AyurezeTheme.forest)),
+          Text("${getTranslated(context, AppString.view_more).toString()} ($count)", style: TextStyle(fontSize: 12, color: AyurezeTheme.healingGreen100)),
         ],
       ),
     );
@@ -548,7 +549,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
                 width: 50,
                 height: 50,
                 fit: BoxFit.cover,
-                errorWidget: (context, url, error) => Container(color: Colors.grey[100], child: Icon(Icons.person, color: Colors.grey)),
+                errorWidget: (context, url, error) => Container(color: AyurezeTheme.surfaceMuted, child: Icon(Icons.person, color: AyurezeTheme.textSecondary)),
               ),
             ),
             SizedBox(width: 15),
@@ -709,14 +710,11 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
               ),
               Container(
                   margin: EdgeInsets.only(left: 12, right: 12),
-                  child: ElevatedButton(
-                      onPressed: () => Navigator.pushReplacementNamed(
-                          context, "subscription"),
-                      child: Text(getTranslated(
-                              context, AppString.home_activate_subscription)
-                          .toString())))
-            ],
-          ),
+                  child: OslerButton(
+                      text: getTranslated(context, AppString.home_activate_subscription).toString(),
+                      onPressed: () => Navigator.pushReplacementNamed(context, "subscription")
+                  )
+              ),
         ),
       ),
     );

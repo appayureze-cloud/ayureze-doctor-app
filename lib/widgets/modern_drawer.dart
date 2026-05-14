@@ -53,7 +53,7 @@ class ModernDrawer extends StatelessWidget {
                     height: 76,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      border: Border.all(color: AyurezeTheme.lime, width: 2),
+                      border: Border.all(color: AyurezeTheme.healingGreen50, width: 2),
                       image: DecorationImage(
                         image: (dFullImage != null && dFullImage!.isNotEmpty)
                             ? NetworkImage(dFullImage!)
@@ -77,7 +77,7 @@ class ModernDrawer extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: AyurezeTheme.lime,
+                      color: AyurezeTheme.healingGreen50,
                       borderRadius: BorderRadius.circular(999),
                     ),
                     child: Text(

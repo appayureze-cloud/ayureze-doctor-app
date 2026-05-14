@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/screens/home%20page/login_home.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
 
 class ProfileCompleteScreen extends StatelessWidget {
   const ProfileCompleteScreen({Key? key}) : super(key: key);
@@ -42,7 +43,9 @@ class ProfileCompleteScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 height: 55,
-                child: ElevatedButton(
+                child: OslerButton(
+                  text: "Go to Dashboard",
+                  customColor: AyurezeTheme.healingGreen100,
                   onPressed: () {
                     Navigator.pushAndRemoveUntil(
                       context,
@@ -50,22 +53,6 @@ class ProfileCompleteScreen extends StatelessWidget {
                       (route) => false,
                     );
                   },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AyurezeTheme.forestDeep,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    elevation: 5,
-                    shadowColor: AyurezeTheme.forestDeep.withOpacity(0.4),
-                  ),
-                  child: const Text(
-                    "Go to Dashboard",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
                 ),
               ),
               const SizedBox(height: 40),

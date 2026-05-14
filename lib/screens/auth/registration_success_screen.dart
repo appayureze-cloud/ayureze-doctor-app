@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/screens/home%20page/login_home.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
 
 class RegistrationSuccessScreen extends StatelessWidget {
   final String doctorName;
@@ -141,9 +142,9 @@ class RegistrationSuccessScreen extends StatelessWidget {
             style: TextStyle(
               fontSize: isPrimary ? 18 : 14,
               fontWeight: isPrimary || isStatus ? FontWeight.bold : FontWeight.w600,
-              color: isStatus 
+          color: isStatus 
                 ? Colors.orange[800] 
-                : (isPrimary ? AyurezeTheme.forestDeep : AyurezeTheme.textPrimary),
+                : (isPrimary ? AyurezeTheme.healingGreen100 : AyurezeTheme.textPrimary),
             ),
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,
@@ -157,7 +158,9 @@ class RegistrationSuccessScreen extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: 60,
-      child: ElevatedButton(
+      child: OslerButton(
+        text: "Continue",
+        customColor: AyurezeTheme.healingGreen100,
         onPressed: onContinue ?? () {
           Navigator.pushAndRemoveUntil(
             context,
@@ -165,22 +168,6 @@ class RegistrationSuccessScreen extends StatelessWidget {
             (route) => false,
           );
         },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: AyurezeTheme.forestDeep,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
-          ),
-          elevation: 5,
-          shadowColor: AyurezeTheme.forestDeep.withOpacity(0.3),
-        ),
-        child: const Text(
-          "Get Started",
-          style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-            color: Colors.white,
-          ),
-        ),
       ),
     );
   }

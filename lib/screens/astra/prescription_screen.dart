@@ -3,6 +3,7 @@ import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/services/astra_api_service.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/widgets/astra_fill_display.dart';
@@ -428,16 +429,10 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                   
                   SizedBox(height: 20),
                   
-                  ElevatedButton(
-                    onPressed: _isLoading ? null : _submitPrescription,
-                    child: _isLoading 
-                      ? CircularProgressIndicator(color: Colors.white)
-                      : Text("Submit & Automate (PDF + WhatsApp)"),
-                    style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 50),
-                      backgroundColor: AyurezeTheme.forestDeep,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
-                    ),
+                  OslerButton(
+                    text: "Submit & Automate (PDF + WhatsApp)",
+                    isLoading: _isLoading,
+                    onPressed: _submitPrescription,
                   ),
                 ],
               ),

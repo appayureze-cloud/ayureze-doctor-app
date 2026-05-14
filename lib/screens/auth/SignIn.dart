@@ -19,6 +19,8 @@ import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/auth/phoneverification.dart';
 import 'package:doctro/screens/auth/signup.dart';
+import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_input.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -170,16 +172,12 @@ class _SignInState extends State<SignIn> {
                           style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: AyurezeTheme.textSecondary),
                         ),
                         const SizedBox(height: 18),
-                        TextFormField(
+                        OslerInput(
+                          label: getTranslated(context, AppString.login_email_hint).toString(),
+                          hint: "example@email.com",
                           controller: email,
                           keyboardType: TextInputType.emailAddress,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                          decoration: AyurezeTheme.textFieldDecoration(
-                            labelText: getTranslated(context, AppString.login_email_hint).toString(),
-                            hintText: "example@email.com",
-                          ).copyWith(
-                            prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.forestDeep),
-                          ),
+                          prefixIcon: Icon(Icons.alternate_email_rounded, size: 20, color: AyurezeTheme.healingGreen100),
                           validator: (String? value) {
                             if (value!.isEmpty) {
                               return getTranslated(context, AppString.login_email_validator).toString();
@@ -191,18 +189,15 @@ class _SignInState extends State<SignIn> {
                           },
                         ),
                         const SizedBox(height: 14),
-                        TextFormField(
+                        OslerInput(
+                          label: getTranslated(context, AppString.login_password_hint).toString(),
+                          hint: "••••••••",
                           controller: password,
-                          obscureText: _isHidden,
-                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                          decoration: AyurezeTheme.textFieldDecoration(
-                            labelText: getTranslated(context, AppString.login_password_hint).toString(),
-                          ).copyWith(
-                            prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.forestDeep),
-                            suffixIcon: IconButton(
-                              icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.forestDeep),
-                              onPressed: () => setState(() => _isHidden = !_isHidden),
-                            ),
+                          isPassword: _isHidden,
+                          prefixIcon: Icon(Icons.lock_outline_rounded, size: 20, color: AyurezeTheme.healingGreen100),
+                          suffixIcon: IconButton(
+                            icon: Icon(_isHidden ? Icons.visibility_off_rounded : Icons.visibility_rounded, size: 20, color: AyurezeTheme.healingGreen100),
+                            onPressed: () => setState(() => _isHidden = !_isHidden),
                           ),
                           validator: (String? value) {
                             if (value!.isEmpty) {
@@ -218,28 +213,18 @@ class _SignInState extends State<SignIn> {
                             onPressed: () => Navigator.pushNamed(context, 'ForgotPasswordScreen'),
                             child: Text(
                               getTranslated(context, AppString.login_forgot_password).toString(),
-                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AyurezeTheme.forestDeep),
+                              style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AyurezeTheme.healingGreen100),
                             ),
                           ),
                         ),
                         const SizedBox(height: 20),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AyurezeTheme.forestDeep,
-                            foregroundColor: Colors.white,
-                            minimumSize: const Size(double.infinity, 56),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-                            elevation: 0,
-                          ),
+                        OslerButton(
+                          text: getTranslated(context, AppString.login_button).toString(),
                           onPressed: () {
                             if (_formkey.currentState!.validate()) {
                               callApiForLogin();
                             }
                           },
-                          child: Text(
-                            getTranslated(context, AppString.login_button).toString(),
-                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                          ),
                         ),
                         const SizedBox(height: 24),
                         Row(

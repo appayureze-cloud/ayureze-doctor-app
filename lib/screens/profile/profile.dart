@@ -3,9 +3,7 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctro/constant/app_icons.dart';
-import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -231,7 +229,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: AyurezeTheme.lime,
+                                        color: AyurezeTheme.healingGreen50,
                                         width: 2,
                                       ),
                                     ),
@@ -249,7 +247,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                     decoration: BoxDecoration(
                                       shape: BoxShape.circle,
                                       border: Border.all(
-                                        color: AyurezeTheme.lime,
+                                        color: AyurezeTheme.healingGreen50,
                                         width: 2,
                                       ),
                                     ),
@@ -266,7 +264,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                       ),
                                       placeholder: (context, url) =>
                                           const CircularProgressIndicator(
-                                        color: AyurezeTheme.lime,
+                                        color: AyurezeTheme.healingGreen50,
                                       ),
                                       errorWidget: (context, url, error) =>
                                           Image.asset("images/no_image.png"),
@@ -280,7 +278,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                   chooseProfileImage();
                                 },
                                 child: CircleAvatar(
-                                  backgroundColor: AyurezeTheme.lime,
+                                  backgroundColor: AyurezeTheme.healingGreen50,
                                   radius: 14,
                                   child: const Icon(
                                     Icons.add,
@@ -334,7 +332,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                 data: Theme.of(context).copyWith(
                   colorScheme: Theme.of(context).colorScheme.copyWith(
                         primary: AyurezeTheme.forestDeep,
-                        secondary: AyurezeTheme.lime,
+                        secondary: AyurezeTheme.healingGreen50,
                       ),
                 ),
                 child: Container(
@@ -1870,30 +1868,10 @@ class _ProfileScreen extends State<ProfileScreen> {
         color: AyurezeTheme.canvas,
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
         height: width! * 0.18,
-        child: ElevatedButton(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              if (_currentStep == 0)
-                Text(
-                  getTranslated(context, AppString.profile_continue_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-              if (_currentStep == 1)
-                Text(
-                  getTranslated(context, AppString.profile_continue_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-              if (_currentStep == 2)
-                Text(
-                  getTranslated(context, AppString.profile_submit_button)
-                      .toString(),
-                  style: TextStyle(fontSize: width! * 0.04, color: colorWhite),
-                ),
-            ],
-          ),
+        child: OslerButton(
+          text: _currentStep < 2
+              ? getTranslated(context, AppString.profile_continue_button).toString()
+              : getTranslated(context, AppString.profile_submit_button).toString(),
           onPressed: () {
             if (_currentStep == 0 && _step1.currentState!.validate()) {
               for (int i = 0; i < hospitalReq.length; i++) {
@@ -1920,7 +1898,6 @@ class _ProfileScreen extends State<ProfileScreen> {
               degree = _pDegree.text.toString().split(",");
               college = _pCollege.text.toString().split(',');
               year = _pCollegeYear.text.toString().split(',');
-
               certificate = _pCertificate.text.toString().split(',');
               certificateYear = _pCertificateYear.text.toString().split(',');
 
@@ -1936,8 +1913,7 @@ class _ProfileScreen extends State<ProfileScreen> {
               }
 
               for (int i = 0; i < certificate.length; i++) {
-                EducationCertificate certificateData =
-                    new EducationCertificate();
+                EducationCertificate certificateData = new EducationCertificate();
                 certificateData.certificate = certificate[i];
                 certificateData.certificateYear = certificateYear[i];
                 certificateList.add(certificateData);

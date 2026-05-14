@@ -187,7 +187,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       context,
                       AppString.drawer_subscription_history,
                     ).toString(),
-                    color: AyurezeTheme.lime,
+                    color: AyurezeTheme.healingGreen50,
                     onTap: () => Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -379,7 +379,7 @@ class _SettingScreenState extends State<SettingScreen> {
       trailing: Switch.adaptive(
         value: value,
         activeColor: AyurezeTheme.forestDeep,
-        activeTrackColor: AyurezeTheme.lime,
+        activeTrackColor: AyurezeTheme.healingGreen50,
         onChanged: onChanged,
       ),
     );

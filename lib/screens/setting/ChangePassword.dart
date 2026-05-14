@@ -8,6 +8,7 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -219,16 +220,13 @@ class _ChangePasswordState extends State<ChangePassword> {
           const SizedBox(height: 22),
           SizedBox(
             width: double.infinity,
-            child: ElevatedButton(
+            child: OslerButton(
+              text: getTranslated(context, AppString.change_password_button).toString(),
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   passwordChange();
                 }
               },
-              child: Text(
-                getTranslated(context, AppString.change_password_button)
-                    .toString(),
-              ),
             ),
           ),
         ],

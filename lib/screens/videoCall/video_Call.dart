@@ -380,8 +380,8 @@ class _VideoCallState extends State<VideoCall> {
                             child: _localUserJoined && !mutedVideo
                                 ? _localPreview()
                                 : Container(
-                                    color: Colors.grey[900],
-                                    child: const Icon(Icons.videocam_off, color: Colors.white38, size: 30),
+                                    color: AyurezeTheme.surfaceDark,
+                                    child: Icon(Icons.videocam_off, color: AyurezeTheme.textMuted, size: 30),
                                   ),
                           ),
                         ),
