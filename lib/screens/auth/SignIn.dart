@@ -358,9 +358,9 @@ class _SignInState extends State<SignIn> {
       }
     } else {
       String errorText = "Google Sign In Failed or Canceled";
-      if (authProvider.status == Status.authenticateError) {
+      if (authProvider.status == chat.Status.authenticateError) {
         errorText = "Google Sign In Error: Please ensure:\n1. Internet connection is active\n2. Google Play Services are installed\n3. Your Google account is properly configured";
-      } else if (authProvider.status == Status.authenticateCanceled) {
+      } else if (authProvider.status == chat.Status.authenticateCanceled) {
         errorText = "Google Sign In was canceled";
       }
       // Show error using OslerAlert in the build context
