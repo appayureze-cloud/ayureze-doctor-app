@@ -14,6 +14,7 @@ import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/paymentScreen/PaymentGateway.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_card.dart';
 import 'package:flutter/material.dart';
 
 class SubSubscription extends StatefulWidget {
@@ -150,9 +151,8 @@ class _SubSubscriptionState extends State<SubSubscription> {
         ? (selectedIndex >= planOptions.length ? 0 : selectedIndex)
         : 0;
 
-    return Container(
-      decoration: AyurezeTheme.panelDecoration(),
-      padding: const EdgeInsets.all(18),
+    return OslerCard(
+      margin: const EdgeInsets.only(bottom: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

@@ -31,6 +31,8 @@ import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_card.dart';
+import 'package:doctro/widgets/osler_status_badge.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
@@ -534,39 +536,49 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
     );
   }
 
-  Widget _buildAppointmentCard(dynamic app) {
-    return GestureDetector(
+Widget _buildAppointmentCard(dynamic app) {
+    final statusMap = {
+      'pending': AppointmentStatus.pending,
+      'approved': AppointmentStatus.approved,
+      'complete': AppointmentStatus.complete,
+      'cancelled': AppointmentStatus.cancel,
+      'waiting': AppointmentStatus.waiting,
+    };
+    final status = statusMap[app.appointmentStatus?.toLowerCase()] ?? AppointmentStatus.pending;
+
+    return OslerCard(
+      margin: EdgeInsets.only(bottom: 12),
       onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context) => patientDetailsScreen(id: app.id))),
-      child: Container(
-        margin: EdgeInsets.only(bottom: 12),
-        padding: EdgeInsets.all(16),
-        decoration: AyurezeTheme.panelDecoration(),
-        child: Row(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: CachedNetworkImage(
-                imageUrl: app.user?.fullImage ?? "",
-                width: 50,
-                height: 50,
-                fit: BoxFit.cover,
-                errorWidget: (context, url, error) => Container(color: AyurezeTheme.surfaceMuted, child: Icon(Icons.person, color: AyurezeTheme.textSecondary)),
-              ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: CachedNetworkImage(
+              imageUrl: app.user?.fullImage ?? "",
+              width: 50,
+              height: 50,
+              fit: BoxFit.cover,
+              errorWidget: (context, url, error) => Container(color: AyurezeTheme.surfaceMuted, child: Icon(Icons.person, color: AyurezeTheme.textSecondary)),
             ),
-            SizedBox(width: 15),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(app.patientName ?? "Patient", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: AyurezeTheme. textPrimary)),
-                  const SizedBox(height: 4),
-                  Text(app.time ?? "", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
-                ],
-              ),
+          ),
+          SizedBox(width: 15),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(child: Text(app.patientName ?? "Patient", style: TextStyle(fontWeight: FontWeight.w800, fontSize: 16, color: AyurezeTheme.textPrimary))),
+                    OslerStatusBadge(status: status),
+                  ],
+                ),
+                const SizedBox(height: 4),
+                Text(app.time ?? "", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
+              ],
             ),
-            Icon(Icons.chevron_right, color: AyurezeTheme.textSecondary.withOpacity(0.6)),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

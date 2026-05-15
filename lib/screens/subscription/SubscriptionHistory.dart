@@ -7,6 +7,8 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_card.dart';
+import 'package:doctro/widgets/osler_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -183,7 +185,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: AyurezeTheme.healingGreen50Soft,
+            color: AyurezeTheme.healingGreen10,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(
@@ -208,10 +210,8 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         ? DateFormat('dd MMM yyyy').format(DateTime.parse(item.startDate!))
         : "--";
 
-    return Container(
+    return OslerCard(
       margin: const EdgeInsets.only(bottom: 12),
-      padding: const EdgeInsets.all(18),
-      decoration: AyurezeTheme.panelDecoration(),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -228,33 +228,11 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
                   ),
                 ),
               ),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-                decoration: BoxDecoration(
-                  color: statusActive
-                      ? const Color(0xFFDDF0D0)
-                      : const Color(0xFFF8D6CF),
-                  borderRadius: BorderRadius.circular(999),
-                ),
-                child: Text(
-                  statusActive
-                      ? getTranslated(
-                          context,
-                          AppString.subscription_active_button,
-                        ).toString()
-                      : getTranslated(
-                          context,
-                          AppString.subscription_expired,
-                        ).toString(),
-                  style: TextStyle(
-                    color: statusActive
-                        ? AyurezeTheme.forestDeep
-                        : AyurezeTheme.danger,
-                    fontSize: 11,
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
+              OslerTag(
+                label: statusActive
+                    ? getTranslated(context, AppString.subscription_active_button).toString()
+                    : getTranslated(context, AppString.subscription_expired).toString(),
+                style: statusActive ? OslerTagStyle.success : OslerTagStyle.danger,
               ),
             ],
           ),

@@ -7,6 +7,9 @@ import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_modal.dart';
+import 'package:doctro/widgets/osler_alert.dart';
+import 'package:doctro/widgets/osler_card.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -325,22 +328,6 @@ class _SettingScreenState extends State<SettingScreen> {
         Container(
           decoration: AyurezeTheme.panelDecoration(),
           child: Column(
-            children: List.generate(items.length, (index) {
-              return Column(
-                children: [
-                  items[index],
-                  if (index != items.length - 1)
-                    Divider(
-                      height: 1,
-                      indent: 68,
-                      endIndent: 18,
-                      color: AyurezeTheme.border,
-                    ),
-                ],
-              );
-            }),
-          ),
-        ),
       ],
     );
   }
@@ -424,34 +411,18 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   void _showDeleteAccountDialog() {
-    showDialog(
+    OslerModal.show(
       context: context,
-      builder: (context) => AlertDialog(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
-        title: const Text(
-          "Delete Account?",
-          style: TextStyle(fontWeight: FontWeight.w800),
-        ),
-        content: const Text(
-          "This action is permanent and cannot be undone. All your data will be removed from our servers.",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("Cancel"),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              Fluttertoast.showToast(msg: "Request submitted to admin");
-            },
-            child: Text(
-              "Delete",
-              style: TextStyle(color: AyurezeTheme.danger),
-            ),
-          ),
-        ],
-      ),
+      title: "Delete Account?",
+      message: "This action is permanent and cannot be undone. All your data will be removed from our servers.",
+      primaryText: "Cancel",
+      secondaryText: "Delete",
+      primaryAction: () => Navigator.pop(context),
+      secondaryAction: () {
+        Navigator.pop(context);
+        Fluttertoast.showToast(msg: "Request submitted to admin");
+      },
+      isDanger: true,
     );
   }
 

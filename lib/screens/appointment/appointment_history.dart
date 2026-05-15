@@ -18,6 +18,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/screens/auth/SignIn.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_card.dart';
+import 'package:doctro/widgets/osler_status_badge.dart';
 
 
 class AppointmentHistoryScreen extends StatefulWidget {
