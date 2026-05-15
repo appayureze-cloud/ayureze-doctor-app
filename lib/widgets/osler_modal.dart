@@ -5,59 +5,65 @@ import 'package:doctro/widgets/osler_button.dart';
 class OslerModal extends StatelessWidget {
   final String title;
   final String? subtitle;
+  final String? message;
   final Widget? content;
-  final String? primaryButtonText;
-  final String? secondaryButtonText;
-  final VoidCallback? onPrimaryPressed;
-  final VoidCallback? onSecondaryPressed;
+  final String? primaryText;
+  final String? secondaryText;
+  final VoidCallback? primaryAction;
+  final VoidCallback? secondaryAction;
   final bool showCloseButton;
   final IconData? icon;
   final Color? iconColor;
+  final bool isDanger;
 
   const OslerModal({
     super.key,
     required this.title,
     this.subtitle,
+    this.message,
     this.content,
-    this.primaryButtonText,
-    this.secondaryButtonText,
-    this.onPrimaryPressed,
-    this.onSecondaryPressed,
+    this.primaryText,
+    this.secondaryText,
+    this.primaryAction,
+    this.secondaryAction,
     this.showCloseButton = true,
     this.icon,
     this.iconColor,
+    this.isDanger = false,
   });
 
   static Future<T?> show<T>({
     required BuildContext context,
     required String title,
     String? subtitle,
+    String? message,
     Widget? content,
-    String? primaryButtonText,
-    String? secondaryButtonText,
-    VoidCallback? onPrimaryPressed,
-    VoidCallback? onSecondaryPressed,
+    String? primaryText,
+    String? secondaryText,
+    VoidCallback? primaryAction,
+    VoidCallback? secondaryAction,
     bool showCloseButton = true,
     IconData? icon,
     Color? iconColor,
-    bool barrierDismissible = true,
+    bool isDanger = false,
   }) {
     return showModalBottomSheet<T>(
       context: context,
       isScrollControlled: true,
-      barrierDismissible: barrierDismissible,
       backgroundColor: Colors.transparent,
       builder: (context) => OslerModal(
         title: title,
         subtitle: subtitle,
+        message: message,
         content: content,
-        primaryButtonText: primaryButtonText,
-        secondaryButtonText: secondaryButtonText,
-        onPrimaryPressed: onPrimaryPressed,
-        onSecondaryPressed: onSecondaryPressed,
+        primaryText: primaryText,
+        secondaryText: secondaryText,
+        primaryAction: primaryAction,
+        secondaryAction: secondaryAction,
         showCloseButton: showCloseButton,
         icon: icon,
         iconColor: iconColor,
+        isDanger: isDanger,
       ),
     );
   }
@@ -120,10 +126,10 @@ class OslerModal extends StatelessWidget {
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.w800, color: AyurezeTheme.textPrimary),
                 textAlign: TextAlign.center,
               ),
-              if (subtitle != null) ...[
+              if (subtitle != null || message != null) ...[
                 const SizedBox(height: 8),
                 Text(
-                  subtitle!,
+                  message ?? subtitle!,
                   style: TextStyle(fontSize: 14, color: AyurezeTheme.textSecondary),
                   textAlign: TextAlign.center,
                 ),
@@ -132,25 +138,26 @@ class OslerModal extends StatelessWidget {
                 const SizedBox(height: 24),
                 content!,
               ],
-              if (primaryButtonText != null || secondaryButtonText != null) ...[
+              if (primaryText != null || secondaryText != null) ...[
                 const SizedBox(height: 24),
                 Column(
                   children: [
-                    if (primaryButtonText != null)
+                    if (primaryText != null)
                       OslerButton(
-                        text: primaryButtonText!,
+                        text: primaryText!,
+                        customColor: isDanger ? AyurezeTheme.remoteRed50 : null,
                         onPressed: () {
-                          onPrimaryPressed?.call();
+                          primaryAction?.call();
                           Navigator.pop(context);
                         },
                       ),
-                    if (secondaryButtonText != null) ...[
+                    if (secondaryText != null) ...[
                       const SizedBox(height: 12),
                       OslerButton(
-                        text: secondaryButtonText!,
+                        text: secondaryText!,
                         style: OslerButtonStyle.secondary,
                         onPressed: () {
-                          onSecondaryPressed?.call();
+                          secondaryAction?.call();
                           Navigator.pop(context);
                         },
                       ),
