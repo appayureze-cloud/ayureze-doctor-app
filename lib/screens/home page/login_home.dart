@@ -224,7 +224,7 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
           elevation: 0,
           leading: IconButton(
             icon: SvgPicture.asset("assets/icons/dMenuBar.svg", height: 18, color: AyurezeTheme.iconPrimary),
-            onPressed: () => _scaffoldKey.currentState!.openDrawer()),
+            onPressed: () => _scaffoldKey.currentState!.openDrawer(),
           ),
           actions: [
             Padding(
@@ -253,27 +253,28 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
           onRefresh: todayAppointmentsFunction,
           color: AyurezeTheme.healingGreen100,
           child: SingleChildScrollView(
-            physics: AlwaysScrollableScrollPhysics(),
+            physics: const AlwaysScrollableScrollPhysics(),
             padding: AyurezeTheme.screenPadding,
             child: FutureBuilder(
-                future: todayAppointment,
-                builder: (context, snapshot) {
-                  return Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildWelcomeHeader(),
-                      SizedBox(height: 25),
-                      _buildStatsGrid(),
-                      SizedBox(height: 25),
-                      _buildQuickActions(),
-                      SizedBox(height: 25),
-                      _buildSectionTitle(getTranslated(context, AppString.home_title).toString(), todayAppointments.length),
-                      SizedBox(height: 15),
-                      _buildAppointmentList(snapshot.connectionState == ConnectionState.waiting),
-                      SizedBox(height: 30),
-                    ],
-                  );
-                }),
+              future: todayAppointment,
+              builder: (context, snapshot) {
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildWelcomeHeader(),
+                    const SizedBox(height: 25),
+                    _buildStatsGrid(),
+                    const SizedBox(height: 25),
+                    _buildQuickActions(),
+                    const SizedBox(height: 25),
+                    _buildSectionTitle(getTranslated(context, AppString.home_title).toString(), todayAppointments.length),
+                    const SizedBox(height: 15),
+                    _buildAppointmentList(snapshot.connectionState == ConnectionState.waiting),
+                    const SizedBox(height: 30),
+                  ],
+                );
+              },
+            ),
           ),
         ),
         floatingActionButton: ScaleTransition(
@@ -679,46 +680,47 @@ class _LoginHomeScreenState extends State<LoginHomeScreen> with SingleTickerProv
               SizedBox(
                 height: 10,
               ),
-              Container(
-                  child: Text(
-                getTranslated(context, AppString.home_subscription_deActive)
-                    .toString(),
-                style: TextStyle(
-                    fontSize: 20,
-                    color: AyurezeTheme. textPrimary,
-                    decoration: TextDecoration.none),
-                textAlign: TextAlign.center,
-              )),
-              GestureDetector(
-                onTap: () {
-                  Navigator.pushReplacementNamed(context, "subscription");
-                },
-                child: Container(
-                    margin: EdgeInsets.only(top: height * 0.02),
-                    child: Text(
-                      getTranslated(context, AppString.home_please_active_plan)
-                          .toString(),
-                      style: TextStyle(
-                          fontSize: 14,
-                          color: darkGrey,
-                          decoration: TextDecoration.none),
-                      textAlign: TextAlign.center,
-                    )),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                  margin: EdgeInsets.only(left: 12, right: 12),
-                  child: OslerButton(
-                      text: getTranslated(context, AppString.home_activate_subscription).toString(),
-                      onPressed: () => Navigator.pushReplacementNamed(context, "subscription")
-                  )
-              ),
-        ),
-      ),
-    );
-  }
+               Container(
+                   child: Text(
+                 getTranslated(context, AppString.home_subscription_deActive)
+                     .toString(),
+                 style: TextStyle(
+                     fontSize: 20,
+                     color: AyurezeTheme. textPrimary,
+                     decoration: TextDecoration.none),
+                 textAlign: TextAlign.center,
+               ),
+               GestureDetector(
+                 onTap: () {
+                   Navigator.pushReplacementNamed(context, "subscription");
+                 },
+                 child: Container(
+                     margin: EdgeInsets.only(top: height * 0.02),
+                     child: Text(
+                       getTranslated(context, AppString.home_please_active_plan)
+                           .toString(),
+                       style: TextStyle(
+                           fontSize: 14,
+                           color: darkGrey,
+                           decoration: TextDecoration.none),
+                       textAlign: TextAlign.center,
+                     ),
+                   ),
+               ),
+               SizedBox(
+                 height: 10,
+               ),
+               Container(
+                   margin: EdgeInsets.only(left: 12, right: 12),
+                   child: OslerButton(
+                       text: getTranslated(context, AppString.home_activate_subscription).toString(),
+                       onPressed: () => Navigator.pushReplacementNamed(context, "subscription")
+                   ),
+               ),
+         ),
+       ),
+     );
+   }
 
   // Future<void> getOneSingleToken() async {
   //   try {

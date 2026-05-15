@@ -296,7 +296,7 @@ class _SubSubscriptionState extends State<SubSubscription> {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: selected ? AyurezeTheme.healingGreen50Soft : AyurezeTheme.surfaceMuted,
+          color: selected ? AyurezeTheme.healingGreen10 : AyurezeTheme.surfaceMuted,
           borderRadius: BorderRadius.circular(18),
           border: Border.all(
             color: selected ? AyurezeTheme.healingGreen50 : AyurezeTheme.border,
