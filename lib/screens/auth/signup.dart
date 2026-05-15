@@ -5,22 +5,23 @@ import 'package:country_picker/country_picker.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/constant/common_function.dart';
+import 'package:doctro/constant/prefConstatnt.dart';
+import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
-import 'package:doctro/model/otp_verify.dart';
 import 'package:doctro/model/register.dart';
 import 'package:doctro/retrofit/api_header.dart';
-import 'package:doctro/screens/auth/registration_success_screen.dart';
-import 'package:doctro/screens/auth/phoneverification.dart';
-import 'package:doctro/screens/auth/professional_registration_screen.dart';
-import 'package:doctro/services/supabase_service.dart';
-import 'package:doctro/theme/ayureze_theme.dart';
-import 'package:doctro/widgets/osler_button.dart';
-import 'package:doctro/widgets/osler_input.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase;
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
+import 'package:doctro/screens/auth/SignIn.dart';
+import 'package:doctro/screens/auth/phoneverification.dart';
+import 'package:doctro/screens/auth/forgotpassword.dart';
+import 'package:doctro/screens/auth/registration_success_screen.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
+import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_input.dart';
+import 'package:doctro/widgets/osler_dropdown.dart';
+import 'package:doctro/widgets/osler_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -215,18 +216,12 @@ class _CreateAccountState extends State<CreateAccount> {
                         },
                       ),
                       const SizedBox(height: 14),
-                      DropdownButtonFormField<String>(
+                      OslerDropdown(
+                        label: '',
+                        hint: getTranslated(context, AppString.register_select_gender_hint).toString(),
                         value: _genderSelect,
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: AyurezeTheme.textPrimary),
-                        decoration: InputDecoration(
-                          labelText: getTranslated(context, AppString.register_select_gender_hint).toString(),
-                          filled: true,
-                          fillColor: AyurezeTheme.oslerGray10,
-                          prefixIcon: Icon(Icons.people_alt_rounded, size: 20, color: AyurezeTheme.healingGreen100),
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
-                          enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(16), borderSide: BorderSide.none),
-                        ),
-                        items: gender.map((String value) => DropdownMenuItem(value: value, child: Text(value))).toList(),
+                        items: gender,
+                        prefixIcon: Icons.people_alt_rounded,
                         onChanged: (newValue) => setState(() => _genderSelect = newValue),
                         validator: (value) => value == null ? getTranslated(context, AppString.please_select_gender).toString() : null,
                       ),

@@ -33,6 +33,7 @@ import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_card.dart';
 import 'package:doctro/widgets/osler_status_badge.dart';
+import 'package:doctro/widgets/osler_alert.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';

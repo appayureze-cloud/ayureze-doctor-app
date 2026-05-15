@@ -26,6 +26,9 @@ import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_card.dart';
 import 'package:doctro/widgets/osler_input.dart';
+import 'package:doctro/widgets/osler_dropdown.dart';
+import 'package:doctro/widgets/osler_checkbox.dart';
+import 'package:doctro/widgets/osler_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -508,7 +511,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                   .toString(),
                                               style: TextStyle(
                                                   fontSize: width! * 0.04,
-                                                  color: hintColor),
+                                                  color: AyurezeTheme.textSecondary),
                                             ),
                                             ListView.builder(
                                               shrinkWrap: true,
@@ -516,16 +519,14 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                   NeverScrollableScrollPhysics(),
                                               itemCount: hospitalReq.length,
                                               itemBuilder: (context, index) {
-                                                return CheckboxListTile(
-                                                  value: hospitalReq[index]
-                                                      .isSelected,
-                                                  title: Text(
-                                                      hospitalReq[index].name!),
+                                                return OslerCheckbox(
+                                                  label: hospitalReq[index].name!,
+                                                  value: hospitalReq[index].isSelected,
                                                   onChanged: (val) {
                                                     setState(
                                                       () {
                                                         hospitalReq[index]
-                                                            .isSelected = val!;
+                                                            .isSelected = val;
                                                       },
                                                     );
                                                   },
@@ -553,48 +554,23 @@ class _ProfileScreen extends State<ProfileScreen> {
                                                     .toString(),
                                                 style: TextStyle(
                                                     fontSize: width! * 0.038,
-                                                    color: hintColor),
+                                                    color: AyurezeTheme.textSecondary),
                                               ),
                                               StatefulBuilder(
                                                 builder: (context, myState) {
-                                                  return DropdownButtonFormField<
-                                                      String>(
-                                                    hint: Text(getTranslated(
-                                                            context,
-                                                            AppString
-                                                                .profile_gender_hint)
-                                                        .toString()),
+                                                  return OslerDropdown(
+                                                    label: '',
+                                                    hint: getTranslated(context, AppString.profile_gender_hint).toString(),
                                                     value: _genderSelect,
-                                                    isExpanded: true,
-                                                    iconSize: 35,
-                                                    items:
-                                                        gender.map((genders) {
-                                                      return DropdownMenuItem<
-                                                          String>(
-                                                        child:
-                                                            new Text(genders),
-                                                        value: genders,
-                                                      );
-                                                    }).toList(),
-                                                    onSaved: (value) {
+                                                    items: gender,
+                                                    onChanged: (value) {
                                                       myState(() {
                                                         _genderSelect = value;
                                                       });
                                                     },
-                                                    onChanged: (newValue) {
-                                                      myState(() {
-                                                        _genderSelect =
-                                                            newValue;
-                                                      });
-                                                    },
                                                     validator: (value) {
-                                                      if (_genderSelect ==
-                                                          null) {
-                                                        return getTranslated(
-                                                                context,
-                                                                AppString
-                                                                    .please_enter_profile_valid_name)
-                                                            .toString();
+                                                      if (_genderSelect == null) {
+                                                        return getTranslated(context, AppString.please_enter_profile_valid_name).toString();
                                                       }
                                                       return null;
                                                     },

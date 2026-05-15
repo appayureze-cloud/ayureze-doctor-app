@@ -4,6 +4,10 @@ import 'package:doctro/services/astra_api_service.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
+import 'package:doctro/widgets/osler_card.dart';
+import 'package:doctro/widgets/osler_dropdown.dart';
+import 'package:doctro/widgets/osler_modal.dart';
+import 'package:doctro/widgets/osler_alert.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/widgets/astra_fill_display.dart';
@@ -147,20 +151,17 @@ class _PrescriptionScreenState extends State<PrescriptionScreen> {
                     controller: dosageController,
                     decoration: const InputDecoration(labelText: "Dosage (e.g. 1 tablet)"),
                   ),
-                  const SizedBox(height: 10),
-                  DropdownButtonFormField<String>(
+const SizedBox(height: 10),
+                  OslerDropdown(
+                    label: '',
+                    hint: "Select frequency",
                     value: frequency,
-                    items: const [
-                      DropdownMenuItem(value: 'once_daily', child: Text('Once daily')),
-                      DropdownMenuItem(value: 'twice_daily', child: Text('Twice daily')),
-                      DropdownMenuItem(value: 'thrice_daily', child: Text('Thrice daily')),
-                    ],
+                    items: const ['Once daily', 'Twice daily', 'Thrice daily'],
                     onChanged: (v) {
                       if (v != null) {
                         setLocalState(() => frequency = v);
                       }
                     },
-                    decoration: const InputDecoration(labelText: "Frequency"),
                   ),
                   const SizedBox(height: 10),
                   TextField(

@@ -6,24 +6,25 @@ import 'package:doctro/chat/providers/auth_provider.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/constant/common_function.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/login.dart';
-import 'package:doctro/model/otp_verify.dart';
-import 'package:doctro/model/setting.dart';
 import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/screens/auth/phoneverification.dart';
 import 'package:doctro/screens/auth/signup.dart';
+import 'package:doctro/screens/auth/forgotpassword.dart';
+import 'package:doctro/screens/auth/phoneverification.dart';
+import 'package:doctro/screens/home%20page/login_home.dart';
+import 'package:doctro/services/supabase_service.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_input.dart';
-import 'package:doctro/theme/ayureze_theme.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase;
-import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:doctro/widgets/osler_alert.dart';
+import 'package:doctro/widgets/osler_tooltip.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -358,7 +359,15 @@ class _SignInState extends State<SignIn> {
       } else if (authProvider.status == Status.authenticateCanceled) {
         errorText = "Google Sign In was canceled";
       }
-      Fluttertoast.showToast(msg: errorText);
+      // Show error using OslerAlert in the build context
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(errorText),
+            backgroundColor: AyurezeTheme.remoteRed100,
+          ),
+        );
+      }
     }
   }
 

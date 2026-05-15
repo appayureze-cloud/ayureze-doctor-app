@@ -10,6 +10,7 @@ import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_modal.dart';
 import 'package:doctro/widgets/osler_alert.dart';
 import 'package:doctro/widgets/osler_card.dart';
+import 'package:doctro/widgets/osler_tooltip.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -342,7 +343,10 @@ class _SettingScreenState extends State<SettingScreen> {
   }) {
     return ListTile(
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-      leading: _iconBadge(icon, color),
+      leading: OslerTooltip(
+        message: title,
+        child: _iconBadge(icon, color),
+      ),
       title: Text(
         title,
         style: TextStyle(
@@ -381,7 +385,10 @@ class _SettingScreenState extends State<SettingScreen> {
     return ListTile(
       onTap: onTap,
       contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
-      leading: _iconBadge(icon, color),
+      leading: OslerTooltip(
+        message: title,
+        child: _iconBadge(icon, color),
+      ),
       title: Text(
         title,
         style: TextStyle(
