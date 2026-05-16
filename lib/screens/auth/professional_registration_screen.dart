@@ -506,7 +506,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
         decoration: BoxDecoration(
           color: AyurezeTheme.surface,
           borderRadius: BorderRadius.circular(20),
-          border: Border.all(color: purple.withOpacity(0.1), width: 2),
+          border: Border.all(color: AyurezeTheme.healingGreen50.withOpacity(0.35), width: 2),
           boxShadow: [BoxShadow(color: AyurezeTheme.shadow.withOpacity(0.08), blurRadius: 10, spreadRadius: 0)],
         ),
         child: file != null
@@ -522,7 +522,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
             : Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.add_a_photo_outlined, size: 40, color: purple.withOpacity(0.4)),
+                  Icon(Icons.add_a_photo_outlined, size: 40, color: AyurezeTheme.healingGreen50.withOpacity(0.65)),
                   const SizedBox(height: 10),
                   Text(placeholder, style: TextStyle(color: AyurezeTheme.textPrimary, fontWeight: FontWeight.w600, fontSize: 13)),
                   const SizedBox(height: 4),
@@ -621,7 +621,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
             keyboardType: isNumber ? TextInputType.number : TextInputType.text,
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 15, color: AyurezeTheme.textPrimary),
             decoration: InputDecoration(
-              prefixIcon: Icon(icon, color: purple.withOpacity(0.7), size: 20),
+              prefixIcon: Icon(icon, color: AyurezeTheme.textSecondary, size: 20),
               filled: true,
               fillColor: AyurezeTheme.surface,
               contentPadding: const EdgeInsets.symmetric(vertical: 18, horizontal: 20),
@@ -675,9 +675,9 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: purple.withOpacity(0.05),
+        color: AyurezeTheme.healingGreen10,
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: purple.withOpacity(0.1)),
+        border: Border.all(color: AyurezeTheme.healingGreen50.withOpacity(0.35)),
       ),
       child: Column(
         children: [
@@ -696,7 +696,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
   Widget _buildSummaryRow(IconData icon, String label, String value) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: purple),
+        Icon(icon, size: 18, color: AyurezeTheme.healingGreen100),
         const SizedBox(width: 12),
         Text("$label: ", style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
         Text(value, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 14)),
@@ -716,11 +716,11 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
           child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: AyurezeTheme.surface,
               shape: BoxShape.rectangle,
               borderRadius: BorderRadius.circular(24),
               boxShadow: const [
-                BoxShadow(color: Colors.black26, blurRadius: 10.0, offset: Offset(0.0, 10.0)),
+                BoxShadow(color: AyurezeTheme.shadow.withOpacity(0.18), blurRadius: 10.0, offset: Offset(0.0, 10.0)),
               ],
             ),
             child: Column(
@@ -742,9 +742,9 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
-                const Text(
+                Text(
                   "Your professional profile has been created. Please keep your credentials safe.",
-                  style: TextStyle(color: Colors.grey),
+                  style: TextStyle(color: AyurezeTheme.textSecondary),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 24),
@@ -792,7 +792,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(label, style: const TextStyle(color: Colors.grey, fontSize: 13)),
+        Text(label, style: TextStyle(color: AyurezeTheme.textSecondary, fontSize: 13)),
         const SizedBox(width: 8),
         Expanded(
           child: Text(
@@ -800,7 +800,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
             style: TextStyle(
               fontWeight: isBold ? FontWeight.bold : FontWeight.normal,
               fontSize: 14,
-              color: isBold ? purple : AyurezeTheme.textPrimary,
+              color: isBold ? AyurezeTheme.healingGreen100 : AyurezeTheme.textPrimary,
             ),
             textAlign: TextAlign.right,
             overflow: TextOverflow.ellipsis,

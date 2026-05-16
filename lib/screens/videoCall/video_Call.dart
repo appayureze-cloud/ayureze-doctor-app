@@ -324,7 +324,7 @@ class _VideoCallState extends State<VideoCall> {
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           decoration: BoxDecoration(
-                            color: Colors.black38,
+                            color: AyurezeTheme.surfaceDark.withOpacity(0.7),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Row(
@@ -333,15 +333,15 @@ class _VideoCallState extends State<VideoCall> {
                               Container(
                                 width: 8,
                                 height: 8,
-                                decoration: const BoxDecoration(
-                                  color: Colors.red,
+                                decoration: BoxDecoration(
+                                  color: AyurezeTheme.remoteRed100,
                                   shape: BoxShape.circle,
                                 ),
                               ),
                               const SizedBox(width: 8),
-                              const Text(
+                              Text(
                                 "Live Consultation",
-                                style: TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.w500),
+                                style: TextStyle(color: AyurezeTheme.textPrimary, fontSize: 13, fontWeight: FontWeight.w500),
                               ),
                             ],
                           ),
@@ -371,9 +371,9 @@ class _VideoCallState extends State<VideoCall> {
                           height: 160,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(16),
-                            border: Border.all(color: Colors.white.withOpacity(0.3), width: 1.5),
+                            border: Border.all(color: AyurezeTheme.border.withOpacity(0.5), width: 1.5),
                             boxShadow: const [
-                              BoxShadow(color: Colors.black45, blurRadius: 10, spreadRadius: 2)
+                              BoxShadow(color: Color(0x55000000), blurRadius: 10, spreadRadius: 2)
                             ],
                           ),
                           child: ClipRRect(
@@ -519,10 +519,10 @@ class _VideoCallState extends State<VideoCall> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CircleAvatar(
+              CircleAvatar(
                 radius: 50,
-                backgroundColor: Colors.white12,
-                child: Icon(Icons.person, size: 50, color: Colors.white54),
+                backgroundColor: AyurezeTheme.surface.withOpacity(0.15),
+                child: Icon(Icons.person, size: 50, color: AyurezeTheme.textSecondary),
               ),
               const SizedBox(height: 25),
               ScalingText(
@@ -531,7 +531,7 @@ class _VideoCallState extends State<VideoCall> {
                     : widget.flag == "OutGoing"
                         ? getTranslated(context, AppString.ringing).toString()
                         : getTranslated(context, AppString.connect_call).toString(),
-                style: const TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w400, letterSpacing: 0.5),
+                style: TextStyle(fontSize: 18, color: AyurezeTheme.textPrimary, fontWeight: FontWeight.w400, letterSpacing: 0.5),
               ),
             ],
           ),
