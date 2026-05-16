@@ -313,7 +313,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                                                         },
                                                                         child: Container(
                                                                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                                                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: AyurezeTheme.border)),
+                                                                          decoration: BoxDecoration(color: AyurezeTheme.surface, borderRadius: BorderRadius.circular(10), border: Border.all(color: AyurezeTheme.border)),
                                                                           child: Text(listDynamic[index]['start_time'].toString(), style: const TextStyle(fontWeight: FontWeight.w700)),
                                                                         ),
                                                                       ),
@@ -350,7 +350,7 @@ class _ScheduleTimingsState extends State<ScheduleTimings> {
                                                                         },
                                                                         child: Container(
                                                                           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                                                          decoration: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(10), border: Border.all(color: AyurezeTheme.border)),
+                                                                          decoration: BoxDecoration(color: AyurezeTheme.surface, borderRadius: BorderRadius.circular(10), border: Border.all(color: AyurezeTheme.border)),
                                                                           child: Text(listDynamic[index]['end_time'].toString(), style: const TextStyle(fontWeight: FontWeight.w700)),
                                                                         ),
                                                                       ),
