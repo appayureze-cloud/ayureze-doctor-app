@@ -247,7 +247,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
@@ -306,7 +306,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
@@ -365,7 +365,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
@@ -422,7 +422,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                       offset: Offset(0, 3)),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
@@ -480,7 +480,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
@@ -538,7 +538,7 @@ class _PaymentGatewayScreenState extends State<PaymentGatewayScreen> {
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20),
-                                color: Colors.white),
+                                color: AyurezeTheme.surface),
                             height: MediaQuery.of(context).size.height * 0.1,
                             width: MediaQuery.of(context).size.width,
                             child: Padding(
