@@ -59,8 +59,8 @@ class AyurezeTheme {
   static const Color forestDeep = healingGreen100;
   static const Color forest = healingGreen50;
   static const Color moss = oslerGray50;
-  static const Color lime = healingGreen50;
-  static const Color limeSoft = healingGreen10;
+  static const Color lightGreen = healingGreen50;
+  static const Color lightGreenSoft = healingGreen10;
   static const Color danger = remoteRed50;
   static const Color warning = sunshineYellow50;
   static const Color purple = caringViolet50;

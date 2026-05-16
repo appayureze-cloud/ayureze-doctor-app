@@ -246,7 +246,7 @@ class _PaymentScreen extends State<PaymentScreen> {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
           decoration: BoxDecoration(
-            color: AyurezeTheme.limeSoft,
+            color: AyurezeTheme.lightGreenSoft,
             borderRadius: BorderRadius.circular(999),
           ),
           child: Text(

@@ -351,7 +351,7 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
         decoration: BoxDecoration(
           color: message.isError 
               ? AyurezeTheme.danger.withOpacity(0.1)
-              : (message.isSystem ? AyurezeTheme.limeSoft : (message.isMe ? AyurezeTheme.forestDeep : AyurezeTheme.surface)),
+              : (message.isSystem ? AyurezeTheme.lightGreenSoft : (message.isMe ? AyurezeTheme.forestDeep : AyurezeTheme.surface)),
           borderRadius: BorderRadius.only(
             topLeft: const Radius.circular(20),
             topRight: const Radius.circular(20),

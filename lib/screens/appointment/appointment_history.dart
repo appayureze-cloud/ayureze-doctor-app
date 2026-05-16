@@ -309,7 +309,7 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
                                               TabBarIndicatorSize.tab,
                                           indicatorColor: loginButton,
                                           indicator: BoxDecoration(
-                                            color: AyurezeTheme.limeSoft,
+                                             color: AyurezeTheme.lightGreenSoft,
                                             borderRadius: BorderRadius.circular(16),
                                           ),
                                           tabs: tabList,
