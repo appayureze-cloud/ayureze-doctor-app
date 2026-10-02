@@ -51,6 +51,12 @@ class Apis {
   static const String astra_session = "api/v1/auth/session";
   static const String astra_user_info = "api/v1/auth/user";
   static const String astra_logout = "api/v1/auth/logout";
+  static const String astra_refresh = "api/v1/auth/refresh";
+
+  // Video Consultations (Agora) - channel name is deterministic
+  // (doc_{doctor_id}_pat_{patient_id}), matching the patient app's own call
+  // to this same endpoint, so both sides land in the same Agora room.
+  static const String astra_video_generate_token = "api/v1/video/generate-token";
 
   // Doctor Management
   static const String astra_register_doctor = "api/v1/api/doctors/register";

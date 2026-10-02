@@ -15,6 +15,15 @@ class Preferences {
   static const String refresh_token = "refresh_token";
   static const String expiresIn = "expiresIn";
   static const String is_filled = "is_filled";
+
+  // Astra gateway (astra.ayureze.in) session cache - separate from the main
+  // app's own auth_token/refresh_token/expiresIn above, since Astra is a
+  // different host with its own JWT, exchanged from a Firebase ID token.
+  static const String astraGatewayAccessToken = "astra_gateway_access_token";
+  static const String astraGatewayRefreshToken = "astra_gateway_refresh_token";
+  static const String astraGatewayTokenExpiresAt =
+      "astra_gateway_token_expires_at";
+  static const String astraGatewayUserId = "astra_gateway_user_id";
   // static const String device_token = "device_token";
   static const String notificationPermissionDialog =
       "notificationPermissionDialog";
