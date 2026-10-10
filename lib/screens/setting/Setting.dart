@@ -1,6 +1,5 @@
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
@@ -8,12 +7,9 @@ import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_modal.dart';
-import 'package:doctro/widgets/osler_alert.dart';
-import 'package:doctro/widgets/osler_card.dart';
 import 'package:doctro/widgets/osler_tooltip.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 import '../../model/UpdateProfile.dart';
 import '../../model/doctor_profile.dart';

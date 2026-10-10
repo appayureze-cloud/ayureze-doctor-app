@@ -1,11 +1,10 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:path/path.dart' as p;
 import 'package:dio/dio.dart';
-import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/retrofit/apis.dart';
-import 'package:doctro/model/astra/astra_models.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:http_parser/http_parser.dart';
+import 'astra_gateway_auth.dart';
 
 /// Legacy Astra Service - Maintained for backward compatibility
 /// 
@@ -31,26 +30,28 @@ class AstraService {
 
     _dio.interceptors.add(InterceptorsWrapper(
       onRequest: (options, handler) async {
-        // Add Firebase Auth Token
-        User? user = FirebaseAuth.instance.currentUser;
-        if (user != null) {
-          String? token = await user.getIdToken();
-          if (token != null) {
-            options.headers['Authorization'] = 'Bearer $token';
-          }
+        // The real backend issues its own short-lived JWT in exchange for a
+        // Firebase ID token and rejects a raw Firebase token outright - see
+        // AstraGatewayAuth for the exchange/cache logic this mirrors.
+        try {
+          final astraToken = await _gatewayAuth.getAccessToken();
+          options.headers['Authorization'] = 'Bearer $astraToken';
+        } catch (_) {
+          // No Firebase session to exchange.
         }
         if (options.headers['Content-Type'] == null) {
           options.headers['Content-Type'] = 'application/json';
         }
-        options.headers['X-Role'] = 'doctor';
         return handler.next(options);
       },
       onError: (error, handler) {
-        print('AstraService Error: ${error.message}');
+        debugPrint('AstraService error: ${error.message}');
         return handler.next(error);
       },
     ));
   }
+
+  final AstraGatewayAuth _gatewayAuth = AstraGatewayAuth();
 
   // ============================================================
   // DOCTOR ENDPOINTS
@@ -471,7 +472,7 @@ class AstraService {
         'user_type': 'doctor',
       });
     } catch (e) {
-      print('Failed to store FCM token: $e');
+      debugPrint('Failed to store FCM token: $e');
     }
   }
 

@@ -51,6 +51,12 @@
 		</array>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>NSCameraUsageDescription</key>
+		<string>Ayureze needs camera access for video consultations and to photograph documents.</string>
+		<key>NSMicrophoneUsageDescription</key>
+		<string>Ayureze needs microphone access for video consultations and voice messages.</string>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Ayureze needs photo library access to attach images and documents.</string>
 		<key>CFBundleURLTypes</key>
 		<array>
 			<dict>

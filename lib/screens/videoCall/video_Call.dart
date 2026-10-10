@@ -5,7 +5,6 @@ import 'package:doctro/VideoCall/overlay_handler.dart';
 import 'package:doctro/VideoCall/overlay_service.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -13,15 +12,16 @@ import 'package:doctro/model/doctor_profile.dart';
 import 'package:doctro/model/setting.dart';
 import 'package:doctro/model/video_call_history_add_model.dart';
 import 'package:doctro/retrofit/api_header.dart';
+import 'package:doctro/retrofit/apis.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/home page/login_home.dart';
 import 'package:doctro/screens/videoCall/model/doctorAgoraTokenGenerateModel.dart';
+import 'package:doctro/services/astra_gateway_client.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pip_view/pip_view.dart';
@@ -421,11 +421,21 @@ class _VideoCallState extends State<VideoCall> {
 
   Future<void> agoraTokenGenerateDoctor() async {
     VideoCallModel response;
-    Map<String, dynamic> body = {"to_id": widget.id};
+    // "${widget.id}" - the patient's Laravel user id, which is also the
+    // same id sync_service.py uses as Astra's patient_id (confirmed live
+    // during the doctor/patient unification work: patient_id == str(users.id)).
+    Map<String, dynamic> body = {"to_id": "${widget.id}"};
     log("body  = $body");
     try {
-      response = await RestClient(await RetroApi().dioData(context))
-          .generateDoctorAgoraTokenCall(body);
+      // Uses the real Astra gateway (astra.ayureze.in), not Laravel's own
+      // generateDoctorAgoraTokenCall - the two use different, incompatible
+      // Agora channel-naming schemes, so only this endpoint's channel name
+      // (doc_{doctor_id}_pat_{patient_id}) matches what the patient app
+      // already generates on its side.
+      final astraDio = await AstraGatewayClient().dio();
+      final astraResponse =
+          await astraDio.post(Apis.astra_video_generate_token, data: body);
+      response = VideoCallModel.fromJson(astraResponse.data);
       if (response.success == true) {
         channelName = response.data!.cn;
         token = response.data!.token;
@@ -435,7 +445,7 @@ class _VideoCallState extends State<VideoCall> {
         OslerToast.error(context, "Failed to call the patient! Unable to connect!");
         Navigator.pop(context);
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       OslerToast.error(context, "Failed to call the patient! Unable to connect!");
       Navigator.pop(context);
     }

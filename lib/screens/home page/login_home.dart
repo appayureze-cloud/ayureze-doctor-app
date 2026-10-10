@@ -22,21 +22,17 @@ import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/auth/SignIn.dart';
 import 'package:doctro/screens/home%20page/patient_information.dart';
-import 'package:doctro/screens/subscription/Subscription.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:doctro/screens/astra/astra_ai_chat_screen.dart';
-import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_card.dart';
 import 'package:doctro/widgets/osler_status_badge.dart';
-import 'package:doctro/widgets/osler_alert.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -658,7 +654,7 @@ Widget _buildAppointmentCard(dynamic app) {
         upcomingAppointments.forEach((a) { if (a.patientName != null) uniquePatients.add(a.patientName!); });
         patientCount = uniquePatients.length;
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -844,55 +840,9 @@ Widget _buildAppointmentCard(dynamic app) {
         }
         if (SharedPreferenceHelper.getBoolean(Preferences.is_logged_in) ==
             true) {
-          if (response.data!.stripeSecretKey != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.stripeSecretKey, response.data!.stripeSecretKey!);
-          }
-
-          if (response.data!.stripePublicKey != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.stripPublicKey, response.data!.stripePublicKey!);
-          }
-
-          if (response.data!.flutterwaveEncryptionKey != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.flutterWave_encryption_key,
-                response.data!.flutterwaveEncryptionKey!);
-          }
-
-          if (response.data!.flutterwaveKey != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.flutterWave_key, response.data!.flutterwaveKey!);
-          }
-
-          if (response.data!.paystackPublicKey != null) {
-            SharedPreferenceHelper.setString(Preferences.payStack_public_key,
-                response.data!.paystackPublicKey!);
-          }
-
           if (response.data!.razorKey != null) {
             SharedPreferenceHelper.setString(
                 Preferences.razor_key, response.data!.razorKey!);
-          }
-
-          if (response.data!.paypalProducationKey != null) {
-            SharedPreferenceHelper.setString(Preferences.payPal_production_key,
-                response.data!.paypalProducationKey!);
-          }
-
-          if (response.data!.paypalSandboxKey != null) {
-            SharedPreferenceHelper.setString(Preferences.payPal_sandbox_key,
-                response.data!.paypalSandboxKey!);
-          }
-
-          if (response.data!.paypalClientId != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.paypal_client_key, response.data!.paypalClientId!);
-          }
-
-          if (response.data!.paypalSecretKey != null) {
-            SharedPreferenceHelper.setString(
-                Preferences.paypal_secret_key, response.data!.paypalSecretKey!);
           }
 
           if (response.data!.currencySymbol != null) {
@@ -913,7 +863,7 @@ Widget _buildAppointmentCard(dynamic app) {
           }
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

@@ -223,7 +223,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
       } else {
         OslerToast.error(context, response.msg!);
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -238,7 +238,7 @@ class _PhoneVerificationScreenState extends State<PhoneVerificationScreen> {
 
       Navigator.pushNamed(context, 'SignIn');
       OslerToast.success(context, response.msg!);
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

@@ -24,11 +24,8 @@ import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
-import 'package:doctro/widgets/osler_card.dart';
-import 'package:doctro/widgets/osler_input.dart';
 import 'package:doctro/widgets/osler_dropdown.dart';
 import 'package:doctro/widgets/osler_checkbox.dart';
-import 'package:doctro/widgets/osler_modal.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -115,7 +112,6 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   //Set List Data Treatment
   List<TreatmentData> treatmentReq = [];
-  TreatmentData? _valueTreatment;
 
   //Set List Data Category
   List<CategoriesData> categoryReq = [];
@@ -123,7 +119,6 @@ class _ProfileScreen extends State<ProfileScreen> {
 
   //Set List Data Expertise
   List<Expert> expertReq = [];
-  Expert? _valueExpertise;
 
   //update user image
   File? proImage;
@@ -265,7 +260,7 @@ class _ProfileScreen extends State<ProfileScreen> {
                                           .getString(Preferences.image),
                                       imageBuilder: (context, imageProvider) =>
                                           CircleAvatar(
-                                        backgroundColor: colorWhite,
+                                        backgroundColor: AyurezeTheme.surface,
                                         child: CircleAvatar(
                                           radius: 36,
                                           backgroundImage: imageProvider,
@@ -1973,7 +1968,7 @@ class _ProfileScreen extends State<ProfileScreen> {
       Navigator.pushNamed(context, "loginHome");
       SharedPreferenceHelper.setInt(Preferences.is_filled, 1);
       OslerToast.success(context, response.msg!);
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2070,7 +2065,11 @@ class _ProfileScreen extends State<ProfileScreen> {
              _pDob.text = rawDob;
              try {
                 _selectedDate = DateFormat('dd-MM-yyyy').parse(rawDob);
-             } catch (e) {}
+             } catch (e) {
+                // Unparseable dob format - leave _selectedDate unset; the
+                // raw text above still displays, just without date-picker
+                // pre-selection.
+             }
           }
         } catch (e) {
           _pDob.text = rawDob;
@@ -2100,7 +2099,7 @@ class _ProfileScreen extends State<ProfileScreen> {
       // Removed treatment settings as it is removed from UI
 
       setState(() {});
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2119,7 +2118,7 @@ class _ProfileScreen extends State<ProfileScreen> {
         }
         doctorProfile();
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2138,7 +2137,7 @@ class _ProfileScreen extends State<ProfileScreen> {
         msg = response.data;
         SharedPreferenceHelper.setString(Preferences.image, response.data!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2222,7 +2221,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           treatmentReq.add(response.data![i]);
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2249,7 +2248,7 @@ class _ProfileScreen extends State<ProfileScreen> {
           }
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -2265,15 +2264,8 @@ class _ProfileScreen extends State<ProfileScreen> {
         for (int i = 0; i < response.expertiseData!.length; i++) {
           expertReq.add(response.expertiseData![i]);
         }
-        if (expertReq.length != 0) {
-          for (int i = 0; i < expertReq.length; i++) {
-            if (expertiseId == expertReq[i].id) {
-              _valueExpertise = expertReq[i];
-            }
-          }
-        }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

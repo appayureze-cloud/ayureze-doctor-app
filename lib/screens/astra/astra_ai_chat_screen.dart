@@ -218,11 +218,13 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
         _recordingPath = '${directory.path}/astra_voice_${DateTime.now().millisecondsSinceEpoch}.wav';
         
         await _audioRecorder.start(const RecordConfig(), path: _recordingPath!);
+        if (!mounted) return;
         setState(() {
           _isRecording = true;
         });
       }
     } catch (e) {
+      if (!mounted) return;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Recording error: $e")),
       );
@@ -233,6 +235,7 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
     try {
       if (!_isRecording) return;
       final path = await _audioRecorder.stop();
+      if (!mounted) return;
       setState(() {
         _isRecording = false;
         _recordingPath = path;
@@ -241,6 +244,7 @@ class _AstraAIChatScreenState extends State<AstraAIChatScreen> {
         _sendMessage(voicePath: path);
       }
     } catch (e) {
+      if (!mounted) return;
       setState(() => _isRecording = false);
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(content: Text("Recording error: $e")),

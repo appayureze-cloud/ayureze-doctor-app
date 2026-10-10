@@ -15,6 +15,15 @@ class Preferences {
   static const String refresh_token = "refresh_token";
   static const String expiresIn = "expiresIn";
   static const String is_filled = "is_filled";
+
+  // Astra gateway (astra.ayureze.in) session cache - separate from the main
+  // app's own auth_token/refresh_token/expiresIn above, since Astra is a
+  // different host with its own JWT, exchanged from a Firebase ID token.
+  static const String astraGatewayAccessToken = "astra_gateway_access_token";
+  static const String astraGatewayRefreshToken = "astra_gateway_refresh_token";
+  static const String astraGatewayTokenExpiresAt =
+      "astra_gateway_token_expires_at";
+  static const String astraGatewayUserId = "astra_gateway_user_id";
   // static const String device_token = "device_token";
   static const String notificationPermissionDialog =
       "notificationPermissionDialog";
@@ -27,27 +36,11 @@ class Preferences {
   static const String is_dark_mode = "isDarkMode";
   static const String is_notification_enabled = "isNotificationEnabled";
 
-  //PaymentGateWay
+  //PaymentGateWay - Razorpay is the only processor this app uses.
   static const String COD = "COD";
-  static const String PayPal = "payPal";
   static const String RazorPay = "RazorPay";
-  static const String PayStack = "PayStack";
-  static const String Stripe = "Stripe";
-  static const String FlutterWave = "FlutterWave";
-
-  //get public and secret key
-  static const String stripPublicKey = "publicKey";
-  static const String stripeSecretKey = "secretKey";
   static const String razor_key = "razor_key";
   static const String agoraAppId = "agoraAppId";
-
-  static const String flutterWave_key = "flutterWave_key";
-  static const String flutterWave_encryption_key = "flutterWave_encryption_key";
-  static const String payStack_public_key = "payStack_public_key";
-  static const String payPal_sandbox_key = "payPal_sandbox_key";
-  static const String payPal_production_key = "payPal_production_key";
-  static const String paypal_client_key = "client_key";
-  static const String paypal_secret_key = "secret_key";
 
   static const String doctorAppId = "doctorAppId";
   static const String currency_symbol = "Currency Symbol";

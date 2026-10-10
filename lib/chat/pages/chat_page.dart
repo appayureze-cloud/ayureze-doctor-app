@@ -8,11 +8,11 @@ import 'package:doctro/chat/constants/firestore_constants.dart';
 import 'package:doctro/chat/models/message_chat.dart';
 import 'package:doctro/chat/providers/auth_provider.dart';
 import 'package:doctro/chat/providers/chat_provider.dart';
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/screens/home%20page/login_home.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:firebase_auth/firebase_auth.dart' as FA;
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
@@ -155,7 +155,7 @@ class ChatPageState extends State<ChatPage> {
             height: 150,
             width: 200,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20), color: colorWhite),
+                borderRadius: BorderRadius.circular(20), color: AyurezeTheme.surface),
             child: Padding(
               padding: const EdgeInsets.fromLTRB(20, 5, 0, 0),
               child: Column(
@@ -169,7 +169,7 @@ class ChatPageState extends State<ChatPage> {
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.06,
-                      color: colorWhite,
+                      color: AyurezeTheme.surface,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                         child: Align(
@@ -178,7 +178,7 @@ class ChatPageState extends State<ChatPage> {
                             getTranslated(
                                     context, AppString.choose_image_camera)
                                 .toString(),
-                            style: TextStyle(color: colorBlack, fontSize: 18),
+                            style: TextStyle(color: AyurezeTheme.textPrimary, fontSize: 18),
                           ),
                         ),
                       ),
@@ -191,7 +191,7 @@ class ChatPageState extends State<ChatPage> {
                     },
                     child: Container(
                       height: MediaQuery.of(context).size.height * 0.06,
-                      color: colorWhite,
+                      color: AyurezeTheme.surface,
                       child: Padding(
                         padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
                         child: Align(
@@ -200,7 +200,7 @@ class ChatPageState extends State<ChatPage> {
                             getTranslated(
                                     context, AppString.choose_image_gallery)
                                 .toString(),
-                            style: TextStyle(color: colorBlack, fontSize: 18),
+                            style: TextStyle(color: AyurezeTheme.textPrimary, fontSize: 18),
                           ),
                         ),
                       ),
@@ -557,7 +557,7 @@ class ChatPageState extends State<ChatPage> {
         elevation: 0,
         backgroundColor: ColorConstants.greyColor2,
         title: Text(
-          this.peerNickname ?? '',
+          this.peerNickname,
           style: const TextStyle(color: ColorConstants.primaryColor),
         ),
         centerTitle: true,
@@ -614,7 +614,7 @@ class ChatPageState extends State<ChatPage> {
                 color: ColorConstants.primaryColor,
               ),
             ),
-            color: colorWhite,
+            color: AyurezeTheme.surface,
           ),
           Flexible(
             child: TextField(
@@ -642,16 +642,16 @@ class ChatPageState extends State<ChatPage> {
                 color: ColorConstants.primaryColor,
               ),
             ),
-            color: colorWhite,
+            color: AyurezeTheme.surface,
           ),
         ],
       ),
       width: double.infinity,
       height: 50,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
           border: Border(
               top: BorderSide(color: ColorConstants.greyColor2, width: 0.5)),
-          color: colorWhite),
+          color: AyurezeTheme.surface),
     );
   }
 

@@ -46,11 +46,28 @@ android {
         applicationId "com.ayureze.ayureze"
 
         // Ensure minSdk is at least 21 for multidex/desugaring support
-        minSdk 24 
+        minSdk 24
         targetSdk 36
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+    }
+
+    signingConfigs {
+        debug {
+            // Fixed, checked-in keystore rather than AGP's default
+            // ~/.android/debug.keystore: on ephemeral CI runners that
+            // default is regenerated every run, so release builds got a
+            // different signing certificate each time and Google Sign-In
+            // (which validates against registered SHA-1 fingerprints) broke
+            // with ApiException: 10 (DEVELOPER_ERROR). This keystore's
+            // SHA-1 must be registered in Firebase Console -> Android app ->
+            // Add fingerprint if it's ever regenerated.
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
     }
 
     buildTypes {

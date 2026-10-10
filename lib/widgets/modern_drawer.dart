@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/constant/app_icons.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -55,8 +54,8 @@ class ModernDrawer extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(color: AyurezeTheme.healingGreen50, width: 2),
                       image: DecorationImage(
-                        image: (dFullImage != null && dFullImage!.isNotEmpty)
-                            ? NetworkImage(dFullImage!)
+                        image: (dFullImage != null && dFullImage.isNotEmpty)
+                            ? NetworkImage(dFullImage)
                             : const AssetImage("assets/images/no_image.jpg")
                                 as ImageProvider,
                         fit: BoxFit.cover,

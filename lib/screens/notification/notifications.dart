@@ -337,7 +337,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
       setState(() {
         patientNotification.addAll(response.data!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;

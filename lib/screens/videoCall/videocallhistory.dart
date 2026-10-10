@@ -9,9 +9,9 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 
-import '../subscription/SubscriptionHistory.dart';
 
 class VideoCallHistory extends StatefulWidget {
   const VideoCallHistory({Key? key}) : super(key: key);
@@ -47,18 +47,18 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
           icon: Icon(
             AppIcons.back,
             size: 20,
-            color: hintColor,
+            color: AyurezeTheme.textPrimary,
           ),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
         centerTitle: true,
-        backgroundColor: colorWhite,
+        backgroundColor: AyurezeTheme.surface,
         title: Text(
           getTranslated(context, AppString.drawer_callHistory).toString(),
           style: TextStyle(
-              fontSize: 18, color: hintColor, fontWeight: FontWeight.bold),
+              fontSize: 18, color: AyurezeTheme.textPrimary, fontWeight: FontWeight.bold),
         ),
       ),
       body: RefreshIndicator(
@@ -283,7 +283,7 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
           },
         );
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

@@ -1,5 +1,3 @@
-import 'dart:collection';
-import 'dart:convert';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +8,6 @@ import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
-import 'package:doctro/model/today_appointment.dart';
 import 'package:doctro/model/DoctorStatusChange.dart';
 import 'package:doctro/model/AllMedicines.dart';
 import 'package:doctro/model/appointment_details.dart';
@@ -62,16 +59,12 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
   // Astra Fill Data (Health intake from patient's app)
   final AstraService _astraService = AstraService();
   Map<String, dynamic>? _astraFillData;
-  bool _isLoadingAstraFill = false;
 
   //Pdf Pass Data
   String? valueDays;
   bool? alertValueFirst = false;
   bool? alertValueSecond = false;
   bool? alertValueThird = false;
-
-  //alert dialog validation
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   //set high/width using mediaQuery
   double? width;
@@ -88,7 +81,6 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
   TabController? _tabController;
 
   //Add Medicine Data dialog
-  TextEditingController _days = TextEditingController();
   String? selectedMedicineValue;
 
   //Show Signal Appointment Details
@@ -146,8 +138,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
     final targetPhone = searchPhone ?? phoneNo;
     
     if (targetId == null && targetPhone == null) return;
-    
-    setState(() => _isLoadingAstraFill = true);
+
     try {
       Map<String, dynamic> data = {};
       
@@ -157,7 +148,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
       }
       
       // 2. Fallback: If no data or loading by ID failed, try searching by phone in Astra
-      if ((data == null || data.isEmpty) && targetPhone != null && targetPhone.isNotEmpty) {
+      if (data.isEmpty && targetPhone != null && targetPhone.isNotEmpty) {
         // Clean phone number (remove +, spaces, etc. for search)
         String cleanPhone = targetPhone.replaceAll(RegExp(r'\D'), '');
         final searchResults = await _astraService.searchPatients(cleanPhone);
@@ -175,13 +166,11 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
       if (mounted) {
         setState(() {
           _astraFillData = data;
-          _isLoadingAstraFill = false;
         });
       }
     } catch (e) {
-      if (mounted) {
-        setState(() => _isLoadingAstraFill = false);
-      }
+      // Astra fill lookup is best-effort; leave _astraFillData at its
+      // current value on failure.
     }
   }
 
@@ -1127,7 +1116,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
 
         OslerToast.success(context, response.msg!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -1147,7 +1136,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
           medicineReq.add(response.data![i].name.toString());
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -1188,7 +1177,7 @@ class _patientDetailsScreenState extends State<patientDetailsScreen>
         // After loading appointment details, refresh Astra Fill data with resolved IDs
         _loadAstraFillData(patientId: userId.toString(), searchPhone: phoneNo);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

@@ -327,7 +327,7 @@ class _SubscriptionHistoryState extends State<SubscriptionHistory> {
         purchaseDetail.addAll(response.data!);
         _subscriptionHistory.addAll(response.data!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;
