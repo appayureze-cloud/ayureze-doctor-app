@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:developer';
 import 'dart:io';
 import 'package:flutter/foundation.dart' show kDebugMode;
 
@@ -38,7 +37,6 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import 'theme/ayureze_theme.dart';
 import 'theme/theme_provider.dart';
 import 'VideoCall/overlay_handler.dart';
 import 'chat/pages/home_page.dart';
@@ -56,7 +54,7 @@ import 'screens/home page/login_home.dart';
 import 'screens/home page/patient_information.dart';
 import 'screens/notification/notifications.dart';
 import 'screens/paymentScreen/payment.dart';
-import 'screens/profile/profile.dart' hide Container;
+import 'screens/profile/profile.dart';
 import 'screens/review/rate&review.dart';
 import 'screens/videoCall/video_Call.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -129,7 +127,7 @@ Future<void> main() async {
     _prefs = await SharedPreferences.getInstance(); 
   }
 
-  runApp(MyApp(prefs: _prefs!));
+  runApp(MyApp(prefs: _prefs));
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -418,57 +416,10 @@ class _MyAppState extends State<MyApp> {
     try {
       response =
           await RestClient(await RetroApi2().dioData2()).settingRequest();
-      log("Data = ${response.data?.toJson()} ");
       if (SharedPreferenceHelper.getBoolean(Preferences.is_logged_in) == true) {
-        if (response.data!.stripeSecretKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.stripeSecretKey, response.data!.stripeSecretKey!);
-        }
-
-        if (response.data!.stripePublicKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.stripPublicKey, response.data!.stripePublicKey!);
-        }
-
-        if (response.data!.flutterwaveEncryptionKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.flutterWave_encryption_key,
-              response.data!.flutterwaveEncryptionKey!);
-        }
-
-        if (response.data!.flutterwaveKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.flutterWave_key, response.data!.flutterwaveKey!);
-        }
-
-        if (response.data!.paystackPublicKey != null) {
-          SharedPreferenceHelper.setString(Preferences.payStack_public_key,
-              response.data!.paystackPublicKey!);
-        }
-
         if (response.data!.razorKey != null) {
           SharedPreferenceHelper.setString(
               Preferences.razor_key, response.data!.razorKey!);
-        }
-
-        if (response.data!.paypalProducationKey != null) {
-          SharedPreferenceHelper.setString(Preferences.payPal_production_key,
-              response.data!.paypalProducationKey!);
-        }
-
-        if (response.data!.paypalSandboxKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.payPal_sandbox_key, response.data!.paypalSandboxKey!);
-        }
-
-        if (response.data!.paypalClientId != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.paypal_client_key, response.data!.paypalClientId!);
-        }
-
-        if (response.data!.paypalSecretKey != null) {
-          SharedPreferenceHelper.setString(
-              Preferences.paypal_secret_key, response.data!.paypalSecretKey!);
         }
 
         if (response.data!.currencySymbol != null) {
@@ -510,7 +461,7 @@ class _MyAppState extends State<MyApp> {
           // });
         }
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -691,7 +642,6 @@ class _MyAppState extends State<MyApp> {
                 'Change Password': (context) => ChangePassword(),
                 'Change Language': (context) => ChangeLanguage(),
                 'ViewAllNotification': (context) => ViewAllNotification(),
-                // 'Stripe': (context) => Stripe(),
                 'VideoCallHistory': (context) => VideoCallHistory(),
                 'Settings': (context) => SettingScreen(),
                 'ChatHome': (context) => HomePage(),

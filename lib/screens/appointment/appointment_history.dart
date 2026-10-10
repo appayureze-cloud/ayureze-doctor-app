@@ -1,7 +1,5 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/common_function.dart';
@@ -18,8 +16,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:doctro/screens/auth/SignIn.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
-import 'package:doctro/widgets/osler_card.dart';
-import 'package:doctro/widgets/osler_status_badge.dart';
 
 
 class AppointmentHistoryScreen extends StatefulWidget {
@@ -63,44 +59,6 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
   //Set Tabbar
   List<Tab> tabList = [];
   TabController? _tabController;
-
-  List<String> _drawer = [];
-  List<String> _drawerMenu = [];
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    //Set Drawer Menu Item List
-
-    _drawer = [
-      getTranslated(context, AppString.drawer_home).toString(),
-      getTranslated(context, AppString.drawer_payments).toString(),
-      getTranslated(context, AppString.drawer_canceled_appointment).toString(),
-      getTranslated(context, AppString.drawer_appointments).toString(),
-      getTranslated(context, AppString.drawer_review).toString(),
-      getTranslated(context, AppString.drawer_notification).toString(),
-      getTranslated(context, AppString.drawer_callHistory).toString(),
-      getTranslated(context, AppString.drawer_schedule_timing).toString(),
-      getTranslated(context, AppString.drawer_setting).toString(),
-      getTranslated(context, AppString.chats).toString(),
-      getTranslated(context, AppString.drawer_logout).toString(),
-    ];
-
-    _drawerMenu = [
-      getTranslated(context, AppString.drawer_home).toString(),
-      getTranslated(context, AppString.drawer_payments).toString(),
-      getTranslated(context, AppString.drawer_canceled_appointment).toString(),
-      getTranslated(context, AppString.drawer_appointments).toString(),
-      getTranslated(context, AppString.drawer_review).toString(),
-      getTranslated(context, AppString.drawer_notification).toString(),
-      getTranslated(context, AppString.drawer_callHistory).toString(),
-      getTranslated(context, AppString.drawer_schedule_timing).toString(),
-      getTranslated(context, AppString.drawer_setting).toString(),
-      getTranslated(context, AppString.chats).toString(),
-      getTranslated(context, AppString.drawer_logout).toString(),
-    ];
-  }
 
   @override
   void initState() {
@@ -1131,7 +1089,7 @@ class _AppointmentHistoryScreen extends State<AppointmentHistoryScreen>
         _userDetails.addAll(response.data!.upcomingAppointment!);
         _pastData.addAll(response.data!.pastAppointment!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

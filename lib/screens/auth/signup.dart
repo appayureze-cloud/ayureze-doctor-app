@@ -2,12 +2,9 @@ import 'dart:core';
 import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/common_function.dart';
-import 'package:doctro/constant/prefConstatnt.dart';
-import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/register.dart';
 import 'package:doctro/model/otp_verify.dart';
@@ -15,9 +12,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/screens/auth/SignIn.dart';
 import 'package:doctro/screens/auth/phoneverification.dart';
-import 'package:doctro/screens/auth/forgotpassword.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
 import 'package:doctro/screens/auth/registration_success_screen.dart';
 import 'package:doctro/services/supabase_service.dart';
@@ -25,7 +20,6 @@ import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_input.dart';
 import 'package:doctro/widgets/osler_dropdown.dart';
-import 'package:doctro/widgets/osler_alert.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -371,7 +365,7 @@ class _CreateAccountState extends State<CreateAccount> {
           ),
         ),
       );
-    } catch (error, stacktrace) {
+    } catch (error) {
       CommonFunction.hideDialog(context);
       return BaseModel()..setException(ServerError.withError(error: error));
     }

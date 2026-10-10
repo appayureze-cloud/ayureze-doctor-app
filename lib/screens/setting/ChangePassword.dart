@@ -1,6 +1,5 @@
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/ChangePassword.dart';
 import 'package:doctro/retrofit/api_header.dart';
@@ -275,7 +274,7 @@ class _ChangePasswordState extends State<ChangePassword> {
       } else {
         OslerToast.error(context, response.data!);
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;

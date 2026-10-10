@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show debugPrint;
 import 'package:minio/minio.dart';
 import 'package:path/path.dart' as path;
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -71,7 +72,7 @@ class WasabiService {
       // Return the Wasabi Public URL
       return "https://$_bucket.$_endpoint/$folderPath";
     } catch (e) {
-      print("Wasabi Upload Error: $e");
+      debugPrint("Wasabi Upload Error: $e");
       return null;
     }
   }
@@ -98,7 +99,7 @@ class WasabiService {
 
       return "https://$_bucket.$_endpoint/$folderPath";
     } catch (e) {
-      print("Wasabi Byte Upload Error: $e");
+      debugPrint("Wasabi Byte Upload Error: $e");
       return null;
     }
   }

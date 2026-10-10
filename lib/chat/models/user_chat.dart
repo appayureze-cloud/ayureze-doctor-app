@@ -37,30 +37,50 @@ class UserChat {
     String token = "";
     String userId = "";
 
+    // doc.get() throws when the field is absent from the document (older
+    // chat documents may not have every field) - each catch is intentional,
+    // leaving the field at its "" default rather than failing the whole
+    // UserChat parse over one missing optional field.
     try {
       photoUrl = doc.get(FirestoreConstants.photoUrl);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       nickname = doc.get(FirestoreConstants.nickname);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       content = doc.get(FirestoreConstants.content);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       shopId = doc.get(FirestoreConstants.shopId);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       userType = doc.get(FirestoreConstants.userType);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       doctorId = doc.get(FirestoreConstants.doctorId);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       token = doc.get(FirestoreConstants.token);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     try {
       userId = doc.get(FirestoreConstants.userId);
-    } catch (e) {}
+    } catch (e) {
+      // field absent on this document - keep default ""
+    }
     return UserChat(userId: userId, id: doc.id, photoUrl: photoUrl, nickname: nickname, content: content, shopId: shopId, userType: userType, doctorId: doctorId, token: token);
   }
 }

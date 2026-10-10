@@ -7,11 +7,10 @@ import 'package:doctro/chat/providers/auth_provider.dart';
 import 'package:doctro/chat/providers/home_provider.dart';
 import 'package:doctro/chat/utils/debouncer.dart';
 import 'package:doctro/chat/utils/utilities.dart';
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/screens/home%20page/login_home.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
@@ -103,16 +102,16 @@ class HomePageState extends State<HomePage> {
                       builder: (context) => LoginHomeScreen(chat: "")));
             },
             child: Icon(Icons.arrow_back)),
-        backgroundColor: colorWhite,
+        backgroundColor: AyurezeTheme.surface,
         title: Text(
           getTranslated(context, AppString.chats).toString(),
           style: TextStyle(color: ColorConstants.primaryColor),
         ),
         centerTitle: true,
-        foregroundColor: colorBlack,
+        foregroundColor: AyurezeTheme.textPrimary,
       ),
       body: Container(
-        color: back,
+        color: AyurezeTheme.canvas,
         child: PopScope(
           canPop: false,
           onPopInvokedWithResult: onBackPress,

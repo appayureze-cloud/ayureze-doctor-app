@@ -1,5 +1,4 @@
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/ForgotPassword.dart';
@@ -124,7 +123,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
           OslerToast.error(context, response.msg!);
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

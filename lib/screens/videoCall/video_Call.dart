@@ -5,7 +5,6 @@ import 'package:doctro/VideoCall/overlay_handler.dart';
 import 'package:doctro/VideoCall/overlay_service.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -23,7 +22,6 @@ import 'package:doctro/services/astra_gateway_client.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:intl/intl.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:pip_view/pip_view.dart';
@@ -447,7 +445,7 @@ class _VideoCallState extends State<VideoCall> {
         OslerToast.error(context, "Failed to call the patient! Unable to connect!");
         Navigator.pop(context);
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       OslerToast.error(context, "Failed to call the patient! Unable to connect!");
       Navigator.pop(context);
     }

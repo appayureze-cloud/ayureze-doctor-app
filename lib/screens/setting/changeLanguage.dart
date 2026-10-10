@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/constant/common_function.dart';
 import 'package:doctro/constant/date_util.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
@@ -19,7 +17,6 @@ import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 
 class ChangeLanguage extends StatefulWidget {
   const ChangeLanguage({Key? key}) : super(key: key);
@@ -158,7 +155,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
                           onChanged: (dynamic selected) async {
                             Future.delayed(const Duration(seconds: 1), () async {
                               value = selected;
-                              Locale local = await setLocale(
+                              await setLocale(
                                 Language.languageList()[index].languageCode,
                               );
                               setState(() {
@@ -310,7 +307,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
         hospitalId = response.data!.hospitalId;
         videoAppointmentFees = response.data!.videoAppointmentFees;
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;
@@ -343,7 +340,7 @@ class _ChangeLanguageState extends State<ChangeLanguage> {
       response = await RestClient(await RetroApi().dioData(context))
           .updateProfile(body);
       OslerToast.success(context, response.msg!);
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;

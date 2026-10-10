@@ -116,8 +116,7 @@ reportView(ctx, List<Map<String, dynamic>> pdfData, int? id, int? userId,
         "medicines": convertMedicine
       });
 
-      var res = await request.send();
-      // print(res);
+      await request.send();
     });
     material.Navigator.of(ctx).push(
       material.MaterialPageRoute(
@@ -164,8 +163,7 @@ reportView(ctx, List<Map<String, dynamic>> pdfData, int? id, int? userId,
         "medicines": convertMedicine
       });
 
-      var res = await request.send();
-      // print(res);
+      await request.send();
     });
     material.Navigator.of(ctx).push(
       material.MaterialPageRoute(

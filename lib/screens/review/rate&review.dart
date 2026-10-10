@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
-import 'package:doctro/constant/common_function.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/localization/localization_constant.dart';
@@ -13,7 +10,7 @@ import 'package:doctro/retrofit/api_header.dart';
 import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
-import 'package:doctro/screens/auth/SignIn.dart';
+import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:doctro/widgets/modern_drawer.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -131,7 +128,7 @@ class _RateAndReviewRoutesScreenState extends State<RateAndReviewRoutesScreen> {
                   margin: EdgeInsets.only(top: height * 0.01),
                   padding: EdgeInsets.all(10),
                   child: Card(
-                    color: colorWhite,
+                    color: AyurezeTheme.surface,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
@@ -482,7 +479,7 @@ class _RateAndReviewRoutesScreenState extends State<RateAndReviewRoutesScreen> {
         reviewData.addAll(response.data!);
         _userReview.addAll(response.data!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       // print("Exception occur: $error stackTrace: $stacktrace");
       return BaseModel()..setException(ServerError.withError(error: error));
     }

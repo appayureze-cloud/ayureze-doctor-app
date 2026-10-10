@@ -130,9 +130,6 @@ class _AstraFillDisplayWidgetState extends State<AstraFillDisplayWidget> {
     final hasThyroid = _astraFillData?['history_of_thyroid'] == true;
     final hasBp = _astraFillData?['history_of_blood_pressure'] == true;
     
-    // Legacy support handles
-    final rawSymptoms = _astraFillData?['extracted_symptoms'] ?? _astraFillData?['symptoms'];
-    final List<String> symptoms = rawSymptoms is List ? List<String>.from(rawSymptoms) : (rawSymptoms != null ? [rawSymptoms.toString()] : []);
     final currentMedications = _astraFillData?['current_medications'] ?? [];
     final timestamp = _astraFillData?['created_at'] ?? _astraFillData?['timestamp'] ?? '';
     final severityScore = _astraFillData?['severity_score'];
@@ -385,92 +382,6 @@ class _AstraFillDisplayWidgetState extends State<AstraFillDisplayWidget> {
     );
   }
 
-  Widget _buildVitalsSection(Map vitals) {
-    return Padding(
-      padding: EdgeInsets.only(bottom: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Icon(Icons.monitor_heart_outlined, color: Colors.red, size: 18),
-              SizedBox(width: 8),
-              Text("Vitals", style: TextStyle(fontSize: 12, color: hintColor)),
-            ],
-          ),
-          SizedBox(height: 8),
-          Container(
-            padding: EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: Colors.blue.shade50,
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                if (vitals['blood_pressure'] != null)
-                  _buildVitalItem("BP", vitals['blood_pressure'].toString(), Icons.favorite),
-                if (vitals['heart_rate'] != null)
-                  _buildVitalItem("HR", "${vitals['heart_rate']} bpm", Icons.monitor_heart),
-                if (vitals['temperature'] != null)
-                  _buildVitalItem("Temp", "${vitals['temperature']}°F", Icons.thermostat),
-                if (vitals['oxygen_saturation'] != null || vitals['spo2'] != null)
-                  _buildVitalItem("SpO2", "${vitals['oxygen_saturation'] ?? vitals['spo2']}%", Icons.air),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildVitalItem(String label, String value, IconData icon) {
-    return Column(
-      children: [
-        Icon(icon, color: Colors.blue.shade700, size: 20),
-        SizedBox(height: 4),
-        Text(label, style: TextStyle(fontSize: 10, color: hintColor)),
-        Text(value, style: TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: cardText)),
-      ],
-    );
-  }
-
-  Widget _buildMedicalHistorySection(Map history) {
-    List<String> conditions = [];
-    
-    if (history['conditions'] != null) {
-      if (history['conditions'] is List) {
-        conditions.addAll(List<String>.from(history['conditions']));
-      } else {
-        conditions.add(history['conditions'].toString());
-      }
-    }
-    if (history['chronic_conditions'] != null) {
-      if (history['chronic_conditions'] is List) {
-        conditions.addAll(List<String>.from(history['chronic_conditions']));
-      } else {
-        conditions.add(history['chronic_conditions'].toString());
-      }
-    }
-    if (history['past_surgeries'] != null) {
-      if (history['past_surgeries'] is List) {
-        conditions.addAll((history['past_surgeries'] as List).map((s) => "Surgery: $s"));
-      } else {
-        conditions.add("Surgery: ${history['past_surgeries'].toString()}");
-      }
-    }
-
-    if (conditions.isEmpty) return SizedBox.shrink();
-
-    return _buildChipsSection(
-      icon: Icons.history,
-      title: "Medical History",
-      items: conditions,
-      chipColor: AyurezeTheme.surfaceMuted,
-      textColor: AyurezeTheme.forestDeep,
-    );
-  }
-
   Color _getSeverityColor(dynamic score) {
     int severity = score is int ? score : int.tryParse(score.toString()) ?? 0;
     if (severity <= 3) return Colors.green;
@@ -530,10 +441,10 @@ class AstraFillCompactWidget extends StatelessWidget {
                   ),
               ],
             ),
-            if (symptoms != null) ...[
+            if (symptoms.isNotEmpty) ...[
               SizedBox(height: 8),
               Text(
-                "Symptoms: ${symptoms is List ? symptoms.join(', ') : symptoms.toString()}",
+                "Symptoms: ${symptoms.join(', ')}",
                 style: TextStyle(fontSize: 13, color: cardText),
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,

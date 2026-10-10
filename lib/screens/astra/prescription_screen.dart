@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/services/astra_api_service.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
-import 'package:doctro/widgets/osler_card.dart';
 import 'package:doctro/widgets/osler_dropdown.dart';
-import 'package:doctro/widgets/osler_modal.dart';
-import 'package:doctro/widgets/osler_alert.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/widgets/astra_fill_display.dart';

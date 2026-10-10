@@ -1,7 +1,6 @@
 import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/date_util.dart';
-import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/model/Notification.dart';
 import 'package:doctro/retrofit/api_header.dart';
@@ -240,7 +239,7 @@ class _ViewAllAppointmentState extends State<ViewAllNotification> {
       setState(() {
         patientNotification.addAll(response.data!);
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;

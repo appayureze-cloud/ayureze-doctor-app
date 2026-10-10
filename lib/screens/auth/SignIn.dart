@@ -3,9 +3,7 @@ import 'dart:io' show Platform;
 
 import 'package:dio/dio.dart';
 import 'package:doctro/chat/providers/auth_provider.dart' as chat;
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/common_function.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/constant/preferences.dart';
@@ -17,16 +15,11 @@ import 'package:doctro/retrofit/base_model.dart';
 import 'package:doctro/retrofit/network_api.dart';
 import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/screens/auth/signup.dart';
-import 'package:doctro/screens/auth/forgotpassword.dart';
 import 'package:doctro/screens/auth/phoneverification.dart';
-import 'package:doctro/screens/home%20page/login_home.dart';
 import 'package:doctro/model/setting.dart';
-import 'package:doctro/services/supabase_service.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_input.dart';
-import 'package:doctro/widgets/osler_alert.dart';
-import 'package:doctro/widgets/osler_tooltip.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -480,10 +473,10 @@ class _SignInState extends State<SignIn> {
           OslerToast.error(context, response.msg!);
         }
       }
-    } catch (error, stacktrace) {
+    } catch (error) {
       CommonFunction.hideDialog(context);
       if (error is DioException) {
-        print("Login Error Response: ${error.response?.data}");
+        debugPrint("Login failed: ${error.response?.statusCode}");
       }
       return BaseModel()..setException(ServerError.withError(error: error));
     }
@@ -498,73 +491,10 @@ class _SignInState extends State<SignIn> {
           await RestClient(await RetroApi2().dioData2()).settingRequest();
 
       if (SharedPreferenceHelper.getBoolean(Preferences.is_logged_in) == true) {
-        if (response.data!.stripeSecretKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.stripeSecretKey,
-            response.data!.stripeSecretKey!,
-          );
-        }
-
-        if (response.data!.stripePublicKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.stripPublicKey,
-            response.data!.stripePublicKey!,
-          );
-        }
-
-        if (response.data!.flutterwaveEncryptionKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.flutterWave_encryption_key,
-            response.data!.flutterwaveEncryptionKey!,
-          );
-        }
-
-        if (response.data!.flutterwaveKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.flutterWave_key,
-            response.data!.flutterwaveKey!,
-          );
-        }
-
-        if (response.data!.paystackPublicKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.payStack_public_key,
-            response.data!.paystackPublicKey!,
-          );
-        }
-
         if (response.data!.razorKey != null) {
           SharedPreferenceHelper.setString(
             Preferences.razor_key,
             response.data!.razorKey!,
-          );
-        }
-
-        if (response.data!.paypalProducationKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.payPal_production_key,
-            response.data!.paypalProducationKey!,
-          );
-        }
-
-        if (response.data!.paypalSandboxKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.payPal_sandbox_key,
-            response.data!.paypalSandboxKey!,
-          );
-        }
-
-        if (response.data!.paypalClientId != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.paypal_client_key,
-            response.data!.paypalClientId!,
-          );
-        }
-
-        if (response.data!.paypalSecretKey != null) {
-          SharedPreferenceHelper.setString(
-            Preferences.paypal_secret_key,
-            response.data!.paypalSecretKey!,
           );
         }
 

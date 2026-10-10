@@ -55,7 +55,7 @@ class OslerInput extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint,
             filled: true,
-            fillColor: AyurezeTheme.oslerGray10,
+            fillColor: AyurezeTheme.surfaceMuted,
             contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,

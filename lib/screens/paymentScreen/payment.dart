@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:doctro/constant/app_icons.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/constant/common_function.dart';
@@ -458,7 +457,7 @@ class _PaymentScreen extends State<PaymentScreen> {
           sum += double.parse(paymentsRequest[i].amount!);
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;
@@ -480,7 +479,7 @@ class _PaymentScreen extends State<PaymentScreen> {
           sum += double.parse(paymentsRequest[i].amount!);
         }
       });
-    } catch (error, stacktrace) {
+    } catch (error) {
       return BaseModel()..setException(ServerError.withError(error: error));
     }
     return BaseModel()..data = response;
