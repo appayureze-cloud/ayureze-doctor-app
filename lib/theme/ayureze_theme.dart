@@ -30,6 +30,7 @@ class AyurezeTheme {
   // Private state for dynamic theme support
   static bool _isDark = false;
   static void updateThemeMode(bool value) => _isDark = value;
+  static bool get isDark => _isDark;
 
   // Semantic Colors - Light Definitions
   static const Color lightCanvas = Color(0xFFE9EEE4);

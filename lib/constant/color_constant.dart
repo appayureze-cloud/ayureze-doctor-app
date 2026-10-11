@@ -1,47 +1,60 @@
 import 'package:flutter/cupertino.dart';
 
-// Ayureze-inspired palette
+import 'package:doctro/theme/ayureze_theme.dart';
+
+// Ayureze-inspired palette.
+//
+// This file used to duplicate a light-only copy of several AyurezeTheme
+// tokens under different names - cardColor/scaffoldBg/cardBorder/
+// imageBorder/colorButton/card/deepPurple/back/black/grey/
+// ForgotPasswordScreen all had zero real usages anywhere in the app and
+// have been removed outright. The remaining identifiers that represent
+// body text, dividers or surfaces (not a self-contained foreground-on-
+// gradient or foreground-on-tint pair, which stays correct in both
+// themes per AyurezeTheme's own documented convention) are now getters
+// forwarding to AyurezeTheme's dark-aware tokens, so every existing call
+// site - still written as a bare identifier, e.g. `color: text` - gets
+// dark-mode support for free with no per-file changes.
+
+// Foreground-on-gradient/foreground-on-tint - correct in both themes as-is.
 const Color colorWhite = Color(0xFFFFFFFF);
 const Color colorBlack = Color(0xFF203126);
-const Color black = Color(0x12000000);
 
-// Backgrounds
-const Color cardColor = Color(0xFFF7F8F2);
-const Color scaffoldBg = Color(0xFFE9EEE4);
-const Color cardBorder = Color(0xFFD4DDCC);
+// Body text - was a fixed near-black, now follows the active theme.
+Color get hintColor => AyurezeTheme.textPrimary;
+Color get cardText => AyurezeTheme.textPrimary;
+Color get text => AyurezeTheme.textPrimary;
 
-// Text
-const Color subheading = Color(0xFF607063);
-const Color hintColor = Color(0xFF203126);
-const Color passwordVisibility = Color(0xFF7D8C7E);
-const Color ForgotPasswordScreen = Color(0xFF24382C);
+// Secondary/muted text.
+Color get subheading => AyurezeTheme.textSecondary;
+Color get passwordVisibility => AyurezeTheme.textSecondary;
+Color get darkGrey => AyurezeTheme.textSecondary;
 
-// Brand colors
-const Color loginButton = Color(0xFF24382C);
-const Color colorButton = Color(0xFF24382C);
-const Color imageBorder = Color(0xFFB5F36B);
-const Color tabBar = Color(0xFFEFF3EA);
-const Color divider = Color(0xFFD4DDCC);
+// Divider lines and a muted surface fill - both were fixed light colors.
+Color get divider => AyurezeTheme.border;
+Color get tabBar => AyurezeTheme.surfaceMuted;
 
-// Status Colors
+// Brand CTA color (icon/label foreground, e.g. primaryColor/foregroundColor
+// on a button or theme). Keeps its exact light-mode value - only the
+// dark-mode counterpart is new, since nothing here was dark-aware before.
+Color get loginButton =>
+    AyurezeTheme.isDark ? const Color(0xFFFFFFFF) : const Color(0xFF24382C);
+
+// Status/semantic indicator colors - self-contained accents (small
+// badges, switch tracks), readable in both themes as-is; left as plain
+// constants rather than theme-following surfaces.
 const Color status = Color(0xFF5F8D46);
 const Color statusCancel = Color(0xFFD95C4E);
 const Color red = Color(0xFFD95C4E);
 const Color orange = Color(0xFFF0A534);
 const Color green = Color(0xFF5F8D46);
 
-// Astra AI Branding (Preserved)
+// Astra AI branding accent (intentionally not AyurezeTheme.purple, a
+// different violet used elsewhere - this sage-green tone is this app's
+// own "Astra AI" section color, see astra_fill_display.dart).
 const Color purple = Color(0xFF70836F);
-const Color deepPurple = Color(0xFF536256);
 
-// Legacy/Other
-const Color darkGrey = Color(0xFF525252);
-const Color grey = Color(0xFF737373);
 const Color tealAccent = Color(0xFFB5F36B);
-const Color back = Color(0xFFE9EEE4);
 
-const Color cardText = Color(0xFF203126);
-const Color card = Color(0xFF24382C);
-const Color text = Color(0xFF203126);
 const Color blackOpacity = Color(0x54000000);
 const Color transparent = Color(0x00000000);

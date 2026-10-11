@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 
 import 'package:doctro/constant/app_icons.dart';
-import 'package:doctro/constant/color_constant.dart';
 import 'package:doctro/widgets/osler_button.dart';
 import 'package:doctro/widgets/osler_toast.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
@@ -614,7 +613,7 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
       builder: (context, child) {
         return Theme(
           data: ThemeData.light().copyWith(
-            primaryColor: purple,
+            primaryColor: AyurezeTheme.healingGreen100,
             colorScheme: ColorScheme.light(
               primary: AyurezeTheme.healingGreen100,
               onPrimary: Colors.white,
@@ -623,7 +622,8 @@ class _ProfessionalRegistrationScreenState extends State<ProfessionalRegistratio
             ),
             dialogBackgroundColor: AyurezeTheme.surface,
             textButtonTheme: TextButtonThemeData(
-              style: TextButton.styleFrom(foregroundColor: purple),
+              style: TextButton.styleFrom(
+                  foregroundColor: AyurezeTheme.healingGreen100),
             ),
           ),
           child: child!,
