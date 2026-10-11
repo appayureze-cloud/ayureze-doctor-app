@@ -12,7 +12,6 @@ import 'package:doctro/retrofit/server_error.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 import 'package:flutter/material.dart';
 
-
 class VideoCallHistory extends StatefulWidget {
   const VideoCallHistory({Key? key}) : super(key: key);
 
@@ -58,7 +57,9 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
         title: Text(
           getTranslated(context, AppString.drawer_callHistory).toString(),
           style: TextStyle(
-              fontSize: 18, color: AyurezeTheme.textPrimary, fontWeight: FontWeight.bold),
+              fontSize: 18,
+              color: AyurezeTheme.textPrimary,
+              fontWeight: FontWeight.bold),
         ),
       ),
       body: RefreshIndicator(
@@ -140,7 +141,7 @@ class _VideoCallHistoryState extends State<VideoCallHistory> {
                                                   Transform.scale(
                                                 scale: 0.4,
                                                 child:
-                                                    const CircularProgressIndicator(
+                                                    CircularProgressIndicator(
                                                   color: loginButton,
                                                 ),
                                               ),
