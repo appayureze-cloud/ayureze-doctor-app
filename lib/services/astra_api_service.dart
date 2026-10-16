@@ -325,6 +325,31 @@ class AstraApiService {
     }
   }
 
+  /// Updates a case's progress and adherence (`PUT /api/companion/case/
+  /// progress`) - the backend's own `UpdateProgressRequest` only has
+  /// `progress_percentage`, `adherence_score` and free-text `notes`; there
+  /// are no separate "missed dose" or "adverse effect" fields, so those
+  /// go in `notes`, matching what the real backend actually supports.
+  /// Reaching 100% auto-resolves the linked journey server-side.
+  Future<bool> updateCaseProgress({
+    required String caseId,
+    required double progressPercentage,
+    required double adherenceScore,
+    String? notes,
+  }) async {
+    try {
+      await _dio.put('/api/companion/case/progress', data: {
+        'case_id': caseId,
+        'progress_percentage': progressPercentage,
+        'adherence_score': adherenceScore,
+        if (notes != null && notes.isNotEmpty) 'notes': notes,
+      });
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   // ============================================================
   // PRESCRIPTION ENDPOINTS
   // ============================================================

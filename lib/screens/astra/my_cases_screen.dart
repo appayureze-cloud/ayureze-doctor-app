@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:doctro/constant/preferences.dart';
 import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/services/astra_api_service.dart';
+import 'package:doctro/screens/astra/case_progress_screen.dart';
 
 /// Lists the clinical cases assigned to this doctor
 /// (`GET /api/companion/case/by-doctor/{doctor_id}`) - the real,
@@ -93,6 +94,16 @@ class _MyCasesScreenState extends State<MyCasesScreen> {
                               subtitle: Text('Case ID: $caseId\nStatus: $status'),
                               isThreeLine: true,
                               trailing: const Icon(Icons.chevron_right),
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) =>
+                                        CaseProgressScreen(caseData: c),
+                                  ),
+                                );
+                                if (mounted) _loadCases();
+                              },
                             ),
                           );
                         },
