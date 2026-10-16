@@ -87,11 +87,15 @@ class _MyCasesScreenState extends State<MyCasesScreen> {
                           final status = c['status']?.toString() ?? 'open';
                           final caseId =
                               c['case_id']?.toString() ?? c['id']?.toString() ?? '';
+                          final appointmentId = (c['metadata']
+                              as Map<String, dynamic>?)?['appointment_id']
+                              ?.toString();
                           return Card(
                             margin: const EdgeInsets.only(bottom: 10),
                             child: ListTile(
                               title: Text(diagnosis),
-                              subtitle: Text('Case ID: $caseId\nStatus: $status'),
+                              subtitle: Text('Case ID: $caseId\nStatus: $status'
+                                  '${appointmentId != null ? '\nAppointment: $appointmentId' : ''}'),
                               isThreeLine: true,
                               trailing: const Icon(Icons.chevron_right),
                               onTap: () async {
