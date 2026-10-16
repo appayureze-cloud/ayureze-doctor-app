@@ -227,8 +227,32 @@ const SizedBox(height: 10),
         "signature_image": base64Encode(_signatureBytes!),
       };
 
-      await _astraApiService.executePrescriptionWorkflow(payload);
-      
+      final workflowResult = await _astraApiService.executePrescriptionWorkflow(payload);
+
+      // Best-effort, non-blocking: the prescription has already been sent
+      // (above) regardless of whether this succeeds. Without this, the
+      // consultation's outcome never reaches the shared case/journey model
+      // at all - case/create requires a journey_id, which this app has no
+      // other way to learn, so it's looked up from the patient's active
+      // journey right here.
+      try {
+        final journey = await _astraApiService.getActivePatientJourney(widget.patientId);
+        final journeyId = journey?['journey_id'] ?? journey?['id'];
+        if (journeyId != null) {
+          final prescriptionId =
+              workflowResult['prescription_id'] ?? workflowResult['id'];
+          await _astraApiService.createCase(
+            journeyId: journeyId as String,
+            userId: widget.patientId,
+            doctorId: doctorId,
+            diagnosis: _diagnosisController.text,
+            prescriptionId: prescriptionId as String?,
+          );
+        }
+      } catch (e) {
+        debugPrint('Failed to link consultation to case/journey: $e');
+      }
+
       if (!mounted) return;
 
       String msg = "Prescription Sent via WhatsApp!";

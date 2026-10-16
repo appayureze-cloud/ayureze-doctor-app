@@ -5,6 +5,7 @@ import 'package:doctro/constant/prefConstatnt.dart';
 import 'package:doctro/localization/localization_constant.dart';
 import 'package:doctro/constant/app_string.dart';
 import 'package:doctro/screens/auth/professional_registration_screen.dart';
+import 'package:doctro/screens/astra/my_cases_screen.dart';
 import 'package:doctro/theme/ayureze_theme.dart';
 
 class ModernDrawer extends StatelessWidget {
@@ -104,6 +105,10 @@ class ModernDrawer extends StatelessWidget {
                   _drawerItem(context, AppIcons.verified, "Profile & Registration", () {
                     Navigator.pop(context);
                     Navigator.push(context, MaterialPageRoute(builder: (context) => ProfessionalRegistrationScreen()));
+                  }),
+                  _drawerItem(context, Icons.folder_shared_outlined, "My Cases", () {
+                    Navigator.pop(context);
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const MyCasesScreen()));
                   }),
                   _drawerItem(context, AppIcons.clock, getTranslated(context, AppString.drawer_schedule_timing).toString(), () => Navigator.popAndPushNamed(context, 'Schedule Timings')),
                   _drawerItem(context, AppIcons.settings, getTranslated(context, AppString.drawer_setting).toString(), () => Navigator.popAndPushNamed(context, 'Settings')),

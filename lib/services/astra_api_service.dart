@@ -236,13 +236,92 @@ class AstraApiService {
     }
   }
 
-  /// Create consultation record
+  /// Create consultation record.
+  ///
+  /// `Apis.astra_create_consultation` ("api/v1/patients/consultation") does
+  /// not exist on the real backend (confirmed against the live OpenAPI spec
+  /// at astra.ayureze.in/openapi.json). Not called from anywhere in this
+  /// app, so this has never actually run; left here as a documented gap
+  /// rather than guessing a replacement target. See `createCase` below for
+  /// the real route that links a consultation's outcome into the shared
+  /// case/journey model.
   Future<Map<String, dynamic>> createConsultation(Map<String, dynamic> data) async {
     try {
       final response = await _dio.post(Apis.astra_create_consultation, data: data);
       return response.data;
     } catch (e) {
       throw _handleError(e);
+    }
+  }
+
+  // ============================================================
+  // COMPANION CASE/JOURNEY ENDPOINTS
+  //
+  // The shared clinical record both apps are meant to read/write through -
+  // see docs on the patient-app side (astra_doctor_patient_flow.md) for the
+  // full contract. All three routes below were confirmed live by direct
+  // curl against astra.ayureze.in and by reading the backend source
+  // (app/companion_api.py) directly.
+  // ============================================================
+
+  /// The patient's active companion journey, if any. A journey is the
+  /// patient-initiated "I have a concern" record (started from the Astra
+  /// chat tab or at booking time) - this is how a doctor finds the
+  /// journey_id needed to call [createCase] below, since nothing currently
+  /// passes it to this app directly.
+  Future<Map<String, dynamic>?> getActivePatientJourney(String patientId) async {
+    try {
+      final response = await _dio.get('/api/companion/journey/user/$patientId');
+      final journeys = response.data?['journeys'] as List<dynamic>?;
+      if (journeys == null || journeys.isEmpty) return null;
+      final active = journeys.cast<Map<String, dynamic>>().firstWhere(
+            (j) => j['status'] == 'active',
+            orElse: () => journeys.first as Map<String, dynamic>,
+          );
+      return active;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Creates the real clinical case (`POST /api/companion/case/create`)
+  /// linking this consultation's outcome to the patient's journey. Requires
+  /// `doctor_id` + `diagnosis` server-side (CreateCaseRequest in
+  /// companion_api.py) - this is why case creation can only happen here,
+  /// after a doctor has actually assessed the patient, never earlier.
+  Future<Map<String, dynamic>?> createCase({
+    required String journeyId,
+    required String userId,
+    required String doctorId,
+    required String diagnosis,
+    String? prescriptionId,
+    int treatmentDurationDays = 30,
+  }) async {
+    try {
+      final response = await _dio.post('/api/companion/case/create', data: {
+        'journey_id': journeyId,
+        'user_id': userId,
+        'doctor_id': doctorId,
+        'diagnosis': diagnosis,
+        if (prescriptionId != null) 'prescription_id': prescriptionId,
+        'treatment_duration_days': treatmentDurationDays,
+      });
+      return response.data;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Cases assigned to this doctor (`GET /api/companion/case/by-doctor/
+  /// {doctor_id}`) - role-gated server-side to the requesting doctor's own
+  /// id (confirmed live: a mismatched id returns 403 "Insufficient role",
+  /// not a list).
+  Future<List<dynamic>> getCasesByDoctor(String doctorId) async {
+    try {
+      final response = await _dio.get('/api/companion/case/by-doctor/$doctorId');
+      return response.data?['cases'] ?? [];
+    } catch (e) {
+      return [];
     }
   }
 
@@ -412,7 +491,7 @@ class AstraApiService {
   /// Check Shopify sync status
   Future<Map<String, dynamic>> getShopifyStatus() async {
     try {
-      final response = await _dio.get('/api/v1/shopify/status');
+      final response = await _dio.get('/api/v1/shopify/health');
       return response.data;
     } catch (e) {
       return {'error': e.toString(), 'connected': false};
@@ -556,7 +635,7 @@ class AstraApiService {
   /// AI-powered doctor summary generation
   Future<Map<String, dynamic>> generateDoctorSummary(Map<String, dynamic> data) async {
     try {
-      final response = await _dio.post('/api/v1/brain/doctor-summary', data: data);
+      final response = await _dio.post('/api/v1/brain/doctor_summary', data: data);
       return response.data;
     } catch (e) {
       throw _handleError(e);
@@ -566,7 +645,7 @@ class AstraApiService {
   /// Analyze medication safety
   Future<Map<String, dynamic>> analyzeSafety(Map<String, dynamic> data) async {
     try {
-      final response = await _dio.post('/api/v1/brain/analyze-safety', data: data);
+      final response = await _dio.post('/api/v1/brain/analyze_safety', data: data);
       return response.data;
     } catch (e) {
       throw _handleError(e);
@@ -576,7 +655,7 @@ class AstraApiService {
   /// Extract medication schedule from text
   Future<Map<String, dynamic>> extractSchedule(Map<String, dynamic> data) async {
     try {
-      final response = await _dio.post('/api/v1/brain/extract-schedule', data: data);
+      final response = await _dio.post('/api/v1/brain/extract_schedule', data: data);
       return response.data;
     } catch (e) {
       throw _handleError(e);
@@ -665,7 +744,7 @@ class AstraApiService {
   /// Get the latest Astra Fill record for a patient
   Future<Map<String, dynamic>> getLatestAstraFill(String patientId) async {
     try {
-      final response = await _dio.get('/api/v1/astra-fill/latest/$patientId');
+      final response = await _dio.get('/api/v1/astra-fill/patient/$patientId/latest');
       return response.data ?? {};
     } catch (e) {
       return {};
@@ -767,7 +846,14 @@ class AstraApiService {
     }
   }
 
-  /// Update order status
+  /// Update order status.
+  ///
+  /// `PATCH /api/v1/orders/prescription/status` does not exist on the real
+  /// backend (confirmed against the live OpenAPI spec - the only order
+  /// routes are `POST .../save` and `GET .../{prescription_id}`, no status
+  /// update). Not called from anywhere in this app, so this has never
+  /// actually run; left here as a documented gap rather than guessing a
+  /// replacement target.
   Future<Map<String, dynamic>> updateOrderStatus(Map<String, dynamic> data) async {
     try {
       final response = await _dio.patch('/api/v1/orders/prescription/status', data: data);

@@ -280,7 +280,7 @@ class AstraService {
   /// Generate doctor summary from patient data
   Future<Map<String, dynamic>> generateDoctorSummary(Map<String, dynamic> data) async {
     try {
-      final response = await _dio.post('/api/v1/brain/doctor-summary', data: data);
+      final response = await _dio.post('/api/v1/brain/doctor_summary', data: data);
       return response.data;
     } catch (e) {
       return {};
@@ -290,7 +290,7 @@ class AstraService {
   /// Analyze medication safety
   Future<Map<String, dynamic>> analyzeMedicationSafety(Map<String, dynamic> data) async {
     try {
-      final response = await _dio.post('/api/v1/brain/analyze-safety', data: data);
+      final response = await _dio.post('/api/v1/brain/analyze_safety', data: data);
       return response.data;
     } catch (e) {
       return {'is_safe': true, 'warnings': []};
@@ -300,7 +300,7 @@ class AstraService {
   /// Extract medication schedule from text
   Future<Map<String, dynamic>> extractSchedule(String text) async {
     try {
-      final response = await _dio.post('/api/v1/brain/extract-schedule', data: {'text': text});
+      final response = await _dio.post('/api/v1/brain/extract_schedule', data: {'text': text});
       return response.data;
     } catch (e) {
       return {};
@@ -360,7 +360,14 @@ class AstraService {
   // CONSULTATION ENDPOINTS
   // ============================================================
 
-  /// Create consultation record
+  /// Create consultation record.
+  ///
+  /// `/api/v1/patients/consultation` does not exist on the real backend
+  /// (confirmed against the live OpenAPI spec at astra.ayureze.in/openapi.json
+  /// - there is no route for "save consultation notes" at all, only
+  /// appointment booking/cancel and admin-crm consultation records). Not
+  /// called from anywhere in this app, so this has never actually run; left
+  /// here as a documented gap rather than guessing a replacement target.
   Future<Response> createConsultation(Map<String, dynamic> data) async {
     try {
       return await _dio.post('/api/v1/patients/consultation', data: data);
